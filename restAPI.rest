@@ -1,1 +1,7 @@
-http://localhost:8081/
+POST http://localhost:8081/
+Content-Type: application/json
+
+{
+    "user":"admin",
+    "password":"123456"
+}

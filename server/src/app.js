@@ -15,7 +15,11 @@ app.get('/',(req,res)=>{
         msg : 'Hello sara'
     })
 })
-
+app.post('/addUser',(req,res)=>{
+    res.send({
+        msg : `Hell ${req.body.user}`
+    })
+})
 
 app.listen(process.env.PORT || 8081);
 console.log('http://localhost:8081');
