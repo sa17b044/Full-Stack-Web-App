@@ -15,10 +15,11 @@ app.get('/',(req,res)=>{
         msg : 'Hello sara'
     })
 })
-app.post('/addUser',(req,res)=>{
-    res.send({
-        msg : `Hell ${req.body.user}`
-    })
+app.post('/dbStoreUser',(req,res)=>{
+    // res.send({
+    //     msg : `Hello ${req.body}`
+    // })
+    console.log(req.body);
 })
 
 app.listen(process.env.PORT || 8081);

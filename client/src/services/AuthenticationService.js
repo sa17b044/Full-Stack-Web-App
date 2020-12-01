@@ -1,8 +1,8 @@
 import Api from '@/services/Api.js'
 
 export default {
-    addUser(credentials){
-        return Api().post('addUser',credentials)
+    dbStoreUser(...user){
+        return Api().post('dbStoreUser',user)
     }
 }
 
