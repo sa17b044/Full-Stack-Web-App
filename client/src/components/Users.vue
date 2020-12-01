@@ -20,7 +20,7 @@
         <option value="admin">Admin</option>
         <option value="basic">Read Only User</option>
       </select>
-      <input type="submit" value="Update" @click="updateUser" />
+      <input type="submit" value="Update" @click="updateUser"/>
     </div>
     <div v-for="(user, index) in users">
       <ul>
@@ -94,8 +94,6 @@ export default {
     async dbStoreUser() {
       console.log(this.users);
       const res = await AuthenticationService.dbStoreUser(this.users);
-      console.log(res.data);
-      console.log(res);
     },
   },
 };
@@ -103,4 +101,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+input{
+  border: 2px solid red;
+}
 </style>
