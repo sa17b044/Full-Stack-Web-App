@@ -10,13 +10,12 @@
 </template>
 
 <script>
-import AuthenticationService from "@/services/AuthenticationService";
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      user: "",
-      pass: "",
-      credentials: [],
+      credentials: []
     };
   },
   methods: {
@@ -25,9 +24,16 @@ export default {
         user: this.user,
         pass: this.pass
       };
-      console.log(this.credentials);
-      const res = await AuthenticationService.login(this.credentials);
-      console.log(res.data);
+      try {
+              // console.log(this.credentials);
+      const response = await AuthenticationService.login(this.credentials);
+      this.error = false;
+      } catch (error) {
+        console.log('Error');
+        this.error = error.response.data.error;
+        this.error = true;
+      }
+      // console.log(res.data);
     },
   },
 };

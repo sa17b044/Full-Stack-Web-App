@@ -2,7 +2,9 @@
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
     <a href="/#/">Login</a>
-    <a href="/#/users">Users</a>
+    <a href="/#/rules">Rules</a>
+    <a href="/#/logs">Logs</a>
+    
     <router-view/>
   </div>
 </template>

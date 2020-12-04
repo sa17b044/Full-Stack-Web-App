@@ -1,0 +1,46 @@
+<template>
+  <div>
+    <h1>Users</h1>
+    <!-- <div v-if="!isEditing"> -->
+    <div class="container">
+      <div class="d-flex flex-column bd-highlight mb-3">
+        <label>Policy Name</label>
+        <input type="text" name="policy_name" />
+        <label>inspection</label>
+        <input type="checkbox" name="inspection" checked />
+        <label>detection</label>
+        <input type="checkbox" name="detection" checked />
+        <label>Individual addressing</label>
+        <input type="checkbox" name="individual_addressing" checked />
+        <label>Services</label>
+        <label>SEARCH_REQUEST</label>
+        <input type="checkbox" name="SEARCH_REQUEST" checked />
+        <label>DESCRIPTION_REQUEST</label>
+        <input type="checkbox" name="DESCRIPTION_REQUEST" checked />
+        <label>App services</label>
+        <label>A_IndividualAddress_Write</label>
+        <input type="checkbox" name="A_IndividualAddress_Write" checked />
+        <label>A_IndividualAddress_Read</label>
+        <input type="checkbox" name="A_IndividualAddress_Read" checked />
+        <label>Group address level</label>
+        <input type="number" name="group_address_level" />
+        <label>Group address file</label>
+        <input type="file" name="group_address_file" />
+        <label>Header</label>
+        <input type="checkbox" name="header" checked />
+        <label>Payload</label>
+        <input type="checkbox" name="payload" checked />
+        <input type="submit" value="Save" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+// import AuthenticationService from "@/services/AuthenticationService";
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+
+</style>

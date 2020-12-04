@@ -1,7 +1,9 @@
-POST http://localhost:8081/
+PUT http://localhost:8081/api/userList/
 Content-Type: application/json
 
 {
-    "user":"admin",
-    "password":"123456"
+    "userName":"qwer2",
+    "password" : "qwer2",
+    "permision" : "qwer2"
+
 }
