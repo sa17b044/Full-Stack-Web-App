@@ -35,5 +35,5 @@ app.use('/api/serverList',serverListRoutes);
 app.use('/api/logList',logListRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Server -> https://localhost:8080");
+  res.send('<a href="http://localhost:8080">http://localhost:8080</a>');
 });

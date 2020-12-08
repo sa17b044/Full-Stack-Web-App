@@ -59,8 +59,6 @@ export default {
     const response = await axios.get("http://localhost:8081/api/logList/");
     // const reg = /^((?!2\s+(.*?)\s+1001ms).)*$/;
     this.logList = response.data;
-    const str = this.logList;
-     console.log(str)
     
   },
   methods: {

@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
       // console.log('###---###',stdout)
       req.body.log = stdout
       const newlogList = new Log_Model(req.body);
-      console.log(newlogList);
+      // console.log(newlogList);
       try {
         const logList = await newlogList.save();
         if (!logList) throw new Error("wrong saving");
@@ -46,7 +46,7 @@ router.delete("/:id", async (req, res) => {
   const { id } = req.params
   try {
     const removed  = await Log_Model.findByIdAndDelete(id);
-    console.log(removed)
+    // console.log(removed)
     if (!removed) throw Error('Something went wrong ')
     res.status(200).json(removed)
   } catch (error) {
