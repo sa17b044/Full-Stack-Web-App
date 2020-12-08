@@ -1,5 +1,6 @@
 <template>
   <div class="logs container">
+    <div class="card">
     <button class="btn btn-primary m-3" @click="sendLog()">Run</button>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
@@ -31,12 +32,17 @@
     </div>
     <div v-for="(item, i) in logList" :key="item._id">
       <div class="alert-info">{{ i + 1 }}</div>
-      <div class="alert-success">{{ item.log }}</div>
+      <div class="alert-success">
+        {{
+        item.log.match(/\s+p(.*?)\ms/gim).toString()
+        }}
+      </div>
       <div class="alert-danger">
         <button class="btn btn-danger" @click="removeItem(item, i)">
           Remove
         </button>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -47,7 +53,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      cmd: "ping -c 2 8.8.8.8",
+      cmd: "ping -c 1 8.8.8.8",
       server_name: "",
       policy: "",
       log: "",
@@ -59,11 +65,9 @@ export default {
     const response = await axios.get("http://localhost:8081/api/logList/");
     // const reg = /^((?!2\s+(.*?)\s+1001ms).)*$/;
     this.logList = response.data;
-    
   },
   methods: {
     async sendLog() {
-      console.log(this.cmd);
       await axios.post("http://localhost:8081/api/logList/", {
         cmd: this.cmd,
       });
@@ -75,6 +79,7 @@ export default {
       this.logList.splice(i, 1);
     },
   },
+  // 2\s+packets\s+transmitted,\s+2\s+received,\s+0%\s+packet\s+loss,\s+time\s+1001ms
 };
 </script>
 

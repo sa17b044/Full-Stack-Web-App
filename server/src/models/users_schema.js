@@ -15,7 +15,7 @@ const users_schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    permision: {
+    permission: {
       type: String,
       required: true,
     },

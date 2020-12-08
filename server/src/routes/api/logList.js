@@ -27,28 +27,30 @@ router.post("/", async (req, res) => {
       console.error(`exec error: ${error}`);
       return;
     }
-      // console.log('###---###',stdout)
-      req.body.log = stdout
-      const newlogList = new Log_Model(req.body);
-      // console.log(newlogList);
-      try {
-        const logList = await newlogList.save();
-        if (!logList) throw new Error("wrong saving");
-        res.status(200).json(logList);
-      } catch (error) {
-        res.status(500).json({
-          message: error.message,
-        });
-      }
+    
+    req.body.log = stdout;
+
+    console.log("1 - #", req.body.log);
+    const newlogList = new Log_Model(req.body);
+    console.log("2 - ##", newlogList);
+    try {
+      const logList = await newlogList.save();
+      if (!logList) throw new Error("wrong saving");
+      res.status(200).json(logList);
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+      });
+    }
   });
 });
 router.delete("/:id", async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    const removed  = await Log_Model.findByIdAndDelete(id);
+    const removed = await Log_Model.findByIdAndDelete(id);
     // console.log(removed)
-    if (!removed) throw Error('Something went wrong ')
-    res.status(200).json(removed)
+    if (!removed) throw Error("Something went wrong ");
+    res.status(200).json(removed);
   } catch (error) {
     res.status(500).json({
       message: error.message,
