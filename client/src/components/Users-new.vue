@@ -23,7 +23,7 @@
       <input type="submit" value="Update" @click="updateUser" />
     </div>
 
-    <div v-for="(user, index) in users">
+    <div v-for="(user, index) in users" :key="index"></div>
       <ul>
         <li>{{ user.user }}</li>
         <li>{{ user.pass }}</li>

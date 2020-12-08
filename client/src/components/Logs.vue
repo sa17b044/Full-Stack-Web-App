@@ -1,113 +1,85 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
+  <div class="logs container">
+    <button class="btn btn-primary m-3" @click="sendLog()">Run</button>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">
+          Policy Name</span
         >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
+      </div>
+      <input
+        type="text"
+        v-model="policy"
+        class="form-control"
+        aria-label="Sizing example input"
+        aria-describedby="inputGroup-sizing-default"
+      />
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">
+          Server Name</span
         >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+      </div>
+      <input
+        type="text"
+        v-model="server_name"
+        class="form-control"
+        aria-label="Sizing example input"
+        aria-describedby="inputGroup-sizing-default"
+      />
+    </div>
+    <div v-for="(item, i) in logList" :key="item._id">
+      <div class="alert-info">{{ i + 1 }}</div>
+      <div class="alert-success">{{ item.log }}</div>
+      <div class="alert-danger">
+        <button class="btn btn-danger" @click="removeItem(item, i)">
+          Remove
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: 'HelloWorld',
-  data () {
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
+      cmd: "ping -c 2 8.8.8.8",
+      server_name: "",
+      policy: "",
+      log: "",
+      date: "",
+      logList: [],
+    };
+  },
+  async mounted() {
+    const response = await axios.get("http://localhost:8081/api/logList/");
+    // const reg = /^((?!2\s+(.*?)\s+1001ms).)*$/;
+    this.logList = response.data;
+    const str = this.logList;
+     console.log(str)
+    
+  },
+  methods: {
+    async sendLog() {
+      console.log(this.cmd);
+      await axios.post("http://localhost:8081/api/logList/", {
+        cmd: this.cmd,
+      });
+      const response = await axios.get("http://localhost:8081/api/logList/");
+      this.logList = response.data;
+    },
+    async removeItem(item, i) {
+      await axios.delete("http://localhost:8081/api/logList/" + item._id);
+      this.logList.splice(i, 1);
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>

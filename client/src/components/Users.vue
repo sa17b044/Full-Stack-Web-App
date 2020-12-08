@@ -6,26 +6,28 @@
       <option value="admin">Admin</option>
       <option value="basic">Read Only User</option>
     </select>
-    <a v-on:click.prevent="addUser">Add</a>
+    <button @click="addUser">Add</button>
     <br />
-    <div v-for="(user, i) in userList" :key="user._id">
-      <p>----------------------------------------------------------</p>
-      <div v-if="selectedUser._id === user._id">
+    <div v-for="(userItem, i) in userList" :key="userItem._id">
+      <div v-if="selectedUser._id === userItem._id">
         <input type="text" v-model="editedUser" />
         <input type="text" v-model="editedPass" />
         <input type="text" v-model="editedPermision" />
-        <a v-on:click.prevent="updateItem(user, i)">Update</a>
+        <button @click="updateItem(userItem, i)">Update</button>
+        <button class="configure" @click="removeUser(userItem, i)">
+          Remove
+        </button>
       </div>
       <div v-else>
-        <p>
-          <span>{{ i + 1 }}</span>
-          <span> {{ user.userName }} </span>
-          <span>{{ user.password }} </span>
-          <span> {{ user.permision }} </span>
-        </p>
+        <span>{{ i + 1 }}</span>
+        <span> {{ userItem.userName }} </span>
+        <span>{{ userItem.password }} </span>
+        <span> {{ userItem.permision }} </span>
+        <button class="configure" @click="select(userItem)">Edit</button>
+        <button class="configure" @click="removeUser(userItem, i)">
+          Remove
+        </button>
       </div>
-      <a v-on:click.prevent="select(user)"> Edit </a>
-      <a v-on:click.prevent="removeUser(user, i)">Remove</a>
     </div>
   </div>
 </template>
@@ -64,7 +66,6 @@ export default {
       this.permision = "";
     },
     async removeUser(user, i) {
-      console.log(user._id);
       await axios.delete("http://localhost:8081/api/userList/" + user._id);
       this.userList.splice(i, 1);
     },
@@ -73,28 +74,19 @@ export default {
       this.editedUser = user.userName;
       this.editedPass = user.password;
       this.editedPermision = user.permision;
-      console.log(user);
     },
     isSelected(user) {
       return user._id === this.selected._id;
     },
     async updateItem(user, i) {
-      console.log("Test", this.userList, this.userList[i]);
-
       await axios.put("http://localhost:8081/api/userList/" + user._id, {
         userName: this.editedUser,
         password: this.editedPass,
         permision: this.editedPermision,
       });
-      console.log('###')
-      // this.userList[i] = response.data;
-      const response = await axios.get(
-        "http://localhost:8081/api/userList/"
-      );
+      const response = await axios.get("http://localhost:8081/api/userList/");
       this.userList = response.data;
-      console.log(response.data)
-      console.log('###')
-      console.log(this.userList);
+      this.selectedUser._id = -1;
     },
   },
 };
@@ -102,4 +94,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+button.configure {
+  color: unset;
+  background-color: unset;
+  border: unset;
+}
 </style>

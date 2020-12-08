@@ -2,6 +2,10 @@ const { timeStamp } = require("console");
 const mongoose = require("mongoose");
 
 const server_schema = new mongoose.Schema({
+  server_name: {
+    type: String,
+    required: true,
+  },
   src_ip: {
     type: String,
     required: true,

@@ -1,9 +1,7 @@
-PUT http://localhost:8081/api/userList/
-Content-Type: application/json
+GET http://localhost:8081/api/logList/
+# Content-Type: application/json
 
-{
-    "userName":"qwer2",
-    "password" : "qwer2",
-    "permision" : "qwer2"
-
-}
+# {
+#     "cmd":"ls",
+#     "log": " "
+# }

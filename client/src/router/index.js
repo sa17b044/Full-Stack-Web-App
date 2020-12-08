@@ -4,6 +4,7 @@ import Login from "@/components/Login";
 import Users from "@/components/Users";
 import Rules from "@/components/Rules";
 import Servers from "@/components/Servers";
+import Server from "@/components/Server";
 import Policies from "@/components/Policies";
 import Logs from "@/components/Logs";
 
@@ -30,6 +31,11 @@ export default new Router({
       path: "/servers",
       name: "Servers",
       component: Servers
+    },
+    {
+      path: "/server",
+      name: "Server",
+      component: Server
     },
     {
       path: "/policies",
