@@ -4,6 +4,8 @@
     <a href="/#/">Login</a>
     <a href="/#/rules">Rules</a>
     <a href="/#/logs">Logs</a>
+    <a href="/#/users">Users</a>
+    <a href="">Tools</a>
     
     <router-view/>
   </div>

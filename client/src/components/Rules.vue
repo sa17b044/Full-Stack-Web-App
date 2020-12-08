@@ -2,7 +2,6 @@
   <div>
     <a href="/#/policies">Policies</a>
     <a href="/#/servers">Servers</a>
-    <a href="/#/users">Users</a>
   </div>
 </template>
 
