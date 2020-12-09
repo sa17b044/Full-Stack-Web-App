@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const userListRoutes = require("./routes/api/userList.js");
 const serverListRoutes = require("./routes/api/serverList.js");
 const logListRoutes = require("./routes/api/logList.js");
+const policyListRoutes = require("./routes/api/policyList");
 
 
 const PORT = 8081;
@@ -33,6 +34,8 @@ app.use(cors());
 app.use('/api/userList',userListRoutes);
 app.use('/api/serverList',serverListRoutes);
 app.use('/api/logList',logListRoutes);
+app.use('/api/policyList',policyListRoutes);
+// /home/pay/Documents/temp/Full-Stack-Web-App/server/src/routes/api/policyList.js
 
 app.get("/", (req, res) => {
   res.send('<a href="http://localhost:8080">http://localhost:8080</a>');

@@ -1,34 +1,5 @@
 <template>
   <div class="container">
-    <!-- <input type="text" name="user" v-model="user" />
-    <input type="password" name="pass" v-model="pass" />
-    <select id="permission" v-model="permision">
-      <option value="admin">Admin</option>
-      <option value="basic">Read Only User</option>
-    </select>
-    <button @click="addUser">Add</button>
-    <br />
-    <div v-for="(userItem, i) in userList" :key="userItem._id">
-      <div v-if="selectedUser._id === userItem._id">
-        <input type="text" v-model="editedUser" />
-        <input type="text" v-model="editedPass" />
-        <input type="text" v-model="editedPermision" />
-        <button @click="updateItem(userItem, i)">Update</button>
-        <button class="configure" @click="removeUser(userItem, i)">
-          Remove
-        </button>
-      </div>
-      <div v-else>
-        <span>{{ i + 1 }}</span>
-        <span> {{ userItem.userName }} </span>
-        <span>{{ userItem.password }} </span>
-        <span> {{ userItem.permision }} </span>
-        <button class="configure" @click="select(userItem)">Edit</button>
-        <button class="configure" @click="removeUser(userItem, i)">
-          Remove
-        </button>
-      </div>
-    </div> -->
     <div v-if="!edit">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -53,7 +24,7 @@
           <label class="input-group-text">Permissions</label>
         </div>
         <select class="custom-select" v-model="permission">
-          <option selected>Choose...</option>
+          <!-- <option selected>Choose...</option> -->
           <option value="admin">Admin</option>
           <option value="readOnly">Read only</option>
         </select>
@@ -84,9 +55,8 @@
           <label class="input-group-text">Permissions</label>
         </div>
         <select class="custom-select" v-model="permission">
-          <option selected>Choose...</option>
-          <option value="admin">Admin</option>
-          <option value="readOnly">Read only</option>
+          <option value="Admin">Admin</option>
+          <option value="Read only">Read only</option>
         </select>
       </div>
       <!-- {{ selectedItem._id }} -->
@@ -103,9 +73,7 @@
         <button
           class="btn btn-warning"
           @click="
-            editItem(i, item.userName, item.password, item.permission, item)
-          "
-        >
+            editItem(i, item.userName, item.password, item.permission, item)">
           Edit
         </button>
         <button class="btn btn-danger" @click="removeItem(item, i)">

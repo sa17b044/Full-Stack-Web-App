@@ -38,10 +38,10 @@ const policy_schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  group_address_file: {
-    type: Buffer,
-    required: true,
-  }, 
+  // group_address_file: {
+  //   type: Buffer,
+  //   required: true,
+  // }, 
   header: {
     type: String,
     required: true,

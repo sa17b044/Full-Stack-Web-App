@@ -49,13 +49,11 @@ router.put("/:id", async (req, res) => {
 });
 router.delete("/:id", async (req, res) => {
   const { id } = req.params
-  // console.log('#######')
   try {
     const removed  = await Server_Model.findByIdAndDelete(id);
     console.log(removed)
     if (!removed) throw Error('Something went wrong ')
     res.status(200).json(removed)
-    // console.log('test')
   } catch (error) {
     res.status(500).json({
       message: error.message,
