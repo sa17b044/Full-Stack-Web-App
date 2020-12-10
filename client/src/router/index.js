@@ -4,10 +4,10 @@ import Login from "@/components/Login";
 import Users from "@/components/Users";
 import Rules from "@/components/Rules";
 import Servers from "@/components/Servers";
-import Server from "@/components/Server";
 import Policies from "@/components/Policies";
-import Policy from "@/components/Policy";
 import Logs from "@/components/Logs";
+import Tools from "@/components/Tools";
+import Ping from "@/components/Ping";
 
 Vue.use(Router);
 
@@ -17,6 +17,16 @@ export default new Router({
       path: "/",
       name: "login",
       component: Login
+    },
+    {
+      path: "/ping",
+      name: "ping",
+      component: Ping
+    },
+    {
+      path: "/tools",
+      name: "tools",
+      component: Tools
     },
     {
       path: "/users",
@@ -34,19 +44,9 @@ export default new Router({
       component: Servers
     },
     {
-      path: "/server",
-      name: "Server",
-      component: Server
-    },
-    {
       path: "/policies",
       name: "Policies",
       component: Policies
-    },
-    {
-      path: "/policy",
-      name: "Policy",
-      component: Policy
     },
     {
       path: "/logs",

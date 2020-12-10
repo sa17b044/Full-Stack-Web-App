@@ -1,48 +1,22 @@
 <template>
-  <div class="logs container">
-    <div class="card">
-    <button class="btn btn-primary m-3" @click="sendLog()">Run</button>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default">
-          Policy Name</span
-        >
-      </div>
-      <input
-        type="text"
-        v-model="policy"
-        class="form-control"
-        aria-label="Sizing example input"
-        aria-describedby="inputGroup-sizing-default"
-      />
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default">
-          Server Name</span
-        >
-      </div>
-      <input
-        type="text"
-        v-model="server_name"
-        class="form-control"
-        aria-label="Sizing example input"
-        aria-describedby="inputGroup-sizing-default"
-      />
-    </div>
+  <div>
+    <button @click="sendLog()">Run</button>
+    <span>Policy Name</span>
+    <input type="text" v-model="policy" />
+    <span> Server Name</span>
+    <input type="text" v-model="server_name" />
     <div v-for="(item, i) in logList" :key="item._id">
-      <div class="alert-info">{{ i + 1 }}</div>
-      <div class="alert-success">
-        {{
-        item.log.match(/\s+p(.*?)\ms/gim).toString()
-        }}
-      </div>
-      <div class="alert-danger">
+      <!-- <div class="alert-info"> -->
+        {{ i + 1 }}
+      <!-- </div> -->
+      <!-- <div class="alert-success"> -->
+        {{ item.log.match(/\s+p(.*?)\ms/gim).toString() }}
+      <!-- </div> -->
+      <!-- <div class="alert-danger"> -->
         <button class="btn btn-danger" @click="removeItem(item, i)">
           Remove
         </button>
-      </div>
-    </div>
+      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -53,7 +27,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      cmd: "ping -c 1 8.8.8.8",
+      cmd: "ping -c 4 8.8.8.8",
       server_name: "",
       policy: "",
       log: "",

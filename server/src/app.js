@@ -8,6 +8,7 @@ const userListRoutes = require("./routes/api/userList.js");
 const serverListRoutes = require("./routes/api/serverList.js");
 const logListRoutes = require("./routes/api/logList.js");
 const policyListRoutes = require("./routes/api/policyList");
+const pingListRoutes = require("./routes/api/pingList");
 
 
 const PORT = 8081;
@@ -35,6 +36,7 @@ app.use('/api/userList',userListRoutes);
 app.use('/api/serverList',serverListRoutes);
 app.use('/api/logList',logListRoutes);
 app.use('/api/policyList',policyListRoutes);
+app.use('/api/pingList',pingListRoutes);
 // /home/pay/Documents/temp/Full-Stack-Web-App/server/src/routes/api/policyList.js
 
 app.get("/", (req, res) => {

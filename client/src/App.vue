@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
-    <a href="/#/">Login</a>
+    <!-- <a href="/#/">Login</a> -->
     <a href="/#/rules">Rules</a>
     <a href="/#/logs">Logs</a>
     <a href="/#/users">Users</a>
-    <a href="">Tools</a>
+    <a href="/#/tools">Tools</a>
     
     <router-view/>
   </div>

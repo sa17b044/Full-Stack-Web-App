@@ -32,31 +32,31 @@ router.post("/", async (req, res) => {
     console.log('#',error);
   }
 });
-// router.put("/:id", async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     const response = await Policy_Model.findByIdAndUpdate(id, req.body);
-//     console.log(response)
-//     if (!response) throw new Error("wrong updating");
-//     const updated = { ...response._doc, ...req.body };
-//     res.status(200).json(updated);
-//   } catch (error) {
-//     res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// });
-// router.delete("/:id", async (req, res) => {
-//   const { id } = req.params
-//   try {
-//     const removed  = await Policy_Model.findByIdAndDelete(id);
-//     console.log(removed)
-//     if (!removed) throw Error('Something went wrong ')
-//     res.status(200).json(removed)
-//   } catch (error) {
-//     res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// });
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await Policy_Model.findByIdAndUpdate(id, req.body);
+    console.log(response)
+    if (!response) throw new Error("wrong updating");
+    const updated = { ...response._doc, ...req.body };
+    res.status(200).json(updated);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params
+  try {
+    const removed  = await Policy_Model.findByIdAndDelete(id);
+    console.log(removed)
+    if (!removed) throw Error('Something went wrong ')
+    res.status(200).json(removed)
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
 module.exports = router;
