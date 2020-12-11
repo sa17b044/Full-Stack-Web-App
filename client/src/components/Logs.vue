@@ -3,18 +3,27 @@
     <h3>Sniffer</h3>
     <label>Policy Name</label>
     <select class="form-control" v-model="policy_name">
-        <option v-for="policy in policyList" :key="policy._id">{{ policy.policy_name }}</option>
+      <option v-for="policy in policyList" :key="policy._id">
+        {{ policy.policy_name }}
+      </option>
     </select>
-    <div><span>{{policy_name}}</span></div>
+    <div>
+      <span>{{ policy_name }}</span>
+    </div>
     <label>Server Name</label>
     <select class="form-control" v-model="server_name">
-        <option v-for="server in serverList" :key="server._id">{{ server.server_name }}</option>
+      <option v-for="server in serverList" :key="server._id">
+        {{ server.server_name }}
+      </option>
     </select>
-    <div><span>{{server_name}}</span></div>
+    <div>
+      <span>{{ server_name }}</span>
+    </div>
     <button class="btn btn-warning mt-2" @click="run()">Run</button>
     <div v-for="(item, i) in logList" :key="item._id">
       {{ i + 1 }}
-      {{ item.log.match(/\s+p(.*?)\ms/gim).toString() }}
+      <!-- {{ item.cmd.match(/\s+p(.*?)\ms/gim).toString() }} -->
+      {{item.cmd}} - {{server_name}} - {{policy_name}}
       <button class="btn btn-danger" @click="removeItem(item, i)">
         Remove
       </button>
@@ -35,17 +44,18 @@ export default {
       // date: "",
       serverList: [],
       policyList: [],
+      logList:[]
     };
   },
   async mounted() {
-    // const responseLog = await axios.get("http://localhost:8081/api/logList/");
-    // // const reg = /^((?!2\s+(.*?)\s+1001ms).)*$/;
-    // this.logList = responseLog.data;
+    const responseLog = await axios.get("http://localhost:8081/api/logList/");
+    // const reg = /^((?!2\s+(.*?)\s+1001ms).)*$/;
+    this.logList = responseLog.data;
     const responsePolicy = await axios.get(
       "http://localhost:8081/api/policyList/"
     );
     this.policyList = responsePolicy.data;
-        const responseServer = await axios.get(
+    const responseServer = await axios.get(
       "http://localhost:8081/api/serverList/"
     );
     this.serverList = responseServer.data;
