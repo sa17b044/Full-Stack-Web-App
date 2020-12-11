@@ -21,20 +21,20 @@ router.get("/", async (req, res) => {
   }
 });
 router.post("/", async (req, res) => {
-  let cmd = req.body.cmd;
+  
+  cmd = req.body.cmd;
+  console.log(cmd);
   cp.exec(cmd, async (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
       return;
     }
-    
     req.body.log = stdout;
-
-    console.log("1 - #", req.body.log);
-    const newlogList = new Log_Model(req.body);
-    console.log("2 - ##", newlogList);
+    console.log(req.body.log)
+    const newLogList = new Log_Model(req.body);
+    console.log(newLogList)
     try {
-      const logList = await newlogList.save();
+      const logList = await newLogList.save();
       if (!logList) throw new Error("wrong saving");
       res.status(200).json(logList);
     } catch (error) {
@@ -57,4 +57,5 @@ router.delete("/:id", async (req, res) => {
     });
   }
 });
+
 module.exports = router;
