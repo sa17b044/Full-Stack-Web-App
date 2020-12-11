@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Login from "@/components/Login";
+// import Login from "@/components/Login";
 import Users from "@/components/Users";
 import Rules from "@/components/Rules";
 import Servers from "@/components/Servers";
@@ -8,6 +8,7 @@ import Policies from "@/components/Policies";
 import Logs from "@/components/Logs";
 import Tools from "@/components/Tools";
 import Ping from "@/components/Ping";
+import Home from "@/components/Home";
 
 Vue.use(Router);
 
@@ -15,8 +16,8 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "login",
-      component: Login
+      name: "home",
+      component: Home
     },
     {
       path: "/ping",

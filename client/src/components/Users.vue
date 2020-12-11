@@ -1,53 +1,36 @@
 <template>
-  <div class="container">
-    <div v-if="!edit">
-      <!-- <div class="input-group mb-3"> -->
-      <!-- <div class="input-group-prepend"> -->
-      <span class="input-group-text">User Name</span>
-      <!-- </div> -->
+  <label class="container">
+    <label v-if="!edit">
+      <label>User Name</label>
       <input type="text" class="form-control" v-model="user_name" />
-      <!-- </div> -->
-      <!-- <div class="input-group mb-3"> -->
-      <!-- <div class="input-group-prepend"> -->
-      <span class="input-group-text">Password</span>
-      <!-- </div> -->
+      <label>Password</label>
       <input type="text" class="form-control" v-model="password" />
-      <!-- </div> -->
-      <!-- <div class="input-group mb-3">
-        <div class="input-group-prepend"> -->
-      <span class="input-group-text">Confirm password</span>
-      <!-- </div> -->
+      <label>Confirm password</label>
       <input type="text" class="form-control" v-model="conf_password" />
-      <!-- </div> -->
-      <!-- <div class="input-group mb-3">
-        <div class="input-group-prepend"> -->
-      <label class="input-group-text">Permissions</label>
-      <!-- </div> -->
-      <select class="custom-select" v-model="permission">
-        <!-- <option selected>Choose...</option> -->
+      <label>Permissions</label>
+      <select class="form-control" v-model="permission">
         <option value="admin">Admin</option>
         <option value="readOnly">Read only</option>
       </select>
-      <!-- </div> -->
       <button class="btn btn-primary" @click="addItem()">Add</button>
-    </div>
-    <div v-else>
-      <span class="input-group-text">User Name</span>
+    </label>
+    <label v-else>
+      <label>User Name</label>
       <input type="text" class="form-control" v-model="user_name" />
-      <span class="input-group-text">Password</span>
+      <label>Password</label>
       <input type="text" class="form-control" v-model="password" />
-      <span class="input-group-text">Confirm password</span>
+      <label>Confirm password</label>
       <input type="text" class="form-control" v-model="conf_password" />
-      <label class="input-group-text">Permissions</label>
-      <select class="custom-select" v-model="permission">
+      <label>Permissions</label>
+      <select class="form-control"  v-model="permission">
         <option value="Admin">Admin</option>
         <option value="Read only">Read only</option>
       </select>
       <button class="btn btn-success" @click="updateItem(selectedItem)">
         Update
       </button>
-    </div>
-    <div v-for="(item, i) in itemList" :key="item._id">
+    </label>
+    <label v-for="(item, i) in itemList" :key="item._id">
       {{ ++i }}
       {{ item.userName }}
       {{ item.password }}
@@ -56,8 +39,8 @@
       <button class="btn btn-danger" @click="removeItem(item, i)">
         Remove
       </button>
-    </div>
-  </div>
+    </label>
+  </label>
 </template>
 
 <script>
@@ -110,7 +93,7 @@ export default {
       this.itemList = response.data;
     },
 
-    editItem(i,item) {
+    editItem(i, item) {
       this.edit = true;
       this.user_name = item.userName;
       this.password = item.password;

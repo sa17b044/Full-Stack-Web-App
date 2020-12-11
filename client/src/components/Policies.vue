@@ -1,9 +1,10 @@
 <template>
   <div class="container">
+
     <h3>Policy</h3>
     <div v-if="!edit">
-      <label>Policy name</label>
-      <input type="text" v-model="policy_name" />
+      <label class="form-label">Policy name</label>
+      <input class="form-control" type="text" v-model="policy_name" />
       <label>Detection</label>
       <input type="checkbox" v-model="detection" />
       <label>Inspection</label>
