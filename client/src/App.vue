@@ -1,10 +1,23 @@
 <template>
   <div id="app">
     <div class="row">
-      <div class="col-12 alert-danger"><img src="" /></div>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand">Navbar</a>
+          <div class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-primary">Search</button>
+          </div>
+        </div>
+      </nav>
     </div>
     <div class="row">
-      <div class="col-2 alert-success">
+      <div class="col-2 alert-warning p-5">
         <ul>
           <li><a href="/#/rules">Rules</a></li>
           <ol>
@@ -26,7 +39,7 @@
           </ol>
         </ul>
       </div>
-      <div class="col-10 alert-info"><router-view /></div>
+      <div class="col-10 alert-info p-5"><router-view /></div>
     </div>
     <!-- </div> -->
   </div>

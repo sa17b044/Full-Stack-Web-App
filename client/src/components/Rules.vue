@@ -1,7 +1,13 @@
 <template>
   <div>
-    <a href="/#/policies">Policies</a>
-    <a href="/#/servers">Servers</a>
+    <ul>
+      <li>
+        <a href="/#/policies">Policies</a>
+      </li>
+      <li>
+        <a href="/#/servers">Servers</a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -20,5 +26,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
