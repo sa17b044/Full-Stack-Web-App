@@ -17,7 +17,7 @@
       </nav>
     </div>
     <div class="row">
-      <div class="col-2 alert-warning p-5">
+      <div class="col-3 alert-warning p-5">
         <ul>
           <li><a href="/#/rules">Rules</a></li>
           <ol>
@@ -39,7 +39,7 @@
           </ol>
         </ul>
       </div>
-      <div class="col-10 alert-info p-5"><router-view /></div>
+      <div class="col-9 alert-info p-5"><router-view /></div>
     </div>
     <!-- </div> -->
   </div>

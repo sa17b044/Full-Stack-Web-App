@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h3>Sniffer</h3>
+
     <label>Policy Name</label>
     <select class="form-control" v-model="policy_name">
       <option v-for="policy in policyList" :key="policy._id">
@@ -8,7 +9,6 @@
       </option>
     </select>
     <div>
-      <span>{{ policy_name }}</span>
     </div>
     <label>Server Name</label>
     <select class="form-control" v-model="server_name">
@@ -17,17 +17,10 @@
       </option>
     </select>
     <div>
-      <span>{{ server_name }}</span>
+      <button class="btn btn-warning mt-2" @click="run()">Run</button>
     </div>
-    <button class="btn btn-warning mt-2" @click="run()">Run</button>
-    <div v-for="(item, i) in logList" :key="item._id">
-      {{ i + 1 }}
-      <!-- {{ item.cmd.match(/\s+p(.*?)\ms/gim).toString() }} -->
-      {{item.cmd}} - {{server_name}} - {{policy_name}}
-      <button class="btn btn-danger" @click="removeItem(item, i)">
-        Remove
-      </button>
-    </div>
+    <div v-for="item in logList" :key="item._id">{{item.cmd}}</div>
+    
   </div>
 </template>
 
@@ -40,17 +33,17 @@ export default {
       cmd: "ping -c 1 8.8.8.8",
       server_name: "",
       policy_name: "",
-      log: "",
-      // date: "",
+      // log: "",
       serverList: [],
       policyList: [],
-      logList:[]
+      logList: "",
+      // testList: {},
     };
   },
   async mounted() {
-    const responseLog = await axios.get("http://localhost:8081/api/logList/");
-    // const reg = /^((?!2\s+(.*?)\s+1001ms).)*$/;
-    this.logList = responseLog.data;
+    // const responseLog = await axios.get("http://localhost:8081/api/logList/");
+    // // const reg = /^((?!2\s+(.*?)\s+1001ms).)*$/;
+    // this.logList = responseLog.data;
     const responsePolicy = await axios.get(
       "http://localhost:8081/api/policyList/"
     );
@@ -62,17 +55,34 @@ export default {
   },
   methods: {
     async run() {
-      await axios.post("http://localhost:8081/api/logList/", {
+      console.log('1#')
+      await axios.post("http://localhost:8081/api/testList/", {
         cmd: this.cmd,
         server_name: this.server_name,
         policy_name: this.policy_name,
       });
-      const response = await axios.get("http://localhost:8081/api/logList/");
+      const response = await axios.get("http://localhost:8081/api/testList/");
       this.logList = response.data;
     },
+    async getData() {
+      console.log("###---###---###");
+      // const response = await axios.get("http://localhost:8081/api/testList/");
+      // console.log("###---###---###");
+      // this.testList = response.data;
+      // console.log(this.testList);
+      //   // const responsePolicy = await axios.get(
+      //   //   "http://localhost:8081/api/policyList/" + policy_name._id
+      //   // );
+      //   // this.policyList = responsePolicy.data;
+      //   // const responseServer = await axios.get(
+      //   //   "http://localhost:8081/api/serverList/" + server_name._id
+      //   // );
+      //   // this.serverList = responseServer.data;
+    },
     async removeItem(item, i) {
-      await axios.delete("http://localhost:8081/api/logList/" + item._id);
-      this.logList.splice(i, 1);
+      // console.log(item);
+      // await axios.delete("http://localhost:8081/api/logList/" + item._id);
+      // this.logList.splice(i, 1);
     },
   },
   // 2\s+packets\s+transmitted,\s+2\s+received,\s+0%\s+packet\s+loss,\s+time\s+1001ms

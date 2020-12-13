@@ -6,18 +6,22 @@ const logs_schema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  policy_name: {
-    type: String,
-    required: true,
-  },
-  server_name: {
-    type: String,
-    required: true,
-  },
   cmd: {
     type: String,
-    // required: true,
+    required: true
   },
+  // policy_name: {
+  //   type: String,
+  //   required: true,
+  // },
+  // server_name: {
+  //   type: String,
+  //   required: true,
+  // },
+  // cmd: {
+  //   type: String,
+  //   // required: true,
+  // },
 });
 
 const Logs_Model = mongoose.model("Logs_Model", logs_schema);

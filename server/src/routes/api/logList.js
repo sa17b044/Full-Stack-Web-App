@@ -23,17 +23,14 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   
   cmd = req.body.cmd;
-  console.log(cmd);
   cp.exec(cmd, async (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
       return;
     }
     req.body.log = stdout;
-    console.log(req.body.log)
     const newLogList = new Log_Model(req.body);
-    console.log(newLogList)
-    try {
+       try {
       const logList = await newLogList.save();
       if (!logList) throw new Error("wrong saving");
       res.status(200).json(logList);
@@ -48,7 +45,6 @@ router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const removed = await Log_Model.findByIdAndDelete(id);
-    // console.log(removed)
     if (!removed) throw Error("Something went wrong ");
     res.status(200).json(removed);
   } catch (error) {
@@ -57,5 +53,6 @@ router.delete("/:id", async (req, res) => {
     });
   }
 });
+
 
 module.exports = router;
