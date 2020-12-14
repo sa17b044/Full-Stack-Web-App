@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const Server_Model = require("/home/pay/Documents/temp/Full-Stack-Web-App/server/src/models/server_schema.js");
+const Server_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/server_schema.js");
 
 const router = Router();
 

@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const cp = require("child_process");
-const Log_Model = require("/home/pay/Documents/temp/Full-Stack-Web-App/server/src/models/log_schema.js");
+const Log_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/log_schema.js");
 const {
   countDocuments,
-} = require("/home/pay/Documents/temp/Full-Stack-Web-App/server/src/models/log_schema.js");
+} = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/log_schema.js");
 const router = Router();
 
 router.get("/", async (req, res) => {

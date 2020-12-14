@@ -11,11 +11,10 @@ const policyListRoutes = require("./routes/api/policyList");
 const pingListRoutes = require("./routes/api/pingList");
 const testListRoutes = require("./routes/api/testList");
 
-
 const PORT = 8081;
 const app = express();
 // Database connection
-const dbUrl = "mongodb://127.0.0.1:27017/test02";
+const dbUrl = "mongodb://127.0.0.1:27017/bsa";
 mongoose
   .connect(dbUrl, {
     useNewUrlParser: true,

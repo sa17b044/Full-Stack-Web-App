@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const cp = require("child_process");
-const Ping_Model = require("/home/pay/Documents/temp/Full-Stack-Web-App/server/src/models/ping_schema.js");
+const Ping_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/ping_schema.js");
 const router = Router();
 
 router.get("/", async (req, res) => {

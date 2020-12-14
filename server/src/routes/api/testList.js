@@ -1,13 +1,13 @@
 const { Router } = require("express");
 const fs = require("fs");
 const cp = require("child_process");
-const Log_Model = require("/home/pay/Documents/temp/Full-Stack-Web-App/server/src/models/log_schema.js");
-const Policy_Model = require("/home/pay/Documents/temp/Full-Stack-Web-App/server/src/models/policy_schema.js");
-const Server_Model = require("/home/pay/Documents/temp/Full-Stack-Web-App/server/src/models/server_schema.js");
+const Log_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/log_schema.js");
+const Policy_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/policy_schema.js");
+const Server_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/server_schema");
 
 const {
   countDocuments,
-} = require("/home/pay/Documents/temp/Full-Stack-Web-App/server/src/models/log_schema.js");
+} = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/log_schema.js");
 const { constants } = require("buffer");
 
 const router = Router();
@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
     });
 
     runCommand =
-      "ls /home/pay/Documents/temp/Full-Stack-Web-App/server/src/public";
+      "ls /home/payman/#Project/Full-Stack-Web-App/";
     cp.exec(runCommand, async (error, stdout, stderr) => {
       if (error) {
         console.error(`exec error: ${error}`);
