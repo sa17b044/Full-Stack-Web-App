@@ -33,17 +33,13 @@ export default {
       cmd: "ping -c 1 8.8.8.8",
       server_name: "",
       policy_name: "",
-      // log: "",
       serverList: [],
       policyList: [],
       logList: "",
-      // testList: {},
     };
   },
   async mounted() {
-    // const responseLog = await axios.get("http://localhost:8081/api/logList/");
-    // // const reg = /^((?!2\s+(.*?)\s+1001ms).)*$/;
-    // this.logList = responseLog.data;
+
     const responsePolicy = await axios.get(
       "http://localhost:8081/api/policyList/"
     );
@@ -63,26 +59,6 @@ export default {
       });
       const response = await axios.get("http://localhost:8081/api/testList/");
       this.logList = response.data;
-    },
-    async getData() {
-      console.log("###---###---###");
-      // const response = await axios.get("http://localhost:8081/api/testList/");
-      // console.log("###---###---###");
-      // this.testList = response.data;
-      // console.log(this.testList);
-      //   // const responsePolicy = await axios.get(
-      //   //   "http://localhost:8081/api/policyList/" + policy_name._id
-      //   // );
-      //   // this.policyList = responsePolicy.data;
-      //   // const responseServer = await axios.get(
-      //   //   "http://localhost:8081/api/serverList/" + server_name._id
-      //   // );
-      //   // this.serverList = responseServer.data;
-    },
-    async removeItem(item, i) {
-      // console.log(item);
-      // await axios.delete("http://localhost:8081/api/logList/" + item._id);
-      // this.logList.splice(i, 1);
     },
   },
   // 2\s+packets\s+transmitted,\s+2\s+received,\s+0%\s+packet\s+loss,\s+time\s+1001ms

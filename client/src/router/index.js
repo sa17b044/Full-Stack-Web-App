@@ -9,12 +9,12 @@ import Logs from "@/components/Logs";
 import Tools from "@/components/Tools";
 import Ping from "@/components/Ping";
 import Home from "@/components/Home";
+import Nmap from "@/components/Nmap";
 
 Vue.use(Router);
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: "/",
       name: "home",
       component: Home
@@ -50,9 +50,14 @@ export default new Router({
       component: Policies
     },
     {
+      path: "/nmap",
+      name: "Nmap",
+      component: Nmap
+    },
+    {
       path: "/logs",
       name: "Logs",
       component: Logs
-    }
+    },
   ]
 });

@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-
+  <div class="container bounceIn">
     <h3>Policy</h3>
     <div v-if="!edit">
       <label class="form-label">Policy name</label>

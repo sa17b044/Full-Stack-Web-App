@@ -10,6 +10,7 @@ const logListRoutes = require("./routes/api/logList.js");
 const policyListRoutes = require("./routes/api/policyList");
 const pingListRoutes = require("./routes/api/pingList");
 const testListRoutes = require("./routes/api/testList");
+const nmapListRoutes = require("./routes/api/nmapList");
 
 const PORT = 8081;
 const app = express();
@@ -32,15 +33,14 @@ mongoose
 app.use(morgan("tiny"));
 app.use(bodyParser.json());
 app.use(cors());
-app.use('/api/userList',userListRoutes);
-app.use('/api/serverList',serverListRoutes);
-app.use('/api/logList',logListRoutes);
-app.use('/api/policyList',policyListRoutes);
-app.use('/api/pingList',pingListRoutes);
-app.use('/api/testList',testListRoutes);
+app.use('/api/userList', userListRoutes);
+app.use('/api/serverList', serverListRoutes);
+app.use('/api/logList', logListRoutes);
+app.use('/api/policyList', policyListRoutes);
+app.use('/api/pingList', pingListRoutes);
+app.use('/api/testList', testListRoutes);
+app.use('/api/nmapList', nmapListRoutes);
 app.use(express.static("public"));
-// /home/pay/Documents/temp/Full-Stack-Web-App/server/src/routes/api/policyList.js
-
 app.get("/", (req, res) => {
   res.send('<a href="http://localhost:8080">http://localhost:8080</a>');
 });
