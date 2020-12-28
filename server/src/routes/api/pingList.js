@@ -3,6 +3,7 @@ const {
 } = require("express");
 const cp = require("child_process");
 const Ping_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/ping_schema.js");
+const { send } = require("process");
 const router = Router();
 
 router.get("/", async (req, res) => {
@@ -19,17 +20,39 @@ router.get("/", async (req, res) => {
     });
   }
 });
+router.get("/sse", async (req, res) => {
+  res.setHeader('Content-Type','text/event-stream')
+    let output = '';
+    let cmd = 'sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules -i ens33 -A alert_fast -s 65535 -k none'
+  const {
+    stdout,
+    stderr
+  } = await cp.exec(cmd)
+  stdout.on("data", (chunk) => {
+    output = chunk.toString();
+    console.log(output)
+    res.write("data:" + `${output}\n\n`);
+    // console.log(chunk.toString());
+    // console.log(output)
+  })
+  stdout.on('end',() => {
+    console.log('Finished data chunks.');
+  });
+
+});
 router.post("/", async (req, res) => {
-  let cmd = req.body.cmd;
+  console.log(req.body)
+
+  // let cmd = req.body.cmd;
   // cp.exec(cmd, async (error, stdout, stderr) => {
   //   if (error) {
   //     console.error(`exec error: ${error}`);
   //     return;
   //   }
   //   req.body.output = stdout;
-  //   console.log(req.body)
+  //   // console.log(req.body)
   //   const newpingList = new Ping_Model(req.body);
-  //   console.log(newpingList)
+  //   // console.log(newpingList)
   //   try {
   //     const pingList = await newpingList.save();
   //     if (!pingList) throw new Error("wrong saving");
@@ -40,15 +63,23 @@ router.post("/", async (req, res) => {
   //     });
   //   }
   // });
-  const {
-    stdout,
-    stderr
-  } = await cp.exec(cmd)
-  stdout.on("data", (chunk) => {
-    console.log(chunk.toString());
-  })
-  console.log(stdout)
+  // let output = '';
+  // const {
+  //   stdout,
+  //   stderr
+  // } = await cp.exec(cmd)
+  // stdout.on("data", (chunk) => {
+  //   // console.log(chunk.toString());
+  //   output += chunk.toString();
+  //   console.log(output)
+  // })
+  // stdout.on('end',() => {
+  //   console.log('Finished data chunks.');
+  // });
+
 });
+
+// remove
 router.delete("/:id", async (req, res) => {
   const {
     id
@@ -64,4 +95,7 @@ router.delete("/:id", async (req, res) => {
     });
   }
 });
+
+
+
 module.exports = router;

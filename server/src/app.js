@@ -41,6 +41,7 @@ app.use('/api/pingList', pingListRoutes);
 app.use('/api/testList', testListRoutes);
 app.use('/api/nmapList', nmapListRoutes);
 app.use(express.static("public"));
+
 app.get("/", (req, res) => {
   res.send('<a href="http://localhost:8080">http://localhost:8080</a>');
 });
