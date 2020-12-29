@@ -2,7 +2,7 @@ const { timeStamp } = require("console");
 const mongoose = require("mongoose");
 
 const policy_schema = new mongoose.Schema({
-  policy_name: {
+  policy_number: {
     type: String,
     required: true,
   },
@@ -15,22 +15,6 @@ const policy_schema = new mongoose.Schema({
     required: true,
   },
   individual_addressing: {
-    type: String,
-    required: true,
-  },
-  SEARCH_REQUEST: {
-    type: String,
-    required: true,
-  },
-  DESCRIPTION_REQUEST: {
-    type: String,
-    required: true,
-  },
-  A_IndividualAddress_Write: {
-    type: String,
-    required: true,
-  },
-  A_IndividualAddress_Read: {
     type: String,
     required: true,
   },

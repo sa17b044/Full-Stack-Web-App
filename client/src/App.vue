@@ -7,7 +7,7 @@
         </nav>
       </div>
       <div class="row high">
-        <div class="col-2 bg-warning p-2">
+        <div class="col-1 mt-5">
           <ul>
             <li><a href="/#/rules">Rules</a></li>
             <ol>
@@ -29,7 +29,7 @@
             </ol>
           </ul>
         </div>
-        <div class="col-10 bg-info p-5"><router-view /></div>
+        <div class="col-10 p-5"><router-view /></div>
       </div>
     </div>
   </div>
@@ -65,9 +65,6 @@ export default {
   100% {
     opacity: 1;
   }
-}
-body {
-  background-color: black;
 }
 a {
   color: black;

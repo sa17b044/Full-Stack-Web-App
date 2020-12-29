@@ -1,76 +1,230 @@
 <template>
   <div class="container bounceIn">
-    <h3>Policy</h3>
+    <h3 class="mb-4">Policy</h3>
     <div v-if="!edit">
-      <label class="form-label">Policy name</label>
-      <input class="form-control" type="text" v-model="policy_name" />
-      <label>Detection</label>
-      <input type="checkbox" v-model="detection" />
-      <label>Inspection</label>
-      <input type="checkbox" v-model="inspection" />
-      <label>Individual addressing</label>
-      <input type="checkbox" v-model="individual_addressing" />
-      <label>SEARCH_REQUEST</label>
-      <input type="checkbox" v-model="SEARCH_REQUEST" />
-      <label>DESCRIPTION_REQUEST</label>
-      <input type="checkbox" v-model="DESCRIPTION_REQUEST" />
-      <label>A individualAddress write</label>
-      <input type="checkbox" v-model="A_IndividualAddress_Write" />
-      <label>A individualAddress read</label>
-      <input type="checkbox" v-model="A_IndividualAddress_Read" />
-      <label>Group address level</label>
-      <input type="number" v-model="group_address_level" />
+      <div class="mb-2">
+        <label class="form-label">Policy number</label>
+        <input
+          class="form-control"
+          type="number"
+          min="1"
+          max="100"
+          placeholder="0"
+          v-model="policy_number"
+        />
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" v-model="detection" />
+        <label class="form-check-label" for="detection">Detection</label>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" v-model="inspection" />
+        <label class="form-check-label" for="inspection">Inspection</label>
+      </div>
+      <div class="mb-3 form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          v-model="individual_addressing"
+        />
+        <label class="form-check-label" for="individual_addressing"
+          >Individual addressing</label
+        >
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="services">Services</label>
+        <select class="form-select">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Group address level</label>
+        <input
+          class="form-control"
+          type="number"
+          min="1"
+          max="100"
+          placeholder="0"
+          v-model="group_address_level"
+        />
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" v-model="header" />
+        <label class="form-check-label" for="individual_addressing"
+          >Header</label
+        >
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" v-model="payload" />
+        <label class="form-check-label" for="individual_addressing"
+          >Payload</label
+        >
+      </div>
       <!-- Group address file<input type="checkbox" v-model="group_address_file"/> -->
-      <label>Header</label>
-      <input type="checkbox" v-model="header" />
-      <label>Payload</label>
-      <input type="checkbox" v-model="payload" />
-      <button @click="addItem()">Add</button>
+
+      <button class="btn btn-primary" @click="addItem()">Add</button>
     </div>
 
     <div v-else>
-      <label>Policy name</label>
-      <input type="text" v-model="policy_name" />
-      <label>Detection</label>
-      <input type="checkbox" v-model="detection" />
-      <label>Inspection</label>
-      <input type="checkbox" v-model="inspection" />
-      <label>Individual addressing</label>
-      <input type="checkbox" v-model="individual_addressing" />
-      <label>SEARCH_REQUEST</label>
-      <input type="checkbox" v-model="SEARCH_REQUEST" />
-      <label>DESCRIPTION_REQUEST</label>
-      <input type="checkbox" v-model="DESCRIPTION_REQUEST" />
-      <label>A individualAddress write</label>
-      <input type="checkbox" v-model="A_IndividualAddress_Write" />
-      <label>A individualAddress read</label>
-      <input type="checkbox" v-model="A_IndividualAddress_Read" />
-      <label>Group address level</label>
-      <input type="number" v-model="group_address_level" />
-      <!-- Group address file<input type="checkbox" v-model="group_address_file"/> -->
-      <label>Header</label>
-      <input type="checkbox" v-model="header" />
-      <label>Payload</label>
-      <input type="checkbox" v-model="payload" />
-      <button @click="updateItem(selectedItem)">Update</button>
-    </div>
+      <div class="mb-2">
+        <label class="form-label">Policy number</label>
+        <input
+          class="form-control"
+          type="number"
+          min="1"
+          max="100"
+          placeholder="0"
+          v-model="policy_number"
+        />
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" v-model="detection" />
+        <label class="form-check-label" for="detection">Detection</label>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" v-model="inspection" />
+        <label class="form-check-label" for="inspection">Inspection</label>
+      </div>
+      <div class="mb-3 form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          v-model="individual_addressing"
+        />
+        <label class="form-check-label" for="individual_addressing"
+          >Individual addressing</label
+        >
+      </div>
+<div>---------------------------</div>
+      <div class="form-group" v-for="(input, k) in inputs" :key="k">
+        <input type="text" class="form-control" v-model="input.name" />
+        <span>
+          <i
+            class="fas fa-minus-circle"
+            @click="remove(k)"
+            v-show="k || (!k && inputs.length > 1)"
+          ></i>
+          <i
+            class="fas fa-plus-circle"
+            @click="add(k)"
+            v-show="k == inputs.length - 1"
+          ></i>
+        </span>
+      </div>
 
+      <div class="mb-3">
+        <label class="form-label" for="services">Services</label>
+        <select class="form-select" v-model="services.select">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Group address level</label>
+        <input
+          class="form-control"
+          type="number"
+          min="1"
+          max="100"
+          placeholder="0"
+          v-model="group_address_level"
+        />
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" v-model="header" />
+        <label class="form-check-label" for="individual_addressing"
+          >Header</label
+        >
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" v-model="payload" />
+        <label class="form-check-label" for="individual_addressing"
+          >Payload</label
+        >
+      </div>
+      <button class="btn btn-success" @click="updateItem(selectedItem)">
+        Update
+      </button>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <div>Policy Number</div>
+      </div>
+      <div class="col">
+        <div>Detection</div>
+      </div>
+      <div class="col">
+        <div>Inspection</div>
+      </div>
+      <div class="col">
+        <div>Individual Addressing</div>
+      </div>
+      <div class="col">
+        <div>Group Address Level</div>
+      </div>
+      <div class="col">
+        <div>Header</div>
+      </div>
+      <div class="col">
+        <div>Payload</div>
+      </div>
+      <div class="col">
+        <div class="p-2">
+          <button class="btn btn-debug noBorder">
+            Edit
+          </button>
+        </div>
+      </div>
+      <div class="col">
+        <div class="p-2 ">
+          <button class="btn btn-debug noBorder">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
     <div v-for="(item, i) in itemList" :key="item._id">
-      <div>{{ ++i }}</div>
-      <div>{{ item.policy_name }}</div>
-      <div>{{ item.detection }}</div>
-      <div>{{ item.inspection }}</div>
-      <div>{{ item.individual_addressing }}</div>
-      <div>{{ item.SEARCH_REQUEST }}</div>
-      <div>{{ item.DESCRIPTION_REQUEST }}</div>
-      <div>{{ item.A_IndividualAddress_Write }}</div>
-      <div>{{ item.A_IndividualAddress_Read }}</div>
-      <div>{{ item.group_address_level }}</div>
+      <div class="row">
+        <div class="col">
+          <div>{{ item.policy_number }}</div>
+        </div>
+        <div class="col">
+          <div>{{ item.detection }}</div>
+        </div>
+        <div class="col">
+          <div>{{ item.inspection }}</div>
+        </div>
+        <div class="col">
+          <div>{{ item.individual_addressing }}</div>
+        </div>
+        <div class="col">
+          <div>{{ item.group_address_level }}</div>
+        </div>
+        <div class="col">
+          <div>{{ item.header }}</div>
+        </div>
+        <div class="col">
+          <div>{{ item.payload }}</div>
+        </div>
+        <div class="col">
+          <div class="p-2">
+            <button class="btn btn-secondary" @click="editItem(i, item)">
+              Edit
+            </button>
+          </div>
+        </div>
+        <div class="col">
+          <div class="p-2">
+            <button class="btn btn-danger" @click="removeItem(item, i)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
       <!-- <div>Log file{{ item.group_address_file }}</div> -->
-      <div>{{ item.header }}</div>
-      <div>{{ item.payload }}</div>
-      <button @click="editItem(i, item)">Edit</button>
-      <button @click="removeItem(item, i)">Remove</button>
     </div>
   </div>
 </template>
@@ -80,20 +234,26 @@ import axios from "axios";
 export default {
   data() {
     return {
-      policy_name: "",
+      services: [
+        {
+          select: ""
+        }
+      ],
+      inputs: [
+        {
+          name: ""
+        }
+      ],
+      policy_number: "",
       detection: "",
       inspection: "",
       individual_addressing: "",
-      SEARCH_REQUEST: "",
-      DESCRIPTION_REQUEST: "",
-      A_IndividualAddress_Write: "",
-      A_IndividualAddress_Read: "",
       group_address_level: "",
       // group_address_file: "",
       header: "",
       payload: "",
       itemList: [],
-      edit: false,
+      edit: false
     };
   },
   async mounted() {
@@ -102,33 +262,31 @@ export default {
     // console.log(this.itemList);
   },
   methods: {
+    add(index) {
+            this.inputs.push({ name: '' });
+        },
+        remove(index) {
+            this.inputs.splice(index, 1);
+        },
     async addItem() {
       const response = await axios.post(
         "http://localhost:8081/api/policyList/",
         {
-          policy_name: this.policy_name,
+          policy_number: this.policy_number,
           detection: this.detection,
           inspection: this.inspection,
           individual_addressing: this.individual_addressing,
-          SEARCH_REQUEST: this.SEARCH_REQUEST,
-          DESCRIPTION_REQUEST: this.DESCRIPTION_REQUEST,
-          A_IndividualAddress_Write: this.A_IndividualAddress_Write,
-          A_IndividualAddress_Read: this.A_IndividualAddress_Read,
           group_address_level: this.group_address_level,
           //  group_address_file: this.group_address_file,
           header: this.header,
-          payload: this.payload,
+          payload: this.payload
         }
       );
       this.itemList.push(response.data);
-      this.policy_name = "";
+      this.policy_number = "";
       this.detection = "";
       this.inspection = "";
       this.individual_addressing = "";
-      this.SEARCH_REQUEST = "";
-      this.DESCRIPTION_REQUEST = "";
-      this.A_IndividualAddress_Write = "";
-      this.A_IndividualAddress_Read = "";
       this.group_address_level = "";
       // this.group_address_file = "";
       this.header = "";
@@ -142,18 +300,14 @@ export default {
     },
     async updateItem(item) {
       await axios.put("http://localhost:8081/api/policyList/" + item._id, {
-        policy_name: this.policy_name,
+        policy_number: this.policy_number,
         detection: this.detection,
         inspection: this.inspection,
         individual_addressing: this.individual_addressing,
-        SEARCH_REQUEST: this.SEARCH_REQUEST,
-        DESCRIPTION_REQUEST: this.DESCRIPTION_REQUEST,
-        A_IndividualAddress_Write: this.A_IndividualAddress_Write,
-        A_IndividualAddress_Read: this.A_IndividualAddress_Read,
         group_address_level: this.group_address_level,
         //  group_address_file: this.group_address_file,
         header: this.header,
-        payload: this.payload,
+        payload: this.payload
       });
       this.edit = false;
       const response = await axios.get("http://localhost:8081/api/policyList/");
@@ -162,24 +316,43 @@ export default {
     editItem(i, item) {
       console.log(item);
       this.edit = true;
-      this.policy_name = item.policy_name;
+      this.policy_number = item.policy_number;
       this.detection = item.detection;
       this.inspection = item.inspection;
       this.individual_addressing = item.individual_addressing;
-      this.SEARCH_REQUEST = item.SEARCH_REQUEST;
-      this.DESCRIPTION_REQUEST = item.DESCRIPTION_REQUEST;
-      this.A_IndividualAddress_Write = item.A_IndividualAddress_Write;
-      this.A_IndividualAddress_Read = item.A_IndividualAddress_Read;
       this.group_address_level = item.group_address_level;
       // this.group_address_file=item.group_address_file;
       this.header = item.header;
       this.payload = item.payload;
       this.selectedItem = item;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+input[type="number"] {
+  width: 10%;
+}
+select {
+  width: 50%;
+}
+input[type="number"]:focus {
+  background-color: rgb(224, 247, 255);
+}
+input,
+select,
+button {
+  border: 2px solid black;
+}
+.row {
+  border: 2px solid black;
+}
+.col {
+  border: 1px solid black;
+}
+.noBorder {
+  border: 2px solid white;
+}
 </style>

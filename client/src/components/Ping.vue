@@ -22,13 +22,14 @@ export default {
     };
   },
   mounted() {
-    console.log("1-#");
+      console.log("1-#");
     let sse = new EventSource("http://localhost:8081/api/pingList/sse");
     // sse.onmessage = console.log
     sse.addEventListener("message", (output) => {
       console.log(output.data);
       this.output = output.data;
     });
+    
     // console.log(sse.onmessage);
     // console.log("#");
     // const response = axios.get("http://localhost:8081/api/pingList/");

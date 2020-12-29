@@ -40,61 +40,61 @@ router.get("/sse", async (req, res) => {
   });
 
 });
-router.post("/", async (req, res) => {
-  console.log(req.body)
+// router.post("/", async (req, res) => {
+//   console.log(req.body)
 
-  // let cmd = req.body.cmd;
-  // cp.exec(cmd, async (error, stdout, stderr) => {
-  //   if (error) {
-  //     console.error(`exec error: ${error}`);
-  //     return;
-  //   }
-  //   req.body.output = stdout;
-  //   // console.log(req.body)
-  //   const newpingList = new Ping_Model(req.body);
-  //   // console.log(newpingList)
-  //   try {
-  //     const pingList = await newpingList.save();
-  //     if (!pingList) throw new Error("wrong saving");
-  //     res.status(200).json(pingList);
-  //   } catch (error) {
-  //     res.status(500).json({
-  //       message: error.message,
-  //     });
-  //   }
-  // });
-  // let output = '';
-  // const {
-  //   stdout,
-  //   stderr
-  // } = await cp.exec(cmd)
-  // stdout.on("data", (chunk) => {
-  //   // console.log(chunk.toString());
-  //   output += chunk.toString();
-  //   console.log(output)
-  // })
-  // stdout.on('end',() => {
-  //   console.log('Finished data chunks.');
-  // });
+//   // let cmd = req.body.cmd;
+//   // cp.exec(cmd, async (error, stdout, stderr) => {
+//   //   if (error) {
+//   //     console.error(`exec error: ${error}`);
+//   //     return;
+//   //   }
+//   //   req.body.output = stdout;
+//   //   // console.log(req.body)
+//   //   const newpingList = new Ping_Model(req.body);
+//   //   // console.log(newpingList)
+//   //   try {
+//   //     const pingList = await newpingList.save();
+//   //     if (!pingList) throw new Error("wrong saving");
+//   //     res.status(200).json(pingList);
+//   //   } catch (error) {
+//   //     res.status(500).json({
+//   //       message: error.message,
+//   //     });
+//   //   }
+//   // });
+//   // let output = '';
+//   // const {
+//   //   stdout,
+//   //   stderr
+//   // } = await cp.exec(cmd)
+//   // stdout.on("data", (chunk) => {
+//   //   // console.log(chunk.toString());
+//   //   output += chunk.toString();
+//   //   console.log(output)
+//   // })
+//   // stdout.on('end',() => {
+//   //   console.log('Finished data chunks.');
+//   // });
 
-});
+// });
 
 // remove
-router.delete("/:id", async (req, res) => {
-  const {
-    id
-  } = req.params;
-  try {
-    const removed = await Ping_Model.findByIdAndDelete(id);
-    // console.pings(removed)
-    if (!removed) throw Error("Something went wrong ");
-    res.status(200).json(removed);
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
-});
+// router.delete("/:id", async (req, res) => {
+//   const {
+//     id
+//   } = req.params;
+//   try {
+//     const removed = await Ping_Model.findByIdAndDelete(id);
+//     // console.pings(removed)
+//     if (!removed) throw Error("Something went wrong ");
+//     res.status(200).json(removed);
+//   } catch (error) {
+//     res.status(500).json({
+//       message: error.message,
+//     });
+//   }
+// });
 
 
 
