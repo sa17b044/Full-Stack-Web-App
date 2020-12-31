@@ -5,7 +5,7 @@ import Users from "@/components/Users";
 import Rules from "@/components/Rules";
 import Servers from "@/components/Servers";
 import Policies from "@/components/Policies";
-import Logs from "@/components/Logs";
+import Configs from "@/components/Config";
 import Tools from "@/components/Tools";
 import Ping from "@/components/Ping";
 import Home from "@/components/Home";
@@ -56,9 +56,9 @@ export default new Router({
     //   component: Nmap
     // },
     {
-      path: "/logs",
-      name: "Logs",
-      component: Logs
+      path: "/config",
+      name: "Configs",
+      component: Configs
     },
     // {
     //   path: "/xml",

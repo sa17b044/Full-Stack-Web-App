@@ -19,7 +19,7 @@
                         <!-- <ol>
               <a href="/#/xml">XML</a>
             </ol> -->
-            <li><a href="/#/logs">Logs</a></li>
+            <li><a href="/#/Config">Config</a></li>
             <li><a href="/#/users">Users</a></li>
             <li>
               <a href="/#/tools">Tools</a>

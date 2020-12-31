@@ -31,14 +31,39 @@
           >Individual addressing</label
         >
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label class="form-label" for="services">Services</label>
         <select class="form-select">
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </select>
+      </div> -->
+      <!-- ################################################################### -->
+      <!-- <i class="bi bi-dash-square-fill">Test</i> -->
+      <label class="form-label" for="services">Services</label>
+      <div v-for="(service, k) in services" :key="k">
+        <input type="text" class="form-control " v-model="service.select" />
+        <span>
+          <button
+            class="btn alert-success mt-1 mb-1"
+            @click="add(k)"
+            v-show="k == services.length - 1"
+          >
+            +
+          </button>
+          <button
+            class="btn alert-danger mt-1 mb-1"
+            @click="remove(k)"
+            v-show="k || (!k && services.length > 1)"
+          >
+            -
+          </button>
+        </span>
       </div>
+      <!-- <h4>{{this.services}}</h4> -->
+      <!-- ################################################################### -->
+
       <div class="mb-2">
         <label class="form-label">Group address level</label>
         <input
@@ -244,12 +269,13 @@ export default {
   },
   methods: {
     add(index) {
-      this.inputs.push({ name: "" });
+      this.services.push({ select: "" });
     },
     remove(index) {
-      this.inputs.splice(index, 1);
+      this.services.splice(index, 1);
     },
     async addItem() {
+      console.log(this.services);
       const response = await axios.post(
         "http://localhost:8081/api/policyList/",
         {
@@ -315,6 +341,9 @@ export default {
 <style scoped>
 input[type="number"] {
   width: 10%;
+}
+input[type="text"] {
+  width: 50%;
 }
 input[type="file"] {
   width: 27%;
