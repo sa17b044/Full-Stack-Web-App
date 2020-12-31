@@ -7,7 +7,7 @@
         </nav>
       </div>
       <div class="row high">
-        <div class="col-1 mt-5">
+        <div class="col-2 mt-5">
           <ul>
             <li><a href="/#/rules">Rules</a></li>
             <ol>
@@ -16,6 +16,9 @@
             <ol>
               <a href="/#/servers">Servers</a>
             </ol>
+                        <!-- <ol>
+              <a href="/#/xml">XML</a>
+            </ol> -->
             <li><a href="/#/logs">Logs</a></li>
             <li><a href="/#/users">Users</a></li>
             <li>
@@ -24,9 +27,9 @@
             <ol>
               <a href="/#/ping">Ping</a>
             </ol>
-            <ol>
+            <!-- <ol>
               <a href="/#/nmap">Nmap</a>
-            </ol>
+            </ol> -->
           </ul>
         </div>
         <div class="col-10 p-5"><router-view /></div>

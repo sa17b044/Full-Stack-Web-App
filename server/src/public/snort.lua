@@ -1,13 +1,14 @@
-null 
- {
-  _id: 5fdc6433315879135b8c9aa3,
-  server_name: '2',
-  src_ip: '3213248654',
-  src_port: '6354',
-  dst_ip: '654',
-  dst_port: '654',
-  policy: '6354654',
-  logKNXnetip: 'false',
-  logToFile: 'false',
+{
+  _id: 5feb53d5b6cf631ec5241eaf,
+  policy_number: '1',
+  detection: 'true',
+  inspection: 'true',
+  individual_addressing: 'true',
+  group_address_level: '2',
+  header: 'true',
+  payload: 'true',
+  createdAt: 2020-12-29T16:05:41.106Z,
+  updatedAt: 2020-12-29T16:05:41.106Z,
   __v: 0
-}
+} 
+ null

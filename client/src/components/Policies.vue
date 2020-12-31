@@ -50,6 +50,7 @@
           v-model="group_address_level"
         />
       </div>
+
       <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" v-model="header" />
         <label class="form-check-label" for="individual_addressing"
@@ -62,7 +63,6 @@
           >Payload</label
         >
       </div>
-      <!-- Group address file<input type="checkbox" v-model="group_address_file"/> -->
 
       <button class="btn btn-primary" @click="addItem()">Add</button>
     </div>
@@ -97,22 +97,6 @@
           >Individual addressing</label
         >
       </div>
-<div>---------------------------</div>
-      <div class="form-group" v-for="(input, k) in inputs" :key="k">
-        <input type="text" class="form-control" v-model="input.name" />
-        <span>
-          <i
-            class="fas fa-minus-circle"
-            @click="remove(k)"
-            v-show="k || (!k && inputs.length > 1)"
-          ></i>
-          <i
-            class="fas fa-plus-circle"
-            @click="add(k)"
-            v-show="k == inputs.length - 1"
-          ></i>
-        </span>
-      </div>
 
       <div class="mb-3">
         <label class="form-label" for="services">Services</label>
@@ -122,6 +106,7 @@
           <option value="3">Three</option>
         </select>
       </div>
+
       <div class="mb-2">
         <label class="form-label">Group address level</label>
         <input
@@ -149,6 +134,7 @@
         Update
       </button>
     </div>
+
     <div class="row mt-3">
       <div class="col">
         <div>Policy Number</div>
@@ -239,19 +225,14 @@ export default {
           select: ""
         }
       ],
-      inputs: [
-        {
-          name: ""
-        }
-      ],
       policy_number: "",
-      detection: "",
-      inspection: "",
-      individual_addressing: "",
+      detection: "false",
+      inspection: "false",
+      individual_addressing: "false",
       group_address_level: "",
-      // group_address_file: "",
-      header: "",
-      payload: "",
+      group_address_file: "",
+      header: "false",
+      payload: "false",
       itemList: [],
       edit: false
     };
@@ -263,11 +244,11 @@ export default {
   },
   methods: {
     add(index) {
-            this.inputs.push({ name: '' });
-        },
-        remove(index) {
-            this.inputs.splice(index, 1);
-        },
+      this.inputs.push({ name: "" });
+    },
+    remove(index) {
+      this.inputs.splice(index, 1);
+    },
     async addItem() {
       const response = await axios.post(
         "http://localhost:8081/api/policyList/",
@@ -334,6 +315,9 @@ export default {
 <style scoped>
 input[type="number"] {
   width: 10%;
+}
+input[type="file"] {
+  width: 27%;
 }
 select {
   width: 50%;

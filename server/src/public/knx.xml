@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<GroupAddress-Export xmlns="http://knx.org/xml/ga-export/01">
+<GroupAddress Name="Central" Address="0/0/1" Central="true" DPTs="DPST-1-1" />
+<GroupAddress Name="Date and Time" Address="0/1/0" DPTs="DPT-19" />
+<GroupAddress Name="Light A1 - Switch" Address="1/0/0" DPTs="DPST-1-1"
+ia="7.6.7,7.6.5"/>
+<GroupAddress Name="Light B1 - Switch" Address="1/1/0" DPTs="DPST-1-1" />
+<GroupAddress Name="J1 - Up/Down" Address="2/0/0" DPTs="DPST-1-8" />
+<GroupAddress Name="J1 - Stop/Slat" Address="2/0/1" DPTs="DPST-1-9" />
+<GroupAddress Name="J2 - Up/Down" Address="2/1/0" DPTs="DPST-1-8" />
+<GroupAddress Name="J2 - Stop/Slat" Address="2/1/1" DPTs="DPST-1-9" />
+<GroupAddress Name="Room B - Current Temperature" Address="3/1/0" DPTs="DPST-9-1"
+max="30.0" min="15.0" ia="7.6.4" />
+</GroupAddress-Export>
