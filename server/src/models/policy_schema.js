@@ -22,10 +22,8 @@ const policy_schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // group_address_file: {
-  //   type: Buffer,
-  //   required: true,
-  // }, 
+  services: [],
+  app_services: [],
   header: {
     type: String,
     required: true,

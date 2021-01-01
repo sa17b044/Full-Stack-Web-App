@@ -18,6 +18,7 @@ router.get("/", async (req, res) => {
 });
 router.post("/", async (req, res) => {
   console.log(req.body);
+  console.log(typeof(req.body.services))
   const newPolicy = new Policy_Model(req.body);
   try {
     const policyList = await newPolicy.save();

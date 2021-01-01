@@ -7,10 +7,10 @@ const mongoose = require("mongoose");
 
 const userListRoutes = require("./routes/api/userList.js");
 const serverListRoutes = require("./routes/api/serverList.js");
-const logListRoutes = require("./routes/api/logList.js");
+// const logListRoutes = require("./routes/api/logList.js");
 const policyListRoutes = require("./routes/api/policyList");
 const pingListRoutes = require("./routes/api/pingList");
-const testListRoutes = require("./routes/api/testList");
+const configListRoutes = require("./routes/api/configList");
 const nmapListRoutes = require("./routes/api/nmapList");
 
 const PORT = 8081;
@@ -36,10 +36,10 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use('/api/userList', userListRoutes);
 app.use('/api/serverList', serverListRoutes);
-app.use('/api/logList', logListRoutes);
+// app.use('/api/logList', logListRoutes);
 app.use('/api/policyList', policyListRoutes);
 app.use('/api/pingList', pingListRoutes);
-app.use('/api/testList', testListRoutes);
+app.use('/api/configList', configListRoutes);
 app.use('/api/nmapList', nmapListRoutes);
 app.use(express.static("public"));
 

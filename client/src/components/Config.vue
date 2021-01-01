@@ -40,25 +40,24 @@ export default {
       "http://localhost:8081/api/policyList/"
     );
     this.policyList = responsePolicy.data;
-    // console.log(this.policyList)
     const responseServer = await axios.get(
       "http://localhost:8081/api/serverList/"
     );
     this.serverList = responseServer.data;
   }
-  // ,
-  // methods: {
-  //   async run() {
-  //     console.log("1#");
-  //     await axios.post("http://localhost:8081/api/testList/", {
-  //       cmd: this.cmd,
-  //       server_number: this.server_number,
-  //       policy_number: this.policy_number
-  //     });
-  //     const response = await axios.get("http://localhost:8081/api/testList/");
-  //     this.logList = response.data;
-  //   }
-  // }
+  ,
+  methods: {
+    async run() {
+      console.log("1#");
+      await axios.post("http://localhost:8081/api/configList/", {
+        // cmd: this.cmd,
+        server_number: this.server_number,
+        policy_number: this.policy_number
+      });
+      // const response = await axios.get("http://localhost:8081/api/testList/");
+      // this.logList = response.data;
+    }
+  }
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

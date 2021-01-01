@@ -9,7 +9,6 @@
           type="number"
           min="1"
           max="100"
-          placeholder="0"
           v-model="policy_number"
         />
       </div>
@@ -42,7 +41,7 @@
       <!-- ################################################################### -->
       <!-- <i class="bi bi-dash-square-fill">Test</i> -->
       <label class="form-label" for="services">Services</label>
-      <div v-for="(service, k) in services" :key="k">
+      <div v-for="(service, k) in services" :key="'k'+k">
         <input type="text" class="form-control " v-model="service.select" />
         <span>
           <button
@@ -61,6 +60,28 @@
           </button>
         </span>
       </div>
+
+      <label class="form-label" for="services">App Services</label>
+      <!-- {{services}} -->
+      <div v-for="(app, l) in app_services" :key="'l'+l">
+        <input type="text" class="form-control " v-model="app.select_app" />
+        <span>
+          <button
+            class="btn alert-success mt-1 mb-1"
+            @click="addApp(l)"
+            v-show="l == app_services.length - 1"
+          >
+            +
+          </button>
+          <button
+            class="btn alert-danger mt-1 mb-1"
+            @click="removeApp(l)"
+            v-show="l || (!l && app_services.length > 1)"
+          >
+            -
+          </button>
+        </span>
+      </div>
       <!-- <h4>{{this.services}}</h4> -->
       <!-- ################################################################### -->
 
@@ -71,7 +92,6 @@
           type="number"
           min="1"
           max="100"
-          placeholder="0"
           v-model="group_address_level"
         />
       </div>
@@ -100,7 +120,6 @@
           type="number"
           min="1"
           max="100"
-          placeholder="0"
           v-model="policy_number"
         />
       </div>
@@ -122,14 +141,49 @@
           >Individual addressing</label
         >
       </div>
+      <!-- ############################################################################################## -->
+      <label class="form-label" for="services">Services</label>
+      <div v-for="(service, k) in services" :key="k">
+        {{ services }}
+        <input type="text" class="form-control " v-model="service.select" />
+        <span>
+          <button
+            class="btn alert-success mt-1 mb-1"
+            @click="add(k)"
+            v-show="k == services.length - 1"
+          >
+            +
+          </button>
+          <button
+            class="btn alert-danger mt-1 mb-1"
+            @click="remove(k)"
+            v-show="k || (!k && services.length > 1)"
+          >
+            -
+          </button>
+        </span>
+      </div>
 
-      <div class="mb-3">
-        <label class="form-label" for="services">Services</label>
-        <select class="form-select" v-model="services.select">
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+      <label class="form-label" for="services">App Services</label>
+      <!-- {{services}} -->
+      <div v-for="(app, l) in app_services" :key="l">
+        <input type="text" class="form-control " v-model="app.select_app" />
+        <span>
+          <button
+            class="btn alert-success mt-1 mb-1"
+            @click="addApp(l)"
+            v-show="l == app_services.length - 1"
+          >
+            +
+          </button>
+          <button
+            class="btn alert-danger mt-1 mb-1"
+            @click="removeApp(l)"
+            v-show="l || (!l && app_services.length > 1)"
+          >
+            -
+          </button>
+        </span>
       </div>
 
       <div class="mb-2">
@@ -139,7 +193,6 @@
           type="number"
           min="1"
           max="100"
-          placeholder="0"
           v-model="group_address_level"
         />
       </div>
@@ -177,6 +230,12 @@
         <div>Group Address Level</div>
       </div>
       <div class="col">
+        <div>Services</div>
+      </div>
+      <div class="col">
+        <div>App Services</div>
+      </div>
+      <div class="col">
         <div>Header</div>
       </div>
       <div class="col">
@@ -210,6 +269,12 @@
         </div>
         <div class="col">
           <div>{{ item.individual_addressing }}</div>
+        </div>
+        <div class="col">
+          <div>{{ item.services }}</div>
+        </div>
+        <div class="col">
+          <div>{{ item.app_services }}</div>
         </div>
         <div class="col">
           <div>{{ item.group_address_level }}</div>
@@ -250,6 +315,11 @@ export default {
           select: ""
         }
       ],
+      app_services: [
+        {
+          select_app: ""
+        }
+      ],
       policy_number: "",
       detection: "false",
       inspection: "false",
@@ -265,7 +335,8 @@ export default {
   async mounted() {
     const response = await axios.get("http://localhost:8081/api/policyList/");
     this.itemList = response.data;
-    // console.log(this.itemList);
+    // console.log("####");
+    // console.log(response.data);
   },
   methods: {
     add(index) {
@@ -273,6 +344,12 @@ export default {
     },
     remove(index) {
       this.services.splice(index, 1);
+    },
+    addApp(index) {
+      this.app_services.push({ select_app: "" });
+    },
+    removeApp(index) {
+      this.app_services.splice(index, 1);
     },
     async addItem() {
       console.log(this.services);
@@ -283,6 +360,8 @@ export default {
           detection: this.detection,
           inspection: this.inspection,
           individual_addressing: this.individual_addressing,
+          services: this.services,
+          app_services: this.app_services,
           group_address_level: this.group_address_level,
           //  group_address_file: this.group_address_file,
           header: this.header,
@@ -295,9 +374,13 @@ export default {
       this.inspection = "";
       this.individual_addressing = "";
       this.group_address_level = "";
+      // this.services = "";
+      // this.app_services = "";
       // this.group_address_file = "";
       this.header = "";
       this.payload = "";
+      const res = await axios.get("http://localhost:8081/api/policyList/");
+      // this.itemList = res.data;
     },
     async removeItem(item, i) {
       await axios.delete("http://localhost:8081/api/policyList/" + item._id);
@@ -312,6 +395,8 @@ export default {
         inspection: this.inspection,
         individual_addressing: this.individual_addressing,
         group_address_level: this.group_address_level,
+        services: this.services,
+        app_services: this.app_services,
         //  group_address_file: this.group_address_file,
         header: this.header,
         payload: this.payload
@@ -328,6 +413,8 @@ export default {
       this.inspection = item.inspection;
       this.individual_addressing = item.individual_addressing;
       this.group_address_level = item.group_address_level;
+      this.services = item.services;
+      this.app_services = item.app_services;
       // this.group_address_file=item.group_address_file;
       this.header = item.header;
       this.payload = item.payload;
