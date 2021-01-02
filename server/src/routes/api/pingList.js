@@ -48,7 +48,7 @@ router.get("/sse", async (req, res) => {
       }) + "\n\n")
 
     // console.log(chunk.toString());
-    // console.log(output)
+    console.log(output)
   })
   stdout.on('end',() => {
     console.log('Finished data chunks.');

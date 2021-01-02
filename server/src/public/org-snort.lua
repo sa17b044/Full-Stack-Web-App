@@ -13,7 +13,7 @@ require('snort_config')
 -- this depends on SNORT_LUA_PATH
 -- where to find other config files
 -- conf_dir = os.getenv('SNORT_LUA_PATH')
-conf_dir = './etc/scripts'
+conf_dir = '/opt/snort-sabic/etc/snort'
 
 if ( not conf_dir ) then
     conf_dir = '.'

@@ -1,0 +1,6 @@
+sudo iptables -L
+sudo iptables -A INPUT -p icmp --icmp-type echo-request -j REJECT
+sudo iptables -A INPUT -s 8.8.8.8 -j DROP
+
+http://linux-training.be/networking/ch14.html#idp69813024
+
