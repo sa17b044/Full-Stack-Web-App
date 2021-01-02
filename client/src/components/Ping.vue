@@ -5,7 +5,12 @@
     <input class="form-control" type="text" v-model="ip" />
     <button @click="sendLog()" class="btn btn-primary m-1">Run</button>
     <br />
-    {{ this.output }}
+    <div id="output">
+      <p v-for="(par, index) of pars" :key="index" >
+        {{ par }}
+      </p>
+    </div>
+    <!-- <p> {{ output }} </p> -->
   </div>
 </template>
 
@@ -21,13 +26,20 @@ export default {
       // itemList: [],
     };
   },
+  computed: {
+    pars() {
+      return this.output.split("\n");
+    }
+  },
   mounted() {
       console.log("1-#");
     let sse = new EventSource("http://localhost:8081/api/pingList/sse");
     // sse.onmessage = console.log
     sse.addEventListener("message", (output) => {
-      console.log(output.data);
-      this.output = output.data;
+      const data = JSON.parse(output.data);
+      console.log("COUNT " + data.count)
+      console.log(data);
+      this.output += data.output;
     });
     
     // console.log(sse.onmessage);
@@ -62,4 +74,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+div#output > p {
+  font-size: 0.7;
+  margin-bottom: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
 </style>

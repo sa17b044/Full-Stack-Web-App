@@ -21,17 +21,32 @@ router.get("/", async (req, res) => {
   }
 });
 router.get("/sse", async (req, res) => {
-  res.setHeader('Content-Type','text/event-stream')
+  res.setHeader('Content-Type', 'text/event-stream')
+  res.setHeader('Cache-Control', "no-cache");
+  
     let output = '';
-    let cmd = 'sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules -i ens33 -A alert_fast -s 65535 -k none'
+    let cmd = 'sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules -i ens33 -A alert_full -s 65535 -k none -d -X -e'
   const {
     stdout,
     stderr
   } = await cp.exec(cmd)
+  let oldData = "";
+  let count = 0;
+
   stdout.on("data", (chunk) => {
     output = chunk.toString();
-    console.log(output)
-    res.write("data:" + `${output}\n\n`);
+    oldData += output;
+    count++;
+
+    // console.log(output)
+    console.log("SEND DATA TO CLIENT")
+    // res.write("data:" + output)
+    // res.write("data:" + `${output}\n\n`);
+    res.write("data:" + JSON.stringify({
+        output,
+        count
+      }) + "\n\n")
+
     // console.log(chunk.toString());
     // console.log(output)
   })
