@@ -7,7 +7,7 @@
     <br />
     <div id="output">
       <p v-for="(par, index) of pars" :key="index" >
-        {{ par }}
+        {{ par}}
       </p>
     </div>
     <!-- <p> {{ output }} </p> -->
@@ -36,8 +36,9 @@ export default {
     // sse.onmessage = console.log
     sse.addEventListener("message", (output) => {
       const data = JSON.parse(output.data);
+      console.log(data)
       console.log("COUNT " + data.count)
-      console.log(data);
+      console.log(data.output);
       this.output += data.output;
     });
     

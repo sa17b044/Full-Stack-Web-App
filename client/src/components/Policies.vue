@@ -13,35 +13,36 @@
         />
       </div>
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" v-model="detection" />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          v-model="detection"
+          checked="true"
+        />
         <label class="form-check-label" for="detection">Detection</label>
       </div>
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" v-model="inspection" />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          v-model="inspection"
+          checked="true"
+        />
         <label class="form-check-label" for="inspection">Inspection</label>
       </div>
       <div class="mb-3 form-check">
         <input
           type="checkbox"
           class="form-check-input"
+          checked="true"
           v-model="individual_addressing"
         />
         <label class="form-check-label" for="individual_addressing"
           >Individual addressing</label
         >
       </div>
-      <!-- <div class="mb-3">
-        <label class="form-label" for="services">Services</label>
-        <select class="form-select">
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div> -->
-      <!-- ################################################################### -->
-      <!-- <i class="bi bi-dash-square-fill">Test</i> -->
       <label class="form-label" for="services">Services</label>
-      <div v-for="(service, k) in services" :key="'k'+k">
+      <div v-for="(service, k) in services" :key="'k' + k">
         <input type="text" class="form-control " v-model="service.select" />
         <span>
           <button
@@ -63,7 +64,7 @@
 
       <label class="form-label" for="services">App Services</label>
       <!-- {{services}} -->
-      <div v-for="(app, l) in app_services" :key="'l'+l">
+      <div v-for="(app, l) in app_services" :key="'l' + l">
         <input type="text" class="form-control " v-model="app.select_app" />
         <span>
           <button
@@ -97,13 +98,23 @@
       </div>
 
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" v-model="header" />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          v-model="header"
+          checked="false"
+        />
         <label class="form-check-label" for="individual_addressing"
           >Header</label
         >
       </div>
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" v-model="payload" />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          v-model="payload"
+          checked="true"
+        />
         <label class="form-check-label" for="individual_addressing"
           >Payload</label
         >
@@ -124,17 +135,28 @@
         />
       </div>
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" v-model="detection" />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          v-model="detection"
+          checked="true"
+        />
         <label class="form-check-label" for="detection">Detection</label>
       </div>
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" v-model="inspection" />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          v-model="inspection"
+          checked="true"
+        />
         <label class="form-check-label" for="inspection">Inspection</label>
       </div>
       <div class="mb-3 form-check">
         <input
           type="checkbox"
           class="form-check-input"
+          checked="true"
           v-model="individual_addressing"
         />
         <label class="form-check-label" for="individual_addressing"
@@ -197,13 +219,23 @@
         />
       </div>
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" v-model="header" />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          v-model="header"
+          checked="true"
+        />
         <label class="form-check-label" for="individual_addressing"
           >Header</label
         >
       </div>
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" v-model="payload" />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          v-model="payload"
+          checked="true"
+        />
         <label class="form-check-label" for="individual_addressing"
           >Payload</label
         >
@@ -212,95 +244,60 @@
         Update
       </button>
     </div>
+    <div class="card mt-2">
+      <div v-for="(item, i) in itemList" :key="item._id">
+        <div class="row">
+          <div class="col-3">Policy Name :</div>
+          <div class="col-6">{{ item.policy_number }}</div>
+        </div>
+        <div class="row">
+          <div class="col-3">Detection :</div>
+          <div class="col-6">{{ item.detection }}</div>
+        </div>
+        <div class="row">
+          <div class="col-3">Inspection :</div>
+          <div class="col-6">{{ item.inspection }}</div>
+        </div>
+        <div class="row">
+          <div class="col-3">Individual addressing :</div>
+          <div class="col-6">{{ item.individual_addressing }}</div>
+        </div>
+        <div class="row">
+          <div class="col-3">Services :</div>
+          <div class="col" v-for="(serv, ind) in item.services" :key="ind">
+            {{ serv.select }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">App Services :</div>
+          <div
+            class="col"
+            v-for="(appServ, inde) in item.app_services"
+            :key="inde"
+          >
+            {{ appServ.select_app }}
+          </div>
+        </div>
+                <div class="row">
+          <div class="col-3">Group address level :</div>
+          <div class="col-6">{{ item.group_address_level }}</div>
+        </div>
+        <div class="row">
+          <div class="col-3">Header :</div>
+          <div class="col-6">{{ item.header }}</div>
+        </div>
+                <div class="row">
+          <div class="col-3">Payload :</div>
+          <div class="col-6">{{ item.payload }}</div>
+        </div>
 
-    <div class="row mt-3">
-      <div class="col">
-        <div>Policy Number</div>
+        <button class="btn btn-warning mt-3" @click="editItem(i, item)">
+          Edit
+        </button>
+        <button class="btn btn-danger mt-3" @click="removeItem(item, i)">
+          Delete
+        </button>
       </div>
-      <div class="col">
-        <div>Detection</div>
-      </div>
-      <div class="col">
-        <div>Inspection</div>
-      </div>
-      <div class="col">
-        <div>Individual Addressing</div>
-      </div>
-      <div class="col">
-        <div>Group Address Level</div>
-      </div>
-      <div class="col">
-        <div>Services</div>
-      </div>
-      <div class="col">
-        <div>App Services</div>
-      </div>
-      <div class="col">
-        <div>Header</div>
-      </div>
-      <div class="col">
-        <div>Payload</div>
-      </div>
-      <div class="col">
-        <div class="p-2">
-          <button class="btn btn-debug noBorder">
-            Edit
-          </button>
-        </div>
-      </div>
-      <div class="col">
-        <div class="p-2 ">
-          <button class="btn btn-debug noBorder">
-            Delete
-          </button>
-        </div>
-      </div>
-    </div>
-    <div v-for="(item, i) in itemList" :key="item._id">
-      <div class="row">
-        <div class="col">
-          <div>{{ item.policy_number }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.detection }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.inspection }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.individual_addressing }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.services }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.app_services }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.group_address_level }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.header }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.payload }}</div>
-        </div>
-        <div class="col">
-          <div class="p-2">
-            <button class="btn btn-secondary" @click="editItem(i, item)">
-              Edit
-            </button>
-          </div>
-        </div>
-        <div class="col">
-          <div class="p-2">
-            <button class="btn btn-danger" @click="removeItem(item, i)">
-              Delete
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- <div>Log file{{ item.group_address_file }}</div> -->
     </div>
   </div>
 </template>
@@ -321,13 +318,13 @@ export default {
         }
       ],
       policy_number: "",
-      detection: "false",
-      inspection: "false",
-      individual_addressing: "false",
+      detection: "true",
+      inspection: "true",
+      individual_addressing: "true",
       group_address_level: "",
       group_address_file: "",
-      header: "false",
-      payload: "false",
+      header: "true",
+      payload: "true",
       itemList: [],
       edit: false
     };
@@ -352,7 +349,7 @@ export default {
       this.app_services.splice(index, 1);
     },
     async addItem() {
-      console.log(this.services);
+      // console.log(this.services);
       const response = await axios.post(
         "http://localhost:8081/api/policyList/",
         {
@@ -380,7 +377,7 @@ export default {
       this.header = "";
       this.payload = "";
       const res = await axios.get("http://localhost:8081/api/policyList/");
-      // this.itemList = res.data;
+      console.log(res.data);
     },
     async removeItem(item, i) {
       await axios.delete("http://localhost:8081/api/policyList/" + item._id);
@@ -446,13 +443,17 @@ select,
 button {
   border: 2px solid black;
 }
-.row {
-  border: 2px solid black;
-}
-.col {
-  border: 1px solid black;
-}
 .noBorder {
   border: 2px solid white;
+}
+.card {
+  background-color: darkgray;
+  border-radius: 15px;
+  padding: 15px;
+  border: 2px solid black;
+}
+.col-3 {
+  font-weight: bold;
+  padding-left: 30px;
 }
 </style>
