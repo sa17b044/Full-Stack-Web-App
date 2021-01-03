@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
-    <h3>Server</h3>
+  <div class="container card bg-light">
+    <h2 class="mb-4">Server</h2>
     <div v-if="!edit">
-      <div class="row row-cols-2 noBorder">
+      <div class="row row-cols-2">
         <div class="mb-2">
           <label class="form-label">Server number</label>
           <input
@@ -15,7 +15,6 @@
           />
         </div>
         <div><span> </span></div>
-
         <div class="mb-2">
           <label class="form-label">Source IP</label>
           <input
@@ -85,7 +84,7 @@
             <label class="form-check-label" for="detection">Log file</label>
           </div>
         </div>
-<div><span> </span></div>
+        <div><span> </span></div>
         <div>
           <button @click="addItem()" class="btn btn-primary">Add</button>
         </div>
@@ -187,85 +186,49 @@
       </div>
     </div>
 
-      <div class="row">
-        <div class="col">
-          <div>Server number</div>
+    <h3>Servers</h3>
+    <div v-for="item in itemList" :key="item._id">
+      <div class="card mt-2">
+        <div class="row">
+          <div class="col-3">Server Name :</div>
+          <div class="col-6">{{ item.server_number }}</div>
         </div>
-        <div class="col">
-          <div>Source IP</div>
+        <div class="row">
+          <div class="col-3">Source IP :</div>
+          <div class="col-6">{{ item.src_ip }}</div>
         </div>
-        <div class="col">
-          <div>Source Port</div>
+        <div class="row">
+          <div class="col-3">Source Port :</div>
+          <div class="col-6">{{ item.src_port }}</div>
         </div>
-        <div class="col">
-          <div>Destination IP</div>
+        <div class="row">
+          <div class="col-3">Destination IP :</div>
+          <div class="col-6">{{ item.dst_ip }}</div>
         </div>
-        <div class="col">
-          <div>Destination Port</div>
+        <div class="row">
+          <div class="col-3">Destination Port :</div>
+          <div class="col-6">{{ item.dst_port }}</div>
         </div>
-        <div class="col">
-          <div>Policy</div>
+        <div class="row">
+          <div class="col-3">Policy :</div>
+          <div class="col-6">{{ item.policy }}</div>
         </div>
-        <div class="col">
-          <div>Log KNXnetIP</div>
+        <div class="row">
+          <div class="col-3">Log KNXnetIP :</div>
+          <div class="col-6">{{ item.logKNXnetip }}</div>
         </div>
-        <div class="col">
-          <div>Log To File</div>
+        <div class="row">
+          <div class="col-3">Log file :</div>
+          <div class="col-6">{{ item.logToFile }}</div>
         </div>
-        <div class="col">
-          <div class="p-2">
-          <button class="btn btn-debug noBorder">
-            Edit
-          </button>
-          </div>
-        </div>
-        <div class="col">
-          <div class="p-2">
-          <button class="btn btn-debug noBorder">
-            Delete
-          </button>
-          </div>
-        </div>
-      </div>
-
-    <div v-for="(item, i) in itemList" :key="item._id">
-      <div class="row">
-        <div class="col">
-          <div>{{ item.server_number }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.src_ip }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.src_port }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.dst_ip }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.dst_port }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.policy }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.logKNXnetip }}</div>
-        </div>
-        <div class="col">
-          <div>{{ item.logToFile }}</div>
-        </div>
-        <div class="col">
-          <div class="p-2">
-          <button class="btn btn-secondary" @click="editItem(i, item)">
-            Edit
-          </button>
-          </div>
-        </div>
-        <div class="col">
-          <div class="p-2">
-          <button class="btn btn-danger" @click="removeItem(item, i)">
-            Remove
-          </button>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-warning mt-3" @click="editItem(i, item)">
+              Edit
+            </button>
+            <button class="btn btn-danger mt-3" @click="removeItem(item, i)">
+              Delete
+            </button>
           </div>
         </div>
       </div>
@@ -284,8 +247,8 @@ export default {
       dst_ip: "",
       dst_port: "",
       policy: "",
-      logKNXnetip: "false",
-      logToFile: "false",
+      logKNXnetip: "true",
+      logToFile: "true",
       itemList: [],
       edit: false,
       selectedItem: ""
@@ -360,7 +323,13 @@ export default {
 <!-- Add "scoped" atdivibute to limit CSS to this component only -->
 <style scoped>
 input[type="number"] {
-  width: 15%;
+  width: 20%;
+}
+input[type="text"] {
+  width: 50%;
+}
+input[type="file"] {
+  width: 27%;
 }
 select {
   width: 50%;
@@ -373,13 +342,23 @@ select,
 button {
   border: 2px solid black;
 }
-.row {
-  border: 2px solid black;
-}
-.col {
-  border: 1px solid black;
-}
 .noBorder {
   border: 2px solid white;
+}
+.card {
+  background-color: azure;
+  border-radius: 15px;
+  padding: 15px;
+  border: 2px solid black;
+}
+.col-3 {
+  font-weight: bold;
+  padding-left: 30px;
+}
+h3 {
+  text-align: center;
+}
+label {
+  font-weight: bold;
 }
 </style>

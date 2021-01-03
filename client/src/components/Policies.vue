@@ -1,6 +1,6 @@
 <template>
-  <div class="container bounceIn">
-    <h3 class="mb-4">Policy</h3>
+  <div class="container bounceIn card bg-light">
+    <h2 class="mb-4">Policy</h2>
     <div v-if="!edit">
       <div class="mb-2">
         <label class="form-label">Policy number</label>
@@ -166,7 +166,7 @@
       <!-- ############################################################################################## -->
       <label class="form-label" for="services">Services</label>
       <div v-for="(service, k) in services" :key="k">
-        {{ services }}
+        <!-- {{ services }} -->
         <input type="text" class="form-control " v-model="service.select" />
         <span>
           <button
@@ -181,13 +181,12 @@
             @click="remove(k)"
             v-show="k || (!k && services.length > 1)"
           >
-            -
+            X
           </button>
         </span>
       </div>
 
       <label class="form-label" for="services">App Services</label>
-      <!-- {{services}} -->
       <div v-for="(app, l) in app_services" :key="l">
         <input type="text" class="form-control " v-model="app.select_app" />
         <span>
@@ -244,8 +243,9 @@
         Update
       </button>
     </div>
-    <div class="card mt-2">
-      <div v-for="(item, i) in itemList" :key="item._id">
+    <h3 class="mt-3">Policies list</h3>
+    <div v-for="(item, i) in itemList" :key="item._id">
+      <div class="card mt-2">
         <div class="row">
           <div class="col-3">Policy Name :</div>
           <div class="col-6">{{ item.policy_number }}</div>
@@ -278,7 +278,7 @@
             {{ appServ.select_app }}
           </div>
         </div>
-                <div class="row">
+        <div class="row">
           <div class="col-3">Group address level :</div>
           <div class="col-6">{{ item.group_address_level }}</div>
         </div>
@@ -286,17 +286,20 @@
           <div class="col-3">Header :</div>
           <div class="col-6">{{ item.header }}</div>
         </div>
-                <div class="row">
+        <div class="row">
           <div class="col-3">Payload :</div>
           <div class="col-6">{{ item.payload }}</div>
         </div>
-
-        <button class="btn btn-warning mt-3" @click="editItem(i, item)">
-          Edit
-        </button>
-        <button class="btn btn-danger mt-3" @click="removeItem(item, i)">
-          Delete
-        </button>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-warning mt-3" @click="editItem(i, item)">
+              Edit
+            </button>
+            <button class="btn btn-danger mt-3" @click="removeItem(item, i)">
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -332,8 +335,6 @@ export default {
   async mounted() {
     const response = await axios.get("http://localhost:8081/api/policyList/");
     this.itemList = response.data;
-    // console.log("####");
-    // console.log(response.data);
   },
   methods: {
     add(index) {
@@ -349,7 +350,6 @@ export default {
       this.app_services.splice(index, 1);
     },
     async addItem() {
-      // console.log(this.services);
       const response = await axios.post(
         "http://localhost:8081/api/policyList/",
         {
@@ -371,8 +371,6 @@ export default {
       this.inspection = "";
       this.individual_addressing = "";
       this.group_address_level = "";
-      // this.services = "";
-      // this.app_services = "";
       // this.group_address_file = "";
       this.header = "";
       this.payload = "";
@@ -447,7 +445,7 @@ button {
   border: 2px solid white;
 }
 .card {
-  background-color: darkgray;
+  background-color: azure;
   border-radius: 15px;
   padding: 15px;
   border: 2px solid black;
@@ -455,5 +453,11 @@ button {
 .col-3 {
   font-weight: bold;
   padding-left: 30px;
+}
+h3 {
+  text-align: center;
+}
+label {
+  font-weight: bold;
 }
 </style>
