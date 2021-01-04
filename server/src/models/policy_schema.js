@@ -8,29 +8,29 @@ const policy_schema = new mongoose.Schema({
   },
   inspection: {
     type: String,
-    required: true,
+    // required: true,
   },
   detection: {
     type: String,
-    required: true,
+    // required: true,
   },
   individual_addressing: {
     type: String,
-    required: true,
+    // required: true,
   },
   group_address_level: {
     type: String,
-    required: true,
+    // required: true,
   },
   services: [],
   app_services: [],
   header: {
     type: String,
-    required: true,
+    // required: true,
   },
   payload: {
     type: String,
-    required: true,
+    // required: true,
   }},
   { timestamps: true }
 );

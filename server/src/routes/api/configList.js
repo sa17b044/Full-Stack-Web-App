@@ -1,10 +1,13 @@
 const {
-  Router
+    Router
 } = require("express");
 const fs = require("fs");
 const cp = require("child_process");
 const Policy_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/policy_schema.js");
 const Server_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/server_schema.js");
+const {
+    ConnectionStates
+} = require("mongoose");
 
 
 const router = Router();
@@ -25,25 +28,70 @@ const router = Router();
 // });
 
 router.post("/", async (req, res) => {
-  server_name = req.body.server_number;
-  policy_name = req.body.policy_number;
+    server_name = req.body.server_number;
+    policy_name = req.body.policy_number;
 
-  const pList = await Policy_Model.findOne({
-    policy_number: policy_name
-  });
-  const sList = await Server_Model.findOne({
-    server_number: server_name
-  });
+    const pList = await Policy_Model.findOne({
+        policy_number: policy_name
+    });
+    const sList = await Server_Model.findOne({
+        server_number: server_name
+    });
 
-  let services = ``;
-  let servicesArr = pList.services
-  servicesArr.forEach(element => {
-    console.log(element.select);
-    el = element.select;
-    services += `'${el}',`; 
-  });
-  /* ################################
-  ---------------------------------------------------------------------------
+    let item = pList.services;
+    let services = [];
+    item.forEach((element) => {
+        if (element.select !== '') {
+            services.push(`\n'${element.select}'`)
+        } else
+            services = undefined;
+    });
+
+    if (!services) {
+        tempServices = ""
+    } else {
+        tempServices = `services = {${services}},`;
+    }
+    // app sevices####################################################
+
+    let itemApp_services = pList.app_services;
+    let app_services = [];
+    itemApp_services.forEach((elementAppServices) => {
+        console.log(elementAppServices.select_app)
+        if (elementAppServices.select_app !== '') {
+            app_services.push(`\n'${elementAppServices.select_app}'`)
+        } else {
+            app_services = undefined;
+        }
+    });
+
+    if (!app_services) {
+        tempApp_services = ""
+    } else {
+        tempApp_services = `app_services = {${app_services}},`;
+    }
+
+    //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+    let policies = [];
+    let policiesArr = Object.entries(pList._doc)
+    policiesArr.forEach(([key, value]) => {
+        if (value === 'true' || key === 'group_address_level') {
+            policies.push(`\n${key}: ${value}`)
+        }
+    });
+    tempPolicies = `${policies}`;
+    temp = `TEMPLATE 
+    ################
+    {
+    ${tempPolicies}
+    ${tempServices}
+    ${tempApp_services}
+    }
+    ################
+    `
+    console.log(temp)
+    /* ################################
+---------------------------------------------------------------------------
 -- Snort++ configuration
 ---------------------------------------------------------------------------
 
@@ -253,7 +301,7 @@ file_log =
     log_sys_time = true,
 }
    */
-  lua = `  ---------------------------------------------------------------------------
+    lua = `  ---------------------------------------------------------------------------
   -- Snort++ configuration
   ---------------------------------------------------------------------------
   
@@ -306,7 +354,7 @@ file_log =
               inspection = true,
               services = 
               {
-                ${services}
+                services
               },
               app_services =
               {
@@ -461,21 +509,21 @@ file_log =
       log_pkt_time = true,
       log_sys_time = true,
   }`
-  // lua = `
-  // services = 
-  // {
-  //   ${services}
-  // },
-  // `
-  console.log(lua)
+    //   lua = `
+    //   services = 
+    //   {
+    //     ${services}
+    //   },
+    //   `
+    //   console.log(lua)
 
-  fs.writeFile("../server/src/public/snort.lua", lua, (err) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log("successfully");
-  });
+    // fs.writeFile("../server/src/public/snort.lua", lua, (err) => {
+    //     if (err) {
+    //         console.log(err);
+    //         return;
+    //     }
+    //     console.log("successfully");
+    // });
 
 });
 

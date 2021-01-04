@@ -312,24 +312,24 @@ export default {
     return {
       services: [
         {
-          select: ""
+          select: ''
         }
       ],
       app_services: [
         {
-          select_app: ""
+          select_app: ''
         }
       ],
       policy_number: "",
-      detection: "true",
-      inspection: "true",
-      individual_addressing: "true",
+      detection: false,
+      inspection: false,
+      individual_addressing: false,
       group_address_level: "",
       group_address_file: "",
-      header: "true",
-      payload: "true",
+      header: false,
+      payload: false,
       itemList: [],
-      edit: false
+      edit: false,
     };
   },
   async mounted() {
@@ -366,14 +366,14 @@ export default {
         }
       );
       this.itemList.push(response.data);
-      this.policy_number = "";
-      this.detection = "";
-      this.inspection = "";
-      this.individual_addressing = "";
-      this.group_address_level = "";
+      this.policy_number = policy_number++;
+      this.detection = false;
+      this.inspection = false;
+      this.individual_addressing = false;
+      this.group_address_level = NULL;
       // this.group_address_file = "";
-      this.header = "";
-      this.payload = "";
+      this.header = false;
+      this.payload = false;
       const res = await axios.get("http://localhost:8081/api/policyList/");
       console.log(res.data);
     },
