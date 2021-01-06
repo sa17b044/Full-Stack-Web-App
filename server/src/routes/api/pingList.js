@@ -20,46 +20,46 @@ router.get("/", async (req, res) => {
     });
   }
 });
-router.get("/sse", async (req, res) => {
-  res.setHeader('Content-Type', 'text/event-stream')
-  res.setHeader('Cache-Control', "no-cache");
+// router.get("/sse", async (req, res) => {
+//   res.setHeader('Content-Type', 'text/event-stream')
+//   res.setHeader('Cache-Control', "no-cache");
   
-    let output = '';
-    // let cmd = 'sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules -i ens33 -A alert_full -s 65535 -k none -d -X -e'
-    let cmd = 'snort -c /opt/snort-sabic/etc/snort.lua -R /home/payman/snort_src/snort3/etc/rules/local.rules -r /home/payman/snort_src/snort3/captures/test_case/knxnetip/header/02_knxnetip_invalid_header_size.pcap -A alert_full -d -X -e'
-    const {
-    stdout,
-    stderr
-  } = await cp.exec(cmd)
-  let oldData = "";
-  let count = 0;
+//     let output = '';
+//     // let cmd = 'sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules -i ens33 -A alert_full -s 65535 -k none -d -X -e'
+//     // let cmd = 'snort -c /opt/snort-sabic/etc/snort.lua -R /home/payman/snort_src/snort3/etc/rules/local.rules -r /home/payman/snort_src/snort3/captures/test_case/knxnetip/header/02_knxnetip_invalid_header_size.pcap -A alert_full -d -X -e'
+//     const {
+//     stdout,
+//     stderr
+//   } = await cp.exec(cmd)
+//   let oldData = "";
+//   let count = 0;
 
-  stdout.on("data", (chunk) => {
-    output = chunk.toString();
-    oldData += output;
-    count++;
+//   stdout.on("data", (chunk) => {
+//     output = chunk.toString();
+//     oldData += output;
+//     count++;
 
-    // console.log(output)
-    console.log("SEND DATA TO CLIENT")
-    // res.write("data:" + output)
-    // res.write("data:" + `${output}\n\n`);
-    // const reg = "\[\*\*\](.+?)\[\*\*\]";
-    // output = output.match(reg);
-    res.write("data:" + JSON.stringify({
-        output,
-        count
-      }) + "\n\n")
+//     // console.log(output)
+//     console.log("SEND DATA TO CLIENT")
+//     // res.write("data:" + output)
+//     // res.write("data:" + `${output}\n\n`);
+//     // const reg = "\[\*\*\](.+?)\[\*\*\]";
+//     // output = output.match(reg);
+//     res.write("data:" + JSON.stringify({
+//         output,
+//         count
+//       }) + "\n\n")
 
-    // let reg = /\[(?:(?!\]\s+(.+?)\s+\[)(?:.|\n))*\]\s+(.+?)\s+\[(?:(?!\])(?:.|\n))*\]$/m;
-    // oldData = output.match(reg)
-    console.log(output)
-    // console.log(oldData)
-  })
-  stdout.on('end',() => {
-    console.log('Finished data chunks.');
-  });
+//     // let reg = /\[(?:(?!\]\s+(.+?)\s+\[)(?:.|\n))*\]\s+(.+?)\s+\[(?:(?!\])(?:.|\n))*\]$/m;
+//     // oldData = output.match(reg)
+//     console.log(output)
+//     // console.log(oldData)
+//   })
+//   stdout.on('end',() => {
+//     console.log('Finished data chunks.');
+//   });
 
-});
+// });
 // router.post("/", async (req, res) => {
 //   console.log(req.body)
 

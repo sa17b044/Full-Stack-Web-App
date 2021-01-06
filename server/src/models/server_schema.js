@@ -1,40 +1,44 @@
-const { timeStamp } = require("console");
+const {
+  timeStamp
+} = require("console");
 const mongoose = require("mongoose");
 
 const server_schema = new mongoose.Schema({
   server_number: {
     type: String,
-    required: true,
+    // required: true,
   },
   src_ip: {
     type: String,
-    required: true,
+    // required: true,
   },
-  src_port: {
-    type: String,
-    required: true,
-  },
+  // src_port: {
+  //   type: String,
+  //   required: true,
+  // },
+  src_port: [],
   dst_ip: {
     type: String,
-    required: true,
+    // required: true,
   },
-  dst_port: {
-    type: String,
-    required: true,
-  },
+  // dst_port: {
+  //   type: String,
+  //   required: true,
+  // },
+  dst_port: [],
   policy: {
     type: String,
-    required: true,
+    // required: true,
   },
   logKNXnetip: {
     type: String,
-    required: true,
+    // required: true,
   },
   logToFile: {
     type: String,
-    required: true,
+    // required: true,
   },
-  
+
 });
 
 const Server_Model = mongoose.model("Server_Model", server_schema);

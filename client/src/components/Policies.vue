@@ -57,7 +57,7 @@
             @click="remove(k)"
             v-show="k || (!k && services.length > 1)"
           >
-            -
+            X
           </button>
         </span>
       </div>
@@ -79,12 +79,10 @@
             @click="removeApp(l)"
             v-show="l || (!l && app_services.length > 1)"
           >
-            -
+            X
           </button>
         </span>
       </div>
-      <!-- <h4>{{this.services}}</h4> -->
-      <!-- ################################################################### -->
 
       <div class="mb-2">
         <label class="form-label">Group address level</label>
@@ -166,7 +164,6 @@
       <!-- ############################################################################################## -->
       <label class="form-label" for="services">Services</label>
       <div v-for="(service, k) in services" :key="k">
-        <!-- {{ services }} -->
         <input type="text" class="form-control " v-model="service.select" />
         <span>
           <button
@@ -202,7 +199,7 @@
             @click="removeApp(l)"
             v-show="l || (!l && app_services.length > 1)"
           >
-            -
+            X
           </button>
         </span>
       </div>
@@ -366,7 +363,7 @@ export default {
         }
       );
       this.itemList.push(response.data);
-      this.policy_number = policy_number++;
+      this.policy_number = "";
       this.detection = false;
       this.inspection = false;
       this.individual_addressing = false;
