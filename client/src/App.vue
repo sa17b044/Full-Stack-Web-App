@@ -16,9 +16,7 @@
             <ol>
               <a href="/#/servers">Servers</a>
             </ol>
-                        <!-- <ol>
-              <a href="/#/xml">XML</a>
-            </ol> -->
+
             <li><a href="/#/Config">Config</a></li>
             <li><a href="/#/users">Users</a></li>
             <li>
@@ -27,9 +25,6 @@
             <ol>
               <a href="/#/ping">Ping</a>
             </ol>
-            <!-- <ol>
-              <a href="/#/nmap">Nmap</a>
-            </ol> -->
           </ul>
         </div>
         <div class="col-10 p-5"><router-view /></div>
@@ -40,7 +35,7 @@
 
 <script>
 export default {
-  name: "App",
+  name: "App"
 };
 </script>
 
@@ -81,10 +76,7 @@ a:active {
 li {
   list-style-type: none;
 }
-.high {
-  height: 80vh;
-  /* border-radius: 50px; */
-}
+
 /* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

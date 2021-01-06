@@ -17,6 +17,7 @@
     <div>
       <button class="btn btn-warning mt-2" @click="run()">Run</button>
     </div>
+    <!-- <div v-for="item in logList" :key="item._id">{{ item.cmd }}</div> -->
   </div>
 </template>
 
@@ -26,10 +27,12 @@ import axios from "axios";
 export default {
   data() {
     return {
+      // cmd: "ping -c 1 8.8.8.8",
       server_number: "",
       policy_number: "",
       serverList: [],
       policyList: []
+      // logList: ""
     };
   },
   async mounted() {
@@ -45,11 +48,14 @@ export default {
   ,
   methods: {
     async run() {
+      console.log("1#");
       await axios.post("http://localhost:8081/api/configList/", {
+        // cmd: this.cmd,
         server_number: this.server_number,
         policy_number: this.policy_number
       });
-
+      // const response = await axios.get("http://localhost:8081/api/testList/");
+      // this.logList = response.data;
     }
   }
 };
