@@ -1,5 +1,5 @@
 <template>
-  <div class="container bounceIn card bg-light">
+  <div class="container card bg-light">
     <h2 class="mb-4">Policy</h2>
     <div v-if="!edit">
       <div class="mb-2">

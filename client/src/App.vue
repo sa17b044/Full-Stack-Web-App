@@ -16,7 +16,9 @@
             <ol>
               <a href="/#/servers">Servers</a>
             </ol>
-
+            <ol>
+              <a href="/#/xml">XML</a>
+            </ol>
             <li><a href="/#/Config">Config</a></li>
             <li><a href="/#/users">Users</a></li>
             <li>

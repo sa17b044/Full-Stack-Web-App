@@ -30,14 +30,13 @@ const router = Router();
 router.post("/", async (req, res) => {
     server_name = req.body.server_number;
     policy_name = req.body.policy_number;
-    console.log(req.body.items)
 
-    // const pList = await Policy_Model.findOne({
-    //     policy_number: policy_name
-    // });
-    // const sList = await Server_Model.findOne({
-    //     server_number: server_name
-    // });
+    const pList = await Policy_Model.findOne({
+        policy_number: policy_name
+    });
+    const sList = await Server_Model.findOne({
+        server_number: server_name
+    });
 
 
 
@@ -196,7 +195,7 @@ knxnetip =
     policies =
     {
         {
-            {${tempPolicies}
+            ${tempPolicies}
             ${tempServices}
             ${tempApp_services}
         }
@@ -206,7 +205,6 @@ knxnetip =
         ${sList.src_ip}
         ${tempSrc_port}
         ${sList.dst_ip}
-        ${tempDst_port}
         ${tempPolicy}
     },
 }
