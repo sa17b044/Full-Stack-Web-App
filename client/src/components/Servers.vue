@@ -1,6 +1,6 @@
 <template>
-  <div class="container card bg-light">
-    <h2 class="mb-4">Server</h2>
+  <div>
+    <h3 class="mb-4">Server</h3>
     <div v-if="!edit">
       <div class="row row-cols-2">
         <div class="mb-2">
@@ -23,15 +23,6 @@
           />
         </div>
 
-        <!-- <div class="mb-2">
-          <label class="form-label">Source Port</label>
-          <input
-            class="form-control"
-            type="number"
-            placeholder="S. Port"
-            v-model="src_port"
-          />
-        </div> -->
         <div class="mb-2">
           <label class="form-label" for="src_port">Port</label>
           <div v-for="(s_port, i) in src_port" :key="'i' + i">
@@ -42,14 +33,14 @@
                 @click="addSrcPort(i)"
                 v-show="i == src_port.length - 1"
               >
-                <img src="../assets/plus.png" alt="add" /> 
+                <img src="../assets/plus.png" alt="add" />
               </button>
               <button
                 class="btn alert-danger mt-1 mb-1"
                 @click="removeSrcPort(i)"
                 v-show="i || (!i && src_port.length > 1)"
               >
-                <img src="../assets/minus.png" alt="add" /> 
+                <img src="../assets/minus.png" alt="add" />
               </button>
             </div>
           </div>
@@ -64,29 +55,7 @@
             v-model="dst_ip"
           />
         </div>
-<div><span></span></div>
-        <!-- <div class="mb-2">
-          <label class="form-label" for="dst_port">Destination Port</label>
-          <div v-for="(d_port, j) in dst_port" :key="'j' + j">
-            <input type="number" class="form-control" v-model="d_port.dPort" />
-            <div class="btn-group">
-              <button
-                class="btn alert-success mt-1 mb-1"
-                @click="addDstPort(j)"
-                v-show="j == dst_port.length - 1"
-              >
-                <img src="../assets/plus.png" alt="add" /> 
-              </button>
-              <button
-                class="btn alert-danger mt-1 mb-1"
-                @click="removeDstPort(i)"
-                v-show="j || (!j && dst_port.length > 1)"
-              >
-               <img src="../assets/minus.png" alt="add" /> 
-              </button>
-            </div>
-          </div>
-        </div> -->
+        <div><span></span></div>
 
         <div class="mb-2">
           <label class="form-label">Policy</label>
@@ -159,14 +128,14 @@
                 @click="addSrcPort(k)"
                 v-show="k == src_port.length - 1"
               >
-                 <img src="../assets/plus.png" alt="add" /> 
+                <img src="../assets/plus.png" alt="add" />
               </button>
               <button
                 class="btn alert-danger mt-1 mb-1"
                 @click="removeSrcPort(k)"
                 v-show="k || (!k && src_port.length > 1)"
               >
-                 <img src="../assets/minus.png" alt="add" /> 
+                <img src="../assets/minus.png" alt="add" />
               </button>
             </div>
           </div>
@@ -182,29 +151,6 @@
           />
         </div>
         <div><span></span></div>
-
-        <!-- <div class="mb-2">
-          <label class="form-label" for="dst_port">Destination Port</label>
-          <div v-for="(d_port, jj) in dst_port" :key="'jj' + jj">
-            <input type="number" class="form-control" v-model="d_port.dPort" />
-            <div class="btn-group">
-              <button
-                class="btn alert-success mt-1 mb-1"
-                @click="addDstPort(jj)"
-                v-show="jj == dst_port.length - 1"
-              >
-                <img src="../assets/plus.png" alt="add" /> 
-              </button>
-              <button
-                class="btn alert-danger mt-1 mb-1"
-                @click="removeDstPort(i)"
-                v-show="j || (!j && dst_port.length > 1)"
-              >
-                 <img src="../assets/minus.png" alt="add" /> 
-              </button>
-            </div>
-          </div>
-        </div> -->
 
         <div class="mb-2">
           <label class="form-label">Policy</label>
@@ -265,10 +211,6 @@
           <div class="col-3">Destination IP :</div>
           <div class="col-6">{{ item.dst_ip }}</div>
         </div>
-        <!-- <div class="row">
-          <div class="col-3">Destination Port :</div>
-          <div class="col-6">{{ item.dst_port }}</div>
-        </div> -->
         <div class="row">
           <div class="col-3">Policy :</div>
           <div class="col-6">{{ item.policy }}</div>
@@ -283,6 +225,7 @@
         </div>
         <div class="row">
           <div class="col">
+            <div class="btn-group">
             <button class="btn btn-warning mt-3" @click="editItem(i, item)">
               Edit
             </button>
@@ -290,6 +233,7 @@
               Delete
             </button>
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -309,11 +253,6 @@ export default {
         }
       ],
       dst_ip: "",
-      // dst_port: [
-      //   {
-      //     dPort: ""
-      //   }
-      // ],
       policy: "",
       logKNXnetip: false,
       logToFile: false,
@@ -333,12 +272,6 @@ export default {
     removeSrcPort(index) {
       this.src_port.splice(index, 1);
     },
-    // addDstPort(index) {
-    //   this.dst_port.push({ dPort: "" });
-    // },
-    // removeDstPort(index) {
-    //   this.dst_port.splice(index, 1);
-    // },
     async addItem() {
       const response = await axios.post(
         "http://localhost:8081/api/serverList/",
@@ -347,7 +280,6 @@ export default {
           src_ip: this.src_ip,
           src_port: this.src_port,
           dst_ip: this.dst_ip,
-          // dst_port: this.dst_port,
           policy: this.policy,
           logKNXnetip: this.logKNXnetip,
           logToFile: this.logToFile
@@ -356,9 +288,7 @@ export default {
       this.itemList.push(response.data);
       this.server_number = "";
       this.src_ip = "";
-      // this.src_port = "";
       this.dst_ip = "";
-      // this.dst_port = "";
       this.policy = "";
       this.logKNXnetip = "";
       this.logToFile = "";
@@ -375,7 +305,6 @@ export default {
         src_ip: this.src_ip,
         src_port: this.src_port,
         dst_ip: this.dst_ip,
-        // dst_port: this.dst_port,
         policy: this.policy,
         logKNXnetip: this.logKNXnetip,
         logToFile: this.logToFile
@@ -391,7 +320,6 @@ export default {
       this.src_ip = item.src_ip;
       this.src_port = item.src_port;
       this.dst_ip = item.dst_ip;
-      // this.dst_port = item.dst_port;
       this.policy = item.policy;
       this.logKNXnetip = item.logKNXnetip;
       this.logToFile = item.logToFile;
@@ -422,8 +350,8 @@ select,
 button {
   border: 2px solid black;
 }
-.noBorder {
-  border: 2px solid white;
+.btn {
+  border-radius: 10px;
 }
 .card {
   background-color: azure;

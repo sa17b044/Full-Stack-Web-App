@@ -12,6 +12,7 @@ const policyListRoutes = require("./routes/api/policyList");
 const pingListRoutes = require("./routes/api/pingList");
 const configListRoutes = require("./routes/api/configList");
 const nmapListRoutes = require("./routes/api/nmapList");
+const xmlListRoutes = require("./routes/api/xmlList");
 
 const PORT = 8081;
 const app = express();
@@ -41,6 +42,7 @@ app.use('/api/policyList', policyListRoutes);
 app.use('/api/pingList', pingListRoutes);
 app.use('/api/configList', configListRoutes);
 app.use('/api/nmapList', nmapListRoutes);
+app.use('/api/xmlList', xmlListRoutes);
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {

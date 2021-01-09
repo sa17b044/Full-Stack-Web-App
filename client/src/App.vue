@@ -2,14 +2,14 @@
   <div id="app">
     <div class="container-fluid">
       <div class="row">
-        <nav class="navbar bg-danger">
-          <a class="navbar-brand">Navbar</a>
+        <nav class="navbar bg-dark">
+          <a class="navbar-brand">PAYMAN</a>
         </nav>
       </div>
-      <div class="row high">
-        <div class="col-2 mt-5">
+      <div class="row">
+        <div class="col-2">
           <ul>
-            <li><a href="/#/rules">Rules</a></li>
+            <li><a href="/#/rules">Objects</a></li>
             <ol>
               <a href="/#/policies">Policies</a>
             </ol>
@@ -19,13 +19,29 @@
             <ol>
               <a href="/#/xml">XML</a>
             </ol>
-            <li><a href="/#/Config">Config</a></li>
-            <li><a href="/#/users">Users</a></li>
+            <li>
+              <a href="/#/Config">Policy</a>
+              <ol>
+                <a href="/#/Config">Lua</a>
+              </ol>
+            </li>
+            <li>
+              <a href="/#/users">Administrator</a>
+            </li>
+            <ol>
+              <a href="/#/users">Users</a>
+            </ol>
             <li>
               <a href="/#/tools">Tools</a>
             </li>
             <ol>
               <a href="/#/ping">Ping</a>
+            </ol>
+            <ol>
+              <a href="">Whois</a>
+            </ol>
+            <ol>
+              <a href="">Nmap</a>
             </ol>
           </ul>
         </div>
@@ -78,7 +94,11 @@ a:active {
 li {
   list-style-type: none;
 }
-
+body {
+  background: linear-gradient(to right, #00aaff, #00ff6c);
+  height: 100%;
+  width: 100%;
+}
 /* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -86,4 +106,9 @@ li {
   text-align: center;
   margin-top: 60px;
 } */
+.fill {
+  height: 100%;
+  background-color: skyblue;
+  /* width: 100%; */
+}
 </style>

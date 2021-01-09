@@ -1,16 +1,10 @@
 <template>
-  <div class="container card bg-light">
+  <div class="card">
     <h2 class="mb-4">Policy</h2>
     <div v-if="!edit">
       <div class="mb-2">
-        <label class="form-label">Policy number</label>
-        <input
-          class="form-control"
-          type="number"
-          min="1"
-          max="100"
-          v-model="policy_number"
-        />
+        <label class="form-label">Policy name</label>
+        <input class="form-control" type="text" v-model="policy_number" />
       </div>
       <div class="mb-3 form-check">
         <input
@@ -44,20 +38,20 @@
       <label class="form-label" for="services">Services</label>
       <div v-for="(service, k) in services" :key="'k' + k">
         <input type="text" class="form-control " v-model="service.select" />
-        <span>
+        <span class="btn-group">
           <button
             class="btn alert-success mt-1 mb-1"
             @click="add(k)"
             v-show="k == services.length - 1"
           >
-            +
+            <img src="../assets/plus.png" alt="add" />
           </button>
           <button
             class="btn alert-danger mt-1 mb-1"
             @click="remove(k)"
             v-show="k || (!k && services.length > 1)"
           >
-            X
+            <img src="../assets/minus.png" alt="minus" />
           </button>
         </span>
       </div>
@@ -66,20 +60,20 @@
       <!-- {{services}} -->
       <div v-for="(app, l) in app_services" :key="'l' + l">
         <input type="text" class="form-control " v-model="app.select_app" />
-        <span>
+        <span class="btn-group">
           <button
             class="btn alert-success mt-1 mb-1"
             @click="addApp(l)"
             v-show="l == app_services.length - 1"
           >
-            +
+            <img src="../assets/plus.png" alt="add" />
           </button>
           <button
             class="btn alert-danger mt-1 mb-1"
             @click="removeApp(l)"
             v-show="l || (!l && app_services.length > 1)"
           >
-            X
+            <img src="../assets/minus.png" alt="minus" />
           </button>
         </span>
       </div>
@@ -93,6 +87,15 @@
           max="100"
           v-model="group_address_level"
         />
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Group address file</label>
+        <select class="form-control" v-model="group_address_file">
+          <option v-for="xml in xmlList" :key="xml._id+1">
+            {{ xml.originalname }}
+          </option>
+        </select>
       </div>
 
       <div class="mb-3 form-check">
@@ -123,14 +126,8 @@
 
     <div v-else>
       <div class="mb-2">
-        <label class="form-label">Policy number</label>
-        <input
-          class="form-control"
-          type="number"
-          min="1"
-          max="100"
-          v-model="policy_number"
-        />
+        <label class="form-label">Policy name</label>
+        <input class="form-control" type="text" v-model="policy_number" />
       </div>
       <div class="mb-3 form-check">
         <input
@@ -161,24 +158,23 @@
           >Individual addressing</label
         >
       </div>
-      <!-- ############################################################################################## -->
       <label class="form-label" for="services">Services</label>
       <div v-for="(service, k) in services" :key="k">
         <input type="text" class="form-control " v-model="service.select" />
-        <span>
+        <span class="btn-group">
           <button
             class="btn alert-success mt-1 mb-1"
             @click="add(k)"
             v-show="k == services.length - 1"
           >
-            +
+            <img src="../assets/plus.png" alt="add" />
           </button>
           <button
             class="btn alert-danger mt-1 mb-1"
             @click="remove(k)"
             v-show="k || (!k && services.length > 1)"
           >
-            X
+            <img src="../assets/minus.png" alt="add" />
           </button>
         </span>
       </div>
@@ -186,20 +182,20 @@
       <label class="form-label" for="services">App Services</label>
       <div v-for="(app, l) in app_services" :key="l">
         <input type="text" class="form-control " v-model="app.select_app" />
-        <span>
+        <span class="btn-group">
           <button
             class="btn alert-success mt-1 mb-1"
             @click="addApp(l)"
             v-show="l == app_services.length - 1"
           >
-            +
+            <img src="../assets/plus.png" alt="add" />
           </button>
           <button
             class="btn alert-danger mt-1 mb-1"
             @click="removeApp(l)"
             v-show="l || (!l && app_services.length > 1)"
           >
-            X
+            <img src="../assets/minus.png" alt="add" />
           </button>
         </span>
       </div>
@@ -214,6 +210,16 @@
           v-model="group_address_level"
         />
       </div>
+
+      <div class="mb-2">
+        <label class="form-label">Group address file</label>
+        <select class="form-control" v-model="group_address_file">
+          <option v-for="xml in xmlList" :key="xml._id">
+            {{ xml.originalname }}
+          </option>
+        </select>
+      </div>
+
       <div class="mb-3 form-check">
         <input
           type="checkbox"
@@ -280,6 +286,10 @@
           <div class="col-6">{{ item.group_address_level }}</div>
         </div>
         <div class="row">
+          <div class="col-3">Group address file :</div>
+          <div class="col-6">{{ item.group_address_file }}</div>
+        </div>
+        <div class="row">
           <div class="col-3">Header :</div>
           <div class="col-6">{{ item.header }}</div>
         </div>
@@ -309,12 +319,12 @@ export default {
     return {
       services: [
         {
-          select: ''
+          select: ""
         }
       ],
       app_services: [
         {
-          select_app: ''
+          select_app: ""
         }
       ],
       policy_number: "",
@@ -327,11 +337,16 @@ export default {
       payload: false,
       itemList: [],
       edit: false,
+      xmlList: []
     };
   },
   async mounted() {
     const response = await axios.get("http://localhost:8081/api/policyList/");
     this.itemList = response.data;
+    const resXml = await axios.get("http://localhost:8081/api/xmlList/");
+    console.log("##");
+    this.xmlList = resXml.data;
+    console.log(this.xmlList);
   },
   methods: {
     add(index) {
@@ -357,7 +372,7 @@ export default {
           services: this.services,
           app_services: this.app_services,
           group_address_level: this.group_address_level,
-          //  group_address_file: this.group_address_file,
+          group_address_file: this.group_address_file,
           header: this.header,
           payload: this.payload
         }
@@ -367,7 +382,7 @@ export default {
       this.detection = false;
       this.inspection = false;
       this.individual_addressing = false;
-      this.group_address_level = NULL;
+      this.group_address_level = "a";
       // this.group_address_file = "";
       this.header = false;
       this.payload = false;
@@ -387,9 +402,9 @@ export default {
         inspection: this.inspection,
         individual_addressing: this.individual_addressing,
         group_address_level: this.group_address_level,
+        group_address_file: this.group_address_file,
         services: this.services,
         app_services: this.app_services,
-        //  group_address_file: this.group_address_file,
         header: this.header,
         payload: this.payload
       });
@@ -405,9 +420,9 @@ export default {
       this.inspection = item.inspection;
       this.individual_addressing = item.individual_addressing;
       this.group_address_level = item.group_address_level;
+      this.group_address_file = item.group_address_file;
       this.services = item.services;
       this.app_services = item.app_services;
-      // this.group_address_file=item.group_address_file;
       this.header = item.header;
       this.payload = item.payload;
       this.selectedItem = item;
@@ -418,11 +433,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+input {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
 input[type="number"] {
-  width: 10%;
+  width: 20%;
 }
 input[type="text"] {
-  width: 50%;
+  width: 33%;
 }
 input[type="file"] {
   width: 27%;
@@ -438,23 +456,31 @@ select,
 button {
   border: 2px solid black;
 }
-.noBorder {
-  border: 2px solid white;
+.btn {
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .card {
-  background-color: azure;
+  background-color: rgba(255, 255, 255, 0.35);
   border-radius: 15px;
   padding: 15px;
   border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
+  margin: 1px;
 }
 .col-3 {
   font-weight: bold;
-  padding-left: 30px;
+  padding-left: 38px;
 }
-h3 {
+h2 {
   text-align: center;
 }
 label {
+  margin-bottom: 2px;
   font-weight: bold;
+}
+img {
+  width: 17px;
+  height: auto;
 }
 </style>

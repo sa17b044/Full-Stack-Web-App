@@ -65,7 +65,7 @@ payload: true
     servers = 
     {
         from = '1.1.1.1',
-        port = {254,4},
+        port = 254,
         to = '1111',
         policy = 001
     },
