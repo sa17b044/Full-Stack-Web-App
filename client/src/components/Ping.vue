@@ -15,35 +15,35 @@
 </template>
 
 <script>
-import axios from "axios";
-export default {
-  data() {
-    return {
-      // cmd: "",
-      ip: "",
-      output: ""
-      // itemList: [],
-    };
-  },
-  computed: {
-    pars() {
-      return this.output.split("\n");
-    }
-  },
-  mounted() {
-    console.log("1-#");
+// import axios from "axios";
+// export default {
+//   data() {
+//     return {
+//       // cmd: "",
+//       ip: "",
+//       output: ""
+//       // itemList: [],
+//     };
+//   }
+  // ,
+  // computed: {
+  //   pars() {
+  //     return this.output.split("\n");
+  //   }
+  // },
+  // mounted() {
 
-    let sse = new EventSource("http://localhost:8081/api/pingList/sse");
-    // sse.onmessage = console.log
-    sse.addEventListener("message", output => {
-      const data = JSON.parse(output.data);
-      console.log(data);
-      console.log("COUNT " + data.count);
-      console.log(data.allOutput);
-      if (data.count % 2 === 0) {
-        this.output += data.allOutput + '\n';
-      }
-    });
+    // let sse = new EventSource("http://localhost:8081/api/pingList/sse");
+    // // sse.onmessage = console.log
+    // sse.addEventListener("message", output => {
+    //   const data = JSON.parse(output.data);
+    //   console.log(data);
+    //   console.log("COUNT " + data.count);
+    //   console.log(data.allOutput);
+    //   if (data.count % 2 === 0) {
+    //     this.output += data.allOutput + '\n';
+    //   }
+    // });
 
     // console.log(sse.onmessage);
     // console.log("#");
@@ -52,7 +52,7 @@ export default {
     // this.itemList = response.data;
     // console.log(response)
     // console.log('#')
-  }
+  // }
   // ,
   // methods: {
   //   async sendLog() {
@@ -72,7 +72,7 @@ export default {
   //   },
   // },
   // 2\s+packets\s+transmitted,\s+2\s+received,\s+0%\s+packet\s+loss,\s+time\s+1001ms
-};
+// };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

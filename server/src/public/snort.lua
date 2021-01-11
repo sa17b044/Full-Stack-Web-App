@@ -14,7 +14,7 @@ require('snort_config')
 -- this depends on SNORT_LUA_PATH
 -- where to find other config files
 -- conf_dir = os.getenv('SNORT_LUA_PATH')
-conf_dir = './etc/scripts'
+conf_dir = '/opt/snort-sabic/etc/snort'
 
 if ( not conf_dir ) then
     conf_dir = '.'
@@ -48,26 +48,29 @@ knxnetip =
     policies =
     {
         {
-            
-detection: true,
-inspection: true,
-individual_addressing: true,
-group_address_level: 555,
-header: true,
-payload: true
-            services = {
-'321654987'},
-            app_services = {
-'364564654564',
-'454564654654'},
+        
+inspection= true,
+individual_addressing= true,
+group_address_level= 3,
+header= true,
+payload= true,
+        services = {
+'SEARCH_REQUEST',
+'DESCRIPTION_REQUEST'},
+        app_services = {
+'A_IndividualAddress_Write',
+'A_IndividualAddress_Read'},
+        group_address_file = 'group_address.xml'
         }
     },
     servers = 
     {
-        from = '1.1.1.1',
-        port = 254,
-        to = '1111',
-        policy = 001
+        from = '172.22.10.76/32',
+        port = {3671,3672},
+        to = '172.22.10.76/32',
+        policy = 1,
+        log_knxnetip = true,
+        log_to_file = true,
     },
 }
 

@@ -3,8 +3,8 @@
     <h2 class="mb-4">Policy</h2>
     <div v-if="!edit">
       <div class="mb-2">
-        <label class="form-label">Policy name</label>
-        <input class="form-control" type="text" v-model="policy_number" />
+        <label class="form-label">Name</label>
+        <input class="form-control" type="text" v-model="policy_number" placeholder="Name" />
       </div>
       <div class="mb-3 form-check">
         <input
@@ -37,7 +37,7 @@
       </div>
       <label class="form-label" for="services">Services</label>
       <div v-for="(service, k) in services" :key="'k' + k">
-        <input type="text" class="form-control " v-model="service.select" />
+        <input type="text" class="form-control " v-model="service.select" placeholder="Services"/>
         <span class="btn-group">
           <button
             class="btn alert-success mt-1 mb-1"
@@ -59,7 +59,7 @@
       <label class="form-label" for="services">App Services</label>
       <!-- {{services}} -->
       <div v-for="(app, l) in app_services" :key="'l' + l">
-        <input type="text" class="form-control " v-model="app.select_app" />
+        <input type="text" class="form-control " v-model="app.select_app" placeholder="App Services"/>
         <span class="btn-group">
           <button
             class="btn alert-success mt-1 mb-1"
@@ -86,6 +86,7 @@
           min="1"
           max="100"
           v-model="group_address_level"
+          placeholder="0"
         />
       </div>
 
@@ -248,7 +249,7 @@
     </div>
     <h3 class="mt-3">Policies list</h3>
     <div v-for="(item, i) in itemList" :key="item._id">
-      <div class="card mt-2">
+      <div class="cardIn mt-2">
         <div class="row">
           <div class="col-3">Policy Name :</div>
           <div class="col-6">{{ item.policy_number }}</div>
@@ -463,10 +464,20 @@ button {
 .card {
   background-color: rgba(255, 255, 255, 0.35);
   border-radius: 15px;
-  padding: 15px;
+  padding: 25px;
   border: 2px solid black;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
   margin: 1px;
+  margin-right: -15%;
+}
+.cardIn {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 15px;
+  padding: 25px;
+  border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
+  margin: 1px;
+  /* margin-right: -15%; */
 }
 .col-3 {
   font-weight: bold;

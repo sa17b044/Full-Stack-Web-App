@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h3 class="mb-4">Server</h3>
+  <div class="card">
+    <h2 class="mb-4">Server</h2>
     <div v-if="!edit">
       <div class="row row-cols-2">
         <div class="mb-2">
@@ -26,7 +26,12 @@
         <div class="mb-2">
           <label class="form-label" for="src_port">Port</label>
           <div v-for="(s_port, i) in src_port" :key="'i' + i">
-            <input type="number" class="form-control" v-model="s_port.sPort" />
+            <input
+              type="number"
+              class="form-control"
+              v-model="s_port.sPort"
+              placeholder="0"
+            />
             <div class="btn-group">
               <button
                 class="btn alert-success mt-1 mb-1"
@@ -194,7 +199,7 @@
 
     <h3>Servers</h3>
     <div v-for="item in itemList" :key="item._id">
-      <div class="card mt-2">
+      <div class="cardIn mt-2">
         <div class="row">
           <div class="col-3">Server Name :</div>
           <div class="col-6">{{ item.server_number }}</div>
@@ -204,8 +209,14 @@
           <div class="col-6">{{ item.src_ip }}</div>
         </div>
         <div class="row">
-          <div class="col-3">Source Port :</div>
-          <div class="col-6">{{ item.src_port }}</div>
+          <div class="col-3">Port :</div>
+          <div
+            class="col"
+            v-for="(port, indexPort) in item.src_port"
+            :key="indexPort"
+          >
+            {{ port.sPort }}
+          </div>
         </div>
         <div class="row">
           <div class="col-3">Destination IP :</div>
@@ -226,14 +237,14 @@
         <div class="row">
           <div class="col">
             <div class="btn-group">
-            <button class="btn btn-warning mt-3" @click="editItem(i, item)">
-              Edit
-            </button>
-            <button class="btn btn-danger mt-3" @click="removeItem(item, i)">
-              Delete
-            </button>
+              <button class="btn btn-warning mt-3" @click="editItem(i, item)">
+                Edit
+              </button>
+              <button class="btn btn-danger mt-3" @click="removeItem(item, i)">
+                Delete
+              </button>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
@@ -330,11 +341,14 @@ export default {
 </script>
 <!-- Add "scoped" atdivibute to limit CSS to this component only -->
 <style scoped>
+input {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
 input[type="number"] {
-  width: 25%;
+  width: 20%;
 }
 input[type="text"] {
-  width: 50%;
+  width: 33%;
 }
 input[type="file"] {
   width: 27%;
@@ -352,25 +366,47 @@ button {
 }
 .btn {
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .card {
-  background-color: azure;
+  background-color: rgba(255, 255, 255, 0.35);
   border-radius: 15px;
   padding: 15px;
   border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
+  margin: 1px;
 }
 .col-3 {
   font-weight: bold;
-  padding-left: 30px;
+  padding-left: 38px;
 }
-h3 {
+h2 {
   text-align: center;
 }
 label {
+  margin-bottom: 2px;
   font-weight: bold;
 }
 img {
   width: 17px;
   height: auto;
+}
+.card {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 15px;
+  padding: 25px;
+  border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
+  margin: 1px;
+  margin-right: -15%;
+}
+.cardIn {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 15px;
+  padding: 25px;
+  border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
+  margin: 1px;
+  /* margin-right: -15%; */
 }
 </style>

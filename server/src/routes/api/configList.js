@@ -12,20 +12,39 @@ const {
 
 const router = Router();
 
-// router.get("/", async (req, res) => {
-//   try {
-//     const logList = await Log_Model.find();
-//     if (!logList) throw new Error("No item List");
-//     const stored = logList.sort((a, b) => {
-//       return new Date(a.date).getTime() - new Date(b.date).getTime();
-//     });
-//     res.status(200).json(stored);
-//   } catch (error) {
-//     res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// });
+router.get("/sse", async (req, res) => {
+    res.setHeader('Content-Type', 'text/event-stream')
+    res.setHeader('Cache-Control', "no-cache");
+
+    let output = '';
+    // let cmd = 'ls'
+    let cmd = 'snort -c /opt/snort-sabic/etc/snort.lua -R /home/payman/snort_src/snort3/etc/rules/local.rules -r /home/payman/snort_src/snort3/captures/test_case/knxnetip/header/02_knxnetip_invalid_header_size.pcap -A alert_full -d -X -e'
+    // let cmd = 'snort -c /home/payman/#Project/Full-Stack-Web-App/server/src/public/snort.lua -R /home/payman/snort_src/snort3/etc/rules/local.rules -r /home/payman/snort_src/snort3/captures/test_case/knxnetip/header/02_knxnetip_invalid_header_size.pcap -A alert_full -d -X -e'
+    const {
+        stdout,
+        stderr
+    } = await cp.exec(cmd)
+    let allOutput = "";
+    let count = 0;
+    stdout.on("data", (chunk) => {
+        output = chunk.toString();
+        allOutput += output;
+        count++;
+        console.log("SEND DATA TO CLIENT")
+        // const reg = /\+\+\s+\[0\]\s+(.*)\s+(.*)\s+(.*)\s+(.*)\s+(.*)\s+(.*)\s+(.*)\s+(.*)\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+(.*)\s+(.*)\s+(.*)\s+(.*)\s+(.*)\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\-\s+\[(?:(?!\]\s+\[(.*)\]\s+(.*)\s+\[)(?:.|\n))*\]\s+\[(.*)\s+\[(?:(?!\]\s+\-\-\s+\[0\])(?:.|\n))*\]\s+\-\-\s+\[0\]/gm;
+
+        const reg = /\[\*\*\](.+?)\[\*\*\]/gm;
+        allOutput = allOutput.match(reg)
+        console.log(allOutput)
+        res.write("data:" + JSON.stringify({
+            allOutput,
+            count
+        }) + "\n\n")
+    })
+    stdout.on('end', () => {
+        console.log('Finished data chunks.');
+    });
+});
 
 router.post("/", async (req, res) => {
     server_name = req.body.server_number;
@@ -37,8 +56,6 @@ router.post("/", async (req, res) => {
     const sList = await Server_Model.findOne({
         server_number: server_name
     });
-
-
 
     // services - - - ####################################################
     let item = pList.services;
@@ -54,13 +71,13 @@ router.post("/", async (req, res) => {
         tempServices = ""
     } else {
         tempServices = `services = {${services}},`;
+
     }
     // app sevices - - - ####################################################
 
     let itemApp_services = pList.app_services;
     let app_services = [];
     itemApp_services.forEach((elementAppServices) => {
-        // console.log(elementAppServices.select_app)
         if (elementAppServices.select_app !== '') {
             app_services.push(`\n'${elementAppServices.select_app}'`)
         } else {
@@ -82,11 +99,9 @@ router.post("/", async (req, res) => {
             policies.push(`\n${key}: ${value}`)
         }
     });
-    tempPolicies = `${policies}`;
-
-    //server - ############
-    // source Port
-    // console.log(sList)
+    tempPoliciesE = `${policies}`;
+    let regex = /:/gm
+    tempPolicies = tempPoliciesE.replace(regex,"=");
     let itemSport = sList.src_port;
     let src_port = [];
     itemSport.forEach((element) => {
@@ -102,9 +117,6 @@ router.post("/", async (req, res) => {
     } else {
         tempSrc_port = `port = ${src_port},`;;
     }
-    // console.log(tempSrc_port)
-    //destination port
-    // console.log(sList)
     let itemDport = sList.dst_port;
     let dst_port = [];
     itemDport.forEach((element) => {
@@ -125,7 +137,7 @@ router.post("/", async (req, res) => {
         console.log('No SrcIP')
     } else {
         sList.src_ip = `from = '${sList.src_ip}',`;
-        console.log(sList.src_ip)
+        // console.log(sList.src_ip)
     }
     // dst ip ######################
     if (sList.dst_ip === "") {
@@ -133,17 +145,11 @@ router.post("/", async (req, res) => {
         // delete sList.dst_ip;
     } else {
         sList.dst_ip = `to = '${sList.dst_ip}',`;
-        console.log(sList.dst_ip)
+        // console.log(sList.dst_ip)
     }
     //#############################
     tempPolicy = `policy = ${sList.policy}`
     //##################################
-    if (sList.log_knxnetip = false) {
-        console.log(sList.log_knxnetip);
-    } else {
-        console.log('TRUE' + sList.log_knxnetip)
-    }
-    //################################################
 
     let lua = `
     ---------------------------------------------------------------------------
@@ -161,7 +167,7 @@ require('snort_config')
 -- this depends on SNORT_LUA_PATH
 -- where to find other config files
 -- conf_dir = os.getenv('SNORT_LUA_PATH')
-conf_dir = './etc/scripts'
+conf_dir = '/opt/snort-sabic/etc/snort'
 
 if ( not conf_dir ) then
     conf_dir = '.'
@@ -195,9 +201,10 @@ knxnetip =
     policies =
     {
         {
-            ${tempPolicies}
-            ${tempServices}
-            ${tempApp_services}
+        ${tempPolicies},
+        ${tempServices}
+        ${tempApp_services}
+        group_address_file = '${pList.group_address_file}'
         }
     },
     servers = 
@@ -205,7 +212,9 @@ knxnetip =
         ${sList.src_ip}
         ${tempSrc_port}
         ${sList.dst_ip}
-        ${tempPolicy}
+        ${tempPolicy},
+        log_knxnetip = ${sList.logKNXnetip},
+        log_to_file = ${sList.logToFile},
     },
 }
 
@@ -297,7 +306,7 @@ file_log =
     log_sys_time = true,
 }
     `
-    console.log(lua)
+    // console.log(lua)
     fs.writeFile("/home/payman/#Project/Full-Stack-Web-App/server/src/public/snort.lua", lua, (err) => {
         if (err) {
             console.log(err);

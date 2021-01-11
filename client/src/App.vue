@@ -3,11 +3,11 @@
     <div class="container-fluid">
       <div class="row">
         <nav class="navbar bg-dark">
-          <a class="navbar-brand">PAYMAN</a>
+          <a class="navbar-brand"><img src="./assets/49536028_10161397481980486_3467575067997634560_o.png" alt=""></a>
         </nav>
       </div>
       <div class="row">
-        <div class="col-2">
+        <div class="col-2 card">
           <ul>
             <li><a href="/#/rules">Objects</a></li>
             <ol>
@@ -21,10 +21,10 @@
             </ol>
             <li>
               <a href="/#/Config">Policy</a>
-              <ol>
+            </li>
+                          <ol>
                 <a href="/#/Config">Lua</a>
               </ol>
-            </li>
             <li>
               <a href="/#/users">Administrator</a>
             </li>
@@ -45,7 +45,7 @@
             </ol>
           </ul>
         </div>
-        <div class="col-10 p-5"><router-view /></div>
+        <div class="col-9 p-5"><router-view /></div>
       </div>
     </div>
   </div>
@@ -58,30 +58,6 @@ export default {
 </script>
 
 <style>
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 a {
   color: black;
   text-decoration: none;
@@ -93,6 +69,7 @@ a:active {
 }
 li {
   list-style-type: none;
+  font-size: 20px;
 }
 body {
   background: linear-gradient(to right, #00aaff, #00ff6c);
@@ -106,9 +83,18 @@ body {
   text-align: center;
   margin-top: 60px;
 } */
-.fill {
-  height: 100%;
-  background-color: skyblue;
-  /* width: 100%; */
+img {
+  width: 70px;
+  height: auto;
+}
+.card {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 15px;
+  padding: 15px;
+  border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
+  margin-top: 50px;
+  margin-left: 5px;
+  margin-right:-20px;
 }
 </style>

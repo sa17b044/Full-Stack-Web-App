@@ -1,14 +1,18 @@
 <template>
-  <div class="container">
+  <div class="card">
     <h2>XML</h2>
-    <label>Upload a file</label>
+    <label class="mb-2">Upload a XML file</label>
+    
     <input 
     type="file" 
     @change="onFileSelected" 
     style="display: none"
     ref="fileInput" />
+    <div></div>
     <button class="btn btn-light" @click="$refs.fileInput.click()">Upload </button>
     <button @click="onUploadFile()" class="btn btn-warning">Send</button>
+
+    
     <!-- <div class="row">
       <div class="form-group card col-2" v-for="(input, k) in inputs" :key="k">
         <label class="form-label mt-1">GroupAddress Name</label>
@@ -162,5 +166,23 @@ label {
 img {
   width: 17px;
   height: auto;
+}
+.card {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 15px;
+  padding: 25px;
+  border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
+  margin: 1px;
+  margin-right: -15%;
+}
+.cardIn {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 15px;
+  padding: 25px;
+  border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
+  margin: 1px;
+  /* margin-right: -15%; */
 }
 </style>
