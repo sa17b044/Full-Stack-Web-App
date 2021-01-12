@@ -1,30 +1,13 @@
 <template>
   <div class="card">
-    <h2>Config</h2>
-    <label>Policy name</label>
-    <select class="form-control" v-model="policy_number">
-      <option v-for="policy in policyList" :key="policy._id">
-        {{ policy.policy_number }}
-      </option>
-    </select>
-    <div></div>
-    <label>Server name</label>
-    <select class="form-control" v-model="server_number">
-      <option v-for="server in serverList" :key="server._id">
-        {{ server.server_number }}
-      </option>
-    </select>
-    <div>
-      <button class="btn btn-warning mt-2" @click="set()">Set</button>
-      <button class="btn btn-info mt-2" @click="run()">Run</button>
-    </div>
-    <div class="cardIn mt-2">
-      <h2>Logs</h2>
+    <h2>Logs</h2>
+    <button class="btn btn-dark" @click="run()">Run</button>
     <div id="output" class="m-5">
-      <p v-for="(par, index) of pars" :key="index">
-        {{ par }}
-      </p>
-    </div>
+      <div class="cardIn">
+        <p v-for="(par, index) of pars" :key="index">
+          {{ par }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -35,12 +18,18 @@ import axios from "axios";
 export default {
   data() {
     return {
-      server_number: "",
-      policy_number: "",
-      serverList: [],
-      policyList: [],
-      output: ""
+      output: "",
+      sIP: "",
+      dIP: "",
+      sPort: "",
+      dPort: "",
+      log: ""
     };
+  },
+  methods: {
+  async run(){
+    const response = await axios.post("http://localhost:8081/api/configList/");
+    }
   },
   computed: {
     pars() {
@@ -48,36 +37,23 @@ export default {
     }
   },
   async mounted() {
-    const responsePolicy = await axios.get(
-      "http://localhost:8081/api/policyList/"
-    );
-    this.policyList = responsePolicy.data;
-    const responseServer = await axios.get(
-      "http://localhost:8081/api/serverList/"
-    );
-    this.serverList = responseServer.data;
-  },
-  methods: {
-    async set() {
-      console.log("1#");
-      await axios.post("http://localhost:8081/api/configList/", {
-        server_number: this.server_number,
-        policy_number: this.policy_number
-      });
-    },
-    async run() {
-      console.log("2#");
-      let sse = new EventSource("http://localhost:8081/api/configList/sse");
-      sse.addEventListener("message", output => {
-        const data = JSON.parse(output.data);
-        console.log(data);
-        console.log("COUNT " + data.count);
-        console.log(data.allOutput);
-        if (data.count % 2 === 0) {
-          this.output += data.allOutput + "\n";
-        }
-      });
-    }
+    let sse = new EventSource("http://localhost:8081/api/configList/sse");
+    sse.addEventListener("message", output => {
+      const data = JSON.parse(output.data);
+      // console.log(data);
+      // console.log("COUNT " + data.count);
+      // console.log(data.allOutput);
+      if (data.count % 2 === 0) {
+        this.output += data.allOutput + "\n";
+        // console.log(this.output)
+        const r = /ipv4\(.*\):\s+(.*)\s\->\s+(.*)/gm;
+        const m = r.exec(this.output);
+        // console.log(m);
+        this.sIP = m[1];
+        this.dIP = m[2];
+        console.log(ipIN, ipOUT);
+      }
+    });
   }
 };
 </script>

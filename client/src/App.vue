@@ -3,28 +3,33 @@
     <div class="container-fluid">
       <div class="row">
         <nav class="navbar bg-dark">
-          <a class="navbar-brand"><img src="./assets/49536028_10161397481980486_3467575067997634560_o.png" alt=""></a>
+          <a class="navbar-brand"
+            ><img
+              src="./assets/49536028_10161397481980486_3467575067997634560_o.png"
+              alt=""
+          /></a>
         </nav>
       </div>
       <div class="row">
         <div class="col-2 card">
           <ul>
-            <li><a href="/#/rules">Objects</a></li>
-            <ol>
-              <a href="/#/policies">Policies</a>
-            </ol>
-            <ol>
+            <!-- <li><a href="/#/rules">Objects</a></li> -->
+            <li><a href="/#/policies">Rules</a></li>
+            <!-- <ol>
+              <a href="/#/policies">Rules</a>
+            </ol> -->
+            <!-- <ol>
               <a href="/#/servers">Servers</a>
-            </ol>
+            </ol> -->
             <ol>
               <a href="/#/xml">XML</a>
             </ol>
             <li>
-              <a href="/#/Config">Policy</a>
+              <a href="/#/Config">Log</a>
             </li>
-                          <ol>
-                <a href="/#/Config">Lua</a>
-              </ol>
+            <!-- <ol>
+              <a href="/#/Config">Lua</a>
+            </ol> -->
             <li>
               <a href="/#/users">Administrator</a>
             </li>
@@ -32,10 +37,10 @@
               <a href="/#/users">Users</a>
             </ol>
             <li>
-              <a href="/#/tools">Tools</a>
+              <a href="">Tools</a>
             </li>
             <ol>
-              <a href="/#/ping">Ping</a>
+              <a href="">Ping</a>
             </ol>
             <ol>
               <a href="">Whois</a>
@@ -95,6 +100,6 @@ img {
   box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
   margin-top: 50px;
   margin-left: 5px;
-  margin-right:-20px;
+  margin-right: -40px;
 }
 </style>
