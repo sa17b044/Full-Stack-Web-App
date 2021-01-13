@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card mt-3">
     <div class="row">
       <!-- Policy ################################################################ -->
       <div class="col cardIn">
@@ -333,7 +333,7 @@
         <div v-if="!editServer">
           <div class="row row-cols-2">
             <div class="mb-2">
-              <label class="form-label">Name</label>
+              <label class="form-label">Number</label>
               <input
                 class="form-control"
                 type="number"
@@ -533,7 +533,7 @@
         <div v-for="item in itemListS" :key="item._id">
           <div class="cardIn mt-2">
             <div class="row">
-              <div class="col-3">Server Name :</div>
+              <div class="col-3">Server Number :</div>
               <div class="col-6">{{ item.server_number }}</div>
             </div>
             <div class="row">
@@ -676,7 +676,7 @@ export default {
         }
       );
       this.itemListP.push(response.data);
-      this.policy_number = "";
+      // this.policy_number = "";
       this.detection = false;
       this.inspection = false;
       this.individual_addressing = false;
@@ -745,12 +745,12 @@ export default {
         }
       );
       this.itemListS.push(response.data);
-      this.server_number = "";
+      // this.server_number = "";
       this.src_ip = "";
       this.dst_ip = "";
       this.policy = "";
-      this.logKNXnetip = "";
-      this.logToFile = "";
+      this.logKNXnetip = "false";
+      this.logToFile = "false";
     },
     async removeItemServer(itemServer, i) {
       await axios.delete(
@@ -795,29 +795,29 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input {
+/* input {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
+}*/
 input[type="number"] {
-  width: 20%;
+  width: 40%;
 }
 input[type="text"] {
-  width: 33%;
-}
-input[type="file"] {
-  width: 27%;
-}
-select {
   width: 50%;
 }
-input[type="number"]:focus {
+/* input[type="file"] {
+  width: 27%;
+} */
+/* select {
+  width: 50%;
+} */
+/* input[type="number"]:focus {
   background-color: rgb(224, 247, 255);
-}
+} */
 input,
 select,
 button {
   border: 2px solid black;
-}
+} 
 .btn {
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -829,7 +829,7 @@ button {
   border: 2px solid black;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
   margin: 1px;
-  margin-right: -15%;
+  margin-right: -35%;
 }
 .cardIn {
   background-color: rgba(255, 255, 255, 0.35);

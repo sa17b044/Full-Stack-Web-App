@@ -1,51 +1,36 @@
 <template>
   <div id="app">
-    <div class="container-fluid">
+    <div>
+      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark container-fluid">
+        <a class="navbar-brand" href="/#/">PAYMAN</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <!-- <a class="nav-item nav-link" href="#">Home</a> -->
+            <a class="nav-item nav-link" href="/#/policies">Policy & Server</a>
+            <a class="nav-item nav-link" href="/#/log">Log</a>
+            <a class="nav-item nav-link" href="/#/upload">Upload</a>
+            <a class="nav-item nav-link disabled" href="/#/users">Users</a>
+            <a class="nav-item nav-link disabled" href="/#/users">Ping</a>
+            <a class="nav-item nav-link disabled" href="/#/users">Traceroute</a>
+            <a class="nav-item nav-link disabled" href="/#/users">Whois</a>
+            <a class="nav-item nav-link disabled" href="/#/users">Filter</a>
+          </div>
+        </div>
+      </nav>
       <div class="row">
-        <nav class="navbar bg-dark">
-          <a class="navbar-brand"><img src="./assets/49536028_10161397481980486_3467575067997634560_o.png" alt=""></a>
-          <ul><li><a href="/#/policies">Policies</a></li></ul>
-        </nav>
       </div>
       <div class="row">
-        <div class="col-2 card">
-          <ul>
-            <li><a href="/#/policies">Policy & Server</a></li>
-            <!-- <ol>
-              <a href="/#/policies">Policies</a>
-            </ol> -->
-            <!-- <ol>
-              <a href="/#/servers">Servers</a>
-            </ol> -->
-            <ol>
-              <a href="/#/xml">XML</a>
-            </ol>
-            <!-- <li>
-              <a href="/#/Config">Policy</a>
-            </li> -->
-                          <ol>
-                <a href="/#/Config">Lua</a>
-              </ol>
-            <li>
-              <a href="/#/users">Administrator</a>
-            </li>
-            <ol>
-              <a href="/#/users">Users</a>
-            </ol>
-            <li>
-              <a href="/#/tools">Tools</a>
-            </li>
-            <ol>
-              <a href="">Ping</a>
-            </ol>
-            <ol>
-              <a href="">Whois</a>
-            </ol>
-            <ol>
-              <a href="">Nmap</a>
-            </ol>
-          </ul>
-        </div>
         <div class="col-9 p-5"><router-view /></div>
       </div>
     </div>
@@ -68,34 +53,17 @@ a:hover,
 a:active {
   color: gray;
 }
-li {
-  list-style-type: none;
-  font-size: 20px;
-}
+
 body {
   background: linear-gradient(to right, #00aaff, #00ff6c);
   height: 100%;
   width: 100%;
 }
-/* #app {
+#app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  margin-top: 60px;
-} */
+}
 img {
   width: 70px;
   height: auto;
-}
-.card {
-  background-color: rgba(255, 255, 255, 0.35);
-  border-radius: 15px;
-  padding: 15px;
-  border: 2px solid black;
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
-  margin-top: 50px;
-  margin-left: 5px;
-  margin-right:-20px;
 }
 </style>

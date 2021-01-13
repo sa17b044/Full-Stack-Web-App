@@ -3,14 +3,13 @@ import Router from "vue-router";
 // import Login from "@/components/Login";
 import Users from "@/components/Users";
 // import Rules from "@/components/Rules";
-import Servers from "@/components/Servers";
 import Policies from "@/components/Policies";
-import Configs from "@/components/Config";
-import Tools from "@/components/Tools";
-import Ping from "@/components/Ping";
+import Log from "@/components/Log";
+// import Tools from "@/components/Tools";
+// import Ping from "@/components/Ping";
 import Home from "@/components/Home";
 // import Nmap from "@/components/Nmap";
-import Xml from "@/components/Xml"
+import Upload from "@/components/Upload"
 
 Vue.use(Router);
 
@@ -20,16 +19,16 @@ export default new Router({
       name: "home",
       component: Home
     },
-    {
-      path: "/ping",
-      name: "ping",
-      component: Ping
-    },
-    {
-      path: "/tools",
-      name: "tools",
-      component: Tools
-    },
+    // {
+    //   path: "/ping",
+    //   name: "ping",
+    //   component: Ping
+    // },
+    // {
+    //   path: "/tools",
+    //   name: "tools",
+    //   component: Tools
+    // },
     {
       path: "/users",
       name: "Users",
@@ -41,11 +40,6 @@ export default new Router({
     //   component: Rules
     // },
     {
-      path: "/servers",
-      name: "Servers",
-      component: Servers
-    },
-    {
       path: "/policies",
       name: "Policies",
       component: Policies
@@ -56,14 +50,14 @@ export default new Router({
     //   component: Nmap
     // },
     {
-      path: "/config",
-      name: "Configs",
-      component: Configs
+      path: "/log",
+      name: "Log",
+      component: Log
     },
     {
-      path: "/xml",
-      name: "Xml",
-      component: Xml
+      path: "/upload",
+      name: "Upload",
+      component: Upload
     },
   ]
 });
