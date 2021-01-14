@@ -6,7 +6,8 @@ const pcap_schema = new mongoose.Schema(
     originalname: {
       type: String
     }
-  }
+  },
+  { timestamps: true }
   // { timestamps: true }
 );
 

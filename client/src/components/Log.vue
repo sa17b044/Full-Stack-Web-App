@@ -6,7 +6,7 @@
         <div class="cardIn">
           <h5>Snort.lua</h5>
           <p>Create snort.lua and Show log</p>
-          <button class="btn btn-dark" @click="run()">Run</button>
+          <button class="btn btn-dark" @click="runLua()">Run</button>
         </div>
       </div>
       <div class="col">
@@ -20,13 +20,13 @@
         </div>
       </div>
     </div>
-
+<!-- {{log}} -->
     <div id="output" class="m-5">
-      <p v-for="(par, index) of pars" :key="index">
-          {{ par }}
-        </p>
+      <!-- <p v-for="(par, index) of pars" :key="index">
+        {{ par }}
+      </p> -->
       <div class="cardIn">
-        <div class="alert-danger alert">{{sIP}}</div>
+        <div class="alert-danger alert">{{ sIP }}</div>
         <div class="alert-light alert">{{ dIP }}</div>
         <div class="alert-danger alert">{{ output }}</div>
       </div>
@@ -45,7 +45,13 @@ export default {
       dIP: "",
       sPort: "",
       dPort: "",
-      log: "",
+      log: [
+        {
+          output: "",
+          sIP: "",
+          dIP: ""
+        }
+      ],
       selectedFile: null
     };
   },
@@ -55,7 +61,6 @@ export default {
       console.log(this.selectedFile);
     },
     async run() {
-      
       const fd = new FormData();
       fd.append("file", this.selectedFile, this.selectedFile.name);
       const response = await axios.post(
@@ -65,8 +70,13 @@ export default {
           headers: { "content-type": "multipart/form-data" }
         }
       );
-      console.log(response);
-    }
+      await axios.get("http://localhost:8081/api/configList/sse");
+    },
+        async runLua() {
+      const response = await axios.post(
+        "http://localhost:8081/api/configList/");
+      console.log('#####');
+    },
   },
   computed: {
     pars() {
@@ -87,6 +97,7 @@ export default {
         this.dIP = `Destination IP : ${m[2]}`;
         const reg = /\[\*\*\](.*)/gm;
         this.output = this.output.match(reg).toString();
+        // this.log.sIP = `Source IP : ${m[1]}`;
       }
     });
   }

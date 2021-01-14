@@ -20,22 +20,22 @@ var storage = multer.diskStorage({
 var upload = multer({
     storage: storage
 })
-// router.get("/", async (req, res) => {
-//     try {
-//         const xmlList = await XML_Model.find();
-//         console.log(xmlList);
-//         if (!xmlList) throw new Error("No item List");
-//         const stored = xmlList.sort((a, b) => {
-//             return new Date(a.date).getTime() - new Date(b.date).getTime();
-//         });
-//         res.status(200).json(stored);
-//         console.log(req.body);
-//     } catch (error) {
-//         res.status(500).json({
-//             message: error.message,
-//         });
-//     }
-// });
+router.get("/", async (req, res) => {
+    try {
+        const xmlList = await XML_Model.find();
+        console.log(xmlList);
+        if (!xmlList) throw new Error("No item List");
+        const stored = xmlList.sort((a, b) => {
+            return new Date(a.date).getTime() - new Date(b.date).getTime();
+        });
+        res.status(200).json(stored);
+        console.log(req.body);
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+        });
+    }
+});
 
 router.post("/", upload.single('file'), async (req, res) => {
     console.log(req.file)
@@ -54,22 +54,22 @@ router.post("/", upload.single('file'), async (req, res) => {
     
 
 });
-router.post("/pcap", upload.single('file'), async (req, res) => {
-    // console.log(req.file)
-    console.log('test')
-    // let name = req.file.originalname
-    // const newPcapList = new PCAP_Model(req.file);
-    // try {
-    //     const pcapList = await newPcapList.save();
-    //     if (!pcapList) throw new Error("wrong saving");
-    //     res.status(200).json(pcapList);
-    //     console.log(req.body);
-    // } catch (error) {
-    //     res.status(500).json({
-    //         message: error.message,
-    //     });
-    // }
+// router.post("/pcap", upload.single('file'), async (req, res) => {
+//     // console.log(req.file)
+//     console.log('test')
+//     // let name = req.file.originalname
+//     // const newPcapList = new PCAP_Model(req.file);
+//     // try {
+//     //     const pcapList = await newPcapList.save();
+//     //     if (!pcapList) throw new Error("wrong saving");
+//     //     res.status(200).json(pcapList);
+//     //     console.log(req.body);
+//     // } catch (error) {
+//     //     res.status(500).json({
+//     //         message: error.message,
+//     //     });
+//     // }
     
 
-});
+// });
 module.exports = router;
