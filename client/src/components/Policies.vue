@@ -638,13 +638,18 @@ export default {
   async mounted() {
     const responseP = await axios.get("http://localhost:8081/api/policyList/");
     this.itemListP = responseP.data;
-    console.log(this.itemListP);
+    // console.log(this.itemListP);
+    const response = await axios.get("http://localhost:8081/api/serverList/");
+    this.itemListS = response.data;
+
     const resXml = await axios.get("http://localhost:8081/api/xmlList/");
     // console.log("##");
     this.xmlList = resXml.data;
     // console.log(this.xmlList);
-    const responseS = await axios.get("http://localhost:8081/api/serverList/");
-    this.itemListS = responseS.data;
+    // const responseS = await axios.get("http://localhost:8081/api/serverList/");
+    // this.itemListS = responseS.data;
+    // console.log(responseS.data)
+    // console.log(this.itemListS)
   },
   methods: {
     add(index) {
@@ -817,7 +822,7 @@ input,
 select,
 button {
   border: 2px solid black;
-} 
+}
 .btn {
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 // import Login from "@/components/Login";
 import Users from "@/components/Users";
-// import Rules from "@/components/Rules";
+import Xml from "@/components/Xml";
 import Policies from "@/components/Policies";
 import Log from "@/components/Log";
 // import Tools from "@/components/Tools";
@@ -34,11 +34,11 @@ export default new Router({
       name: "Users",
       component: Users
     },
-    // {
-    //   path: "/rules",
-    //   name: "Rules",
-    //   component: Rules
-    // },
+    {
+      path: "/xml",
+      name: "Xml",
+      component: Xml
+    },
     {
       path: "/policies",
       name: "Policies",

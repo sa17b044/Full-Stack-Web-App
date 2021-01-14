@@ -1,16 +1,34 @@
 <template>
   <div class="card mt-3">
     <h2>Logs</h2>
-    <button class="btn btn-dark" @click="run()">Run</button>
-    <div id="output" class="m-5">
-      <!-- <p v-for="(par, index) of pars" :key="index">
-          {{ par }}
-        </p> -->
-      <div class="cardIn">
-        <div class="alert-danger alert">Source IP : {{ sIP }}</div>
-        <div class="alert-light alert">Destination IP : {{ dIP }}</div>
-        <div class="alert-success alert" >{{ output }}</div>
+    <div class="row">
+      <div class="col">
+        <div class="cardIn">
+          <h5>Snort.lua</h5>
+          <p>Create snort.lua and Show log</p>
+          <button class="btn btn-dark" @click="run()">Run</button>
         </div>
+      </div>
+      <div class="col">
+        <div class="cardIn">
+          <h5>Snort.lua and pcap file</h5>
+          <p>1 - Choose a pcap file</p>
+          <input type="file" @change="onFileSelected" />
+          <p class="mt-2">2 - Create a snort.lua</p>
+          <p>3 - Show Log</p>
+          <button class="btn btn-dark" @click="run()">Run</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="output" class="m-5">
+      <p v-for="(par, index) of pars" :key="index">
+          {{ par }}
+        </p>
+      <div class="cardIn">
+        <div class="alert-danger alert">{{sIP}}</div>
+        <div class="alert-light alert">{{ dIP }}</div>
+        <div class="alert-danger alert">{{ output }}</div>
       </div>
     </div>
   </div>
@@ -27,21 +45,34 @@ export default {
       dIP: "",
       sPort: "",
       dPort: "",
-      log: ""
+      log: "",
+      selectedFile: null
     };
   },
   methods: {
+    onFileSelected(event) {
+      this.selectedFile = event.target.files[0];
+      console.log(this.selectedFile);
+    },
     async run() {
+      
+      const fd = new FormData();
+      fd.append("file", this.selectedFile, this.selectedFile.name);
       const response = await axios.post(
-        "http://localhost:8081/api/configList/"
+        "http://localhost:8081/api/configList/",
+        fd,
+        {
+          headers: { "content-type": "multipart/form-data" }
+        }
       );
+      console.log(response);
     }
   },
-  // computed: {
-  //   pars() {
-  //     return this.output.split("\n");
-  //   }
-  // },
+  computed: {
+    pars() {
+      return this.output.split("\n");
+    }
+  },
   async mounted() {
     let sse = new EventSource("http://localhost:8081/api/configList/sse");
     sse.addEventListener("message", output => {
@@ -49,11 +80,11 @@ export default {
       // const data = output.data;
       console.log(data);
       if (data.count % 2 === 0) {
-        this.output = data.allOutput + "\n";
+        this.output += data.allOutput + "\n";
         const r = /ipv4\(.*\):\s+(.*)\s\->\s+(.*)/gm;
         const m = r.exec(this.output);
-        this.sIP = m[1];
-        this.dIP = m[2];
+        this.sIP = `Source IP : ${m[1]}`;
+        this.dIP = `Destination IP : ${m[2]}`;
         const reg = /\[\*\*\](.*)/gm;
         this.output = this.output.match(reg).toString();
       }
@@ -122,7 +153,7 @@ img {
   width: 17px;
   height: auto;
 }
-.alert{
+.alert {
   font-weight: bold;
   border: solid 2px;
   border-radius: 10px;

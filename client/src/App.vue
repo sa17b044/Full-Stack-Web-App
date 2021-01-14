@@ -17,7 +17,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <!-- <a class="nav-item nav-link" href="#">Home</a> -->
-            <a class="nav-item nav-link" href="/#/policies">Policy & Server</a>
+            <a class="nav-item nav-link" href="/#/policies">Inspection</a>
             <a class="nav-item nav-link" href="/#/log">Log</a>
             <a class="nav-item nav-link" href="/#/upload">Upload</a>
             <a class="nav-item nav-link disabled" href="/#/users">Users</a>

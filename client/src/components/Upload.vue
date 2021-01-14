@@ -1,47 +1,37 @@
 <template>
   <div class="card mt-3">
-    <h2>Upload</h2>
-    <ul>
-      <li><a href="">XML</a></li>
-      <li>
-        <a href="">pcap</a>
-      </li>
-    </ul>
-
-    <div class="row">
-      <div class="col-2">
-        <div class="cardIn">
-          <label class="mb-2">Upload a XML file</label>
-          <br />
-          <input
-            type="file"
-            @change="onFileSelected"
-            style="display: none"
-            ref="fileInput"
-          />
-          <button class="btn btn-light" @click="$refs.fileInput.click()">
-            Upload
-          </button>
-          <button @click="onUploadFile()" class="btn btn-warning">Send</button>
+    <h1 class="mb-5">Upload</h1>
+    <div>
+      <div class="row">
+        <div class="col">
+          <div class=" cardIn">
+            <div class="course">
+              <a class="course-preview">
+                <h2>XML</h2>
+              </a>
+              <div class="course-info">
+                <h3>Upload Group address file</h3>
+              </div>
+              <a href="/#/xml"><button class="btn btn-light">Go</button></a>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-2">
-        <div class="cardIn">
-          <label class="mb-2">Upload a pcap file</label>
-          <br />
-          <input
-            type="file"
-            @change="onFileSelectedPcap"
-            style="display: none"
-            ref="fileInputPcap"
-          />
-          <button class="btn btn-info" @click="$refs.fileInputPcap.click()">
-            Upload
-          </button>
-          <button @click="onUploadFilePcap()" class="btn btn-warning">
-            Send
-          </button>
+        <div class="col">
+          <div class=" cardIn">
+            <div class="course">
+              <a class="course-preview">
+                <h2>pcap</h2>
+              </a>
+              <div class="course-info">
+                <h3>Upload Capture file</h3>
+              </div>
+              <a href="/#/pcap"><button class="btn btn-light">Go</button></a>
+            </div>
+          </div>
         </div>
+        <!-- <div class="col-sm">
+          One of three columns
+        </div> -->
       </div>
     </div>
   </div>
@@ -51,108 +41,268 @@
 import axios from "axios";
 export default {
   data() {
-    return {
-      selectedFile: null,
-      selectedFilePcap: null
-    };
-  },
-  methods: {
-    onFileSelected(event) {
-      this.selectedFile = event.target.files[0];
-      console.log(this.selectedFile);
-    },
-    onFileSelectedPcap(event) {
-      this.selectedFilePcap = event.target.files[0];
-      console.log(this.selectedFilePcap);
-      console.log("###############");
-    },
-    async onUploadFile() {
-      const fd = new FormData();
-      fd.append("file", this.selectedFile, this.selectedFile.name);
-      const response = await axios.post(
-        "http://localhost:8081/api/xmlList/",
-        fd,
-        {
-          headers: { "content-type": "multipart/form-data" }
-        }
-      );
-      console.log(response);
-    },
-    async onUploadFilePcap() {
-      const fd = new FormData();
-      fd.append("filePcap", this.selectedFilePcap, this.selectedFilePcap.name);
-      const response = await axios.post(
-        "http://localhost:8081/api/xmlList/pcap",
-        fd,
-        {
-          headers: { "content-type": "multipart/form-data" }
-        }
-      );
-      console.log(response);
-    }
+    return {};
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* input {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}*/
-input[type="number"] {
-  width: 40%;
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+
+* {
+  box-sizing: border-box;
 }
-input[type="text"] {
-  width: 50%;
+
+body {
+  /* background-image: linear-gradient(45deg, #7175da, #9790F2); */
+  font-family: "Muli", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
 }
-/* input[type="file"] {
-  width: 27%;
-} */
-/* select {
-  width: 50%;
-} */
-/* input[type="number"]:focus {
-  background-color: rgb(224, 247, 255);
-} */
-input,
-select,
-button {
-  border: 2px solid black;
+
+.course {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  max-width: 100%;
+  margin: 20px;
+  overflow: hidden;
+  width: 700px;
+}
+
+.course h6 {
+  opacity: 0.6;
+  margin: 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.course h2 {
+  letter-spacing: 1px;
+  margin: 10px 0;
+}
+
+.course-preview {
+  background-color: #2a265f;
+  color: #fff;
+  padding: 30px;
+  max-width: 250px;
+}
+
+.course-preview a {
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  opacity: 0.6;
+  margin-top: 30px;
+  text-decoration: none;
+}
+
+.course-info {
+  padding: 30px;
+  position: relative;
+  width: 100%;
+}
+
+.progress-container {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  text-align: right;
+  width: 150px;
+}
+
+.progress {
+  background-color: #ddd;
+  border-radius: 3px;
+  height: 5px;
+  width: 100%;
+}
+
+.progress::after {
+  border-radius: 3px;
+  /* background-color: #2a265f; */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 66%;
+}
+
+.progress-text {
+  font-size: 10px;
+  opacity: 0.6;
+  letter-spacing: 1px;
 }
 .btn {
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border: solid 2px black;
 }
-.card {
-  background-color: rgba(255, 255, 255, 0.35);
-  border-radius: 15px;
-  padding: 25px;
-  border: 2px solid black;
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
-  margin: 1px;
-  margin-right: -35%;
+
+/* SOCIAL PANEL CSS */
+.social-panel-container {
+  position: fixed;
+  right: 0;
+  bottom: 80px;
+  transform: translateX(100%);
+  transition: transform 0.4s ease-in-out;
 }
-.cardIn {
-  background-color: rgba(255, 255, 255, 0.35);
-  border-radius: 15px;
-  padding: 25px;
-  border: 2px solid black;
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
-  margin: 1px;
-  /* margin-right: -15%; */
+
+.social-panel-container.visible {
+  transform: translateX(-10px);
 }
-.col-3 {
-  font-weight: bold;
+
+.social-panel {
+  background-color: #fff;
+  border-radius: 16px;
+  /* box-shadow: 0 16px 31px -17px rgba(0, 31, 97, 0.6); */
+  border: 5px solid #001f61;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Muli";
+  position: relative;
+  height: 169px;
+  width: 370px;
+  max-width: calc(100% - 10px);
 }
-h2 {
+
+.social-panel button.close-btn {
+  border: 0;
+  color: #97a5ce;
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.social-panel button.close-btn:focus {
+  outline: none;
+}
+
+.social-panel p {
+  border-radius: 0 0 10px 10px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 2px 17px 6px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin: 0;
+  transform: translateX(-50%);
   text-align: center;
+  width: 235px;
 }
-label {
-  margin-bottom: 2px;
-  font-weight: bold;
+
+.social-panel p i {
+  margin: 0 5px;
 }
-img {
-  width: 17px;
-  height: auto;
+
+.social-panel p a {
+  color: #ff7500;
+  text-decoration: none;
+}
+
+.social-panel h4 {
+  margin: 20px 0;
+  color: #97a5ce;
+  font-family: "Muli";
+  font-size: 14px;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.social-panel ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-panel ul li {
+  margin: 0 10px;
+}
+
+.social-panel ul li a {
+  border: 1px solid #dce1f2;
+  border-radius: 50%;
+  /* color: #001f61; */
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  text-decoration: none;
+}
+
+.social-panel ul li a:hover {
+  border-color: #ff6a00;
+  box-shadow: 0 9px 12px -9px #ff6a00;
+}
+
+.floating-btn {
+  border-radius: 26.5px;
+  /* border: 1px solid #001f61; */
+  /* box-shadow: 0 16px 22px -17px #03153b; */
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 12px 20px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+.floating-btn:hover {
+  background-color: #ffffff;
+  color: #001f61;
+}
+
+.floating-btn:focus {
+  outline: none;
+}
+
+.floating-text {
+  background-color: #001f61;
+  border-radius: 10px 10px 0 0;
+  color: #fff;
+  font-family: "Muli";
+  padding: 7px 15px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 998;
+}
+
+.floating-text a {
+  color: #ff7500;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 480px) {
+  .social-panel-container.visible {
+    transform: translateX(0px);
+  }
+
+  .floating-btn {
+    right: 10px;
+  }
+}
+h1 {
+  text-align: center;
 }
 </style>

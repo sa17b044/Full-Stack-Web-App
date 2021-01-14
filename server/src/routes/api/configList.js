@@ -18,8 +18,21 @@ const {
     config
 } = require("process");
 
-
+const multer = require("multer");
 const router = Router();
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '/home/payman/#Project/Full-Stack-Web-App/server/src/public/pcap')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+var upload = multer({
+    storage: storage
+})
+
+// const router = Router();
 
 router.get("/sse", async (req, res) => {
     //################################### - - - - > sse connection 
@@ -54,8 +67,8 @@ router.get("/sse", async (req, res) => {
     });
 });
 //################################# - - - > Log
-router.post("/", async (req, res) => {
-
+router.post("/",upload.single('file'), async (req, res) => {
+    console.log(req.file)
     let i = 0;
     let j = 0;
     // --------------------------------> policy
