@@ -88,8 +88,11 @@ export default {
           console.log(this.output);
           const r = /ipv4\(.*\):\s+(.*)\s\->\s+(.*)/gm;
           const m = r.exec(this.output);
-          this.sIP = `Source IP : ${m[1]}`;
-          this.dIP = `Destination IP : ${m[2]}`;
+          const rPort = /udp\(.*\): (.*) (.*) (.*)/gm;
+          const mPort = rPort.exec(this.output)
+          this.sIP = `Source IP: ${m[1]} & ${mPort[1]}` ;
+          this.dIP = `Destination IP: ${m[2]} & ${mPort[2]}`;
+          console.log(mPort)
           const reg = /\[\*\*\](.*)/gm;
           this.log = this.output.match(reg).toString();
         }
