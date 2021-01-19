@@ -2,10 +2,7 @@ const { timeStamp } = require("console");
 const mongoose = require("mongoose");
 
 const policy_schema = new mongoose.Schema({
-  policy_number: {
-    type: String,
-    required: true,
-  },
+
   inspection: {
     type: String,
     // required: true,

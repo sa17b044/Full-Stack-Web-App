@@ -377,16 +377,11 @@ router.get("/sse", async (req, res) => {
         "createdAt": -1
     });
     console.log('################################')
-    
-
     res.setHeader('Content-Type', 'text/event-stream')
     res.setHeader('Cache-Control', "no-cache");
-
     let output = '';
     // let cmd = 'ls'
-
     const pcap = '-r /home/payman/#Project/Full-Stack-Web-App/server/src/public/pcap/'+pcapList[0].originalname
-
     const snort_lua = '-c /opt/snort-sabic/etc/snort.lua'
     const rule = '-R /home/payman/snort_src/snort3/etc/rules/local.rules'
     let cmd = `snort ${snort_lua} ${rule} ${pcap} -A alert_full -d -X -e`
@@ -402,12 +397,50 @@ router.get("/sse", async (req, res) => {
     stdout.on("data", (chunk) => {
         output = chunk.toString();
         allOutput += output;
+        count++;
+        console.log(allOutput)
+        console.log("SEND DATA TO CLIENT")
+        const reg = /\+\+\s+\[\d+\][^;]*\-\-\s+\[\d+\]/gm;
+        allOutput = allOutput.match(reg)
+        console.log(allOutput)
+        res.write("data:" + JSON.stringify({
+            allOutput,
+            count
+        }) + "\n\n")
+    })
+    stdout.on('end', () => {
+        console.log('Finished data chunks.');
+    });
+});
 
+router.get("/sseOnline", async (req, res) => {
+    //################################### - - - - > sse connection 
+    console.log('################################')
+    res.setHeader('Content-Type', 'text/event-stream')
+    res.setHeader('Cache-Control', "no-cache");
+    let output = '';
+    const snort_lua = '-c /opt/snort-sabic/etc/snort.lua'
+    const rule = '-R /home/payman/snort_src/snort3/etc/rules/local.rules'
+    const iFace = '-i ens33'
+    let cmd = `snort ${snort_lua} ${rule} ${iFace} -A alert_fast -s 65535 -k none`
+    // let cmd = 'snort -c /opt/snort-sabic/etc/snort.lua -R /home/payman/snort_src/snort3/etc/rules/local.rules -r /home/payman/snort_src/snort3/captures/test_case/knxnetip/header/02_knxnetip_invalid_header_size.pcap -A alert_full -d -X -e'
+    // let cmd= 'sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules -i ens33 -A alert_fast -s 65535 -k none'
+    console.log(cmd)
+    const {
+        stdout,
+        stderr
+    } = await cp.exec(cmd)
+    let allOutput = "";
+    let count = 0;
+    stdout.on("data", (chunk) => {
+        output = chunk.toString();
+        allOutput += output;
         count++;
         console.log("SEND DATA TO CLIENT")
         const reg = /\+\+\s+\[\d+\][^;]*\-\-\s+\[\d+\]/gm;
         allOutput = allOutput.match(reg)
-        // console.log(allOutput)
+        console.log(allOutput)
+
         res.write("data:" + JSON.stringify({
             allOutput,
             count

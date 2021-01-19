@@ -4,27 +4,16 @@ const {
 const mongoose = require("mongoose");
 
 const server_schema = new mongoose.Schema({
-  server_number: {
-    type: String,
-    // required: true,
-  },
+
   src_ip: {
     type: String,
     // required: true,
   },
-  // src_port: {
-  //   type: String,
-  //   required: true,
-  // },
   src_port: [],
   dst_ip: {
     type: String,
     // required: true,
   },
-  // dst_port: {
-  //   type: String,
-  //   required: true,
-  // },
   dst_port: [],
   policy: {
     type: String,

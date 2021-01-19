@@ -16,22 +16,6 @@
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class=" cardIn">
-            <div class="course">
-              <a class="course-preview">
-                <h2>pcap</h2>
-              </a>
-              <div class="course-info">
-                <h3>Upload Capture file</h3>
-              </div>
-              <a href="/#/pcap"><button class="btn btn-light">Go</button></a>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="col-sm">
-          One of three columns
-        </div> -->
       </div>
     </div>
   </div>

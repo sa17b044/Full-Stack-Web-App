@@ -6,7 +6,6 @@
       <div class="col-2">
         <div class="cardIn">
           <label class="mb-2">Upload a XML file</label>
-          <br />
           <input
             type="file"
             @change="onFileSelected"
