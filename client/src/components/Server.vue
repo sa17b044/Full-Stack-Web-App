@@ -2,7 +2,7 @@
   <div class="card mt-3">
     <div class="row">
       <!-- Server ##################################################################### -->
-      <div class="col cardIn">
+      <div class="col">
         <h2>Server</h2>
         <div class="cardIn">
         <div v-if="!editServer">
@@ -191,7 +191,7 @@
 
         <h2>Server List</h2>
         <div v-for="item in itemListS" :key="item._id">
-          <div class="cardIn mt-2">
+          <div class="cardIn">
             <div class="row">
               <div class="col-3">Source IP :</div>
               <div class="col-6">{{ item.src_ip }}</div>
@@ -337,24 +337,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* input {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}*/
 input[type="number"] {
   width: 40%;
 }
 input[type="text"] {
   width: 50%;
 }
-/* input[type="file"] {
-  width: 27%;
-} */
-/* select {
-  width: 50%;
-} */
-/* input[type="number"]:focus {
-  background-color: rgb(224, 247, 255);
-} */
 input,
 select,
 button {
@@ -403,5 +391,8 @@ label {
 img {
   width: 17px;
   height: auto;
+}
+.row{
+border-bottom: 2px solid black;
 }
 </style>

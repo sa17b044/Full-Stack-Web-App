@@ -43,8 +43,8 @@ export default {
   margin-right: -35%;
 }
 .cardA {
-  background: aliceblue;
-  height: 250px;
+  background-color: rgba(0, 0, 0, 0.35);
+  /* height: 250px; */
   display: flex;
   padding: 20px;
   flex-direction: column;
@@ -69,7 +69,10 @@ h2 {
   border-radius: 10px;
   border: black 2px solid;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  margin-top: 25%;
   width: 100px;
+}
+img {
+  width: 50px;
+  height: auto;
 }
 </style>

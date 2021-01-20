@@ -17,12 +17,10 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <!-- <a class="nav-item nav-link" href="#">Home</a> -->
-            <a class="nav-item nav-link" href="/#/policies">Inspection</a>
+            <a class="nav-item nav-link" href="/#/inspection">Inspection</a>
             <a class="nav-item nav-link" href="/#/log">Log</a>
             <a class="nav-item nav-link" href="/#/upload">Upload</a>
             <a class="nav-item nav-link disabled" href="/#/users">Users</a>
-            <a class="nav-item nav-link disabled" href="/#/users">Ping</a>
-            <a class="nav-item nav-link disabled" href="/#/users">Traceroute</a>
             <a class="nav-item nav-link disabled" href="/#/users">Whois</a>
             <a class="nav-item nav-link disabled" href="/#/users">Filter</a>
           </div>
@@ -65,5 +63,8 @@ body {
 img {
   width: 70px;
   height: auto;
+}
+.text-nav{
+  color: #00ff6c
 }
 </style>

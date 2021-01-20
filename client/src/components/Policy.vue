@@ -2,7 +2,7 @@
   <div class="card mt-3">
     <div class="row">
       <!-- Policy ################################################################ -->
-      <div class="col cardIn">
+      <div class="col">
         <h2>Policy</h2>
         <div class="cardIn">
           <div v-if="!editPolicy">
@@ -129,6 +129,7 @@
                 >Payload</label
               >
             </div>
+
             <button class="btn btn-primary" @click="addItem()">Add</button>
           </div>
           <div v-else>
@@ -452,22 +453,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* input {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}*/
 input[type="number"] {
   width: 40%;
 }
 input[type="text"] {
-  width: 50%;
-}
-/* input[type="file"] {
-  width: 27%;
-} */
-/* select {
-  width: 50%;
-} */
-select {
   width: 50%;
 }
 input,
@@ -495,7 +484,6 @@ button {
   border: 2px solid black;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
   margin: 0px;
-  /* margin-right: -15%; */
 }
 .col-3 {
   font-weight: bold;
@@ -517,5 +505,8 @@ label {
 img {
   width: 17px;
   height: auto;
+}
+.row {
+  border-bottom: 2px solid black;
 }
 </style>

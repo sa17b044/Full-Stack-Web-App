@@ -3,14 +3,15 @@ import Router from "vue-router";
 // import Login from "@/components/Login";
 import Users from "@/components/Users";
 import Xml from "@/components/Xml";
-import Policies from "@/components/Policies";
+import Inspection from "@/components/Inspection";
 import Log from "@/components/Log";
 import Online from "@/components/Online";
 import Offline from "@/components/Offline";
 import Home from "@/components/Home";
 import Server from "@/components/Server";
 import Policy from "@/components/Policy";
-import Upload from "@/components/Upload"
+import Upload from "@/components/Upload";
+import Ping from "@/components/Ping"
 
 Vue.use(Router);
 
@@ -41,9 +42,9 @@ export default new Router({
       component: Xml
     },
     {
-      path: "/policies",
-      name: "Policies",
-      component: Policies
+      path: "/inspection",
+      name: "Inspection",
+      component: Inspection
     },
     {
       path: "/online",
@@ -65,5 +66,11 @@ export default new Router({
       name: "Upload",
       component: Upload
     },
+    {
+      path: "/ping",
+      name: "Ping",
+      component: Ping
+    },
+    
   ]
 });
