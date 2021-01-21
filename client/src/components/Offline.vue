@@ -24,8 +24,8 @@
       <div v-if="!showBtn">
         <div class="btn-group">
           <button class="btn btn-secondary" @click="showEn()">More</button>
-          <button class="btn btn-danger" @click="drop()">Block</button>
-          <button class="btn btn-success" @click="drop()">Unblock</button>
+          <button class="btn btn-danger" @click="block()">Block</button>
+          <button class="btn btn-success" @click="unblock()">Unblock</button>
         </div>
       </div>
       <div v-else>
@@ -36,8 +36,8 @@
         </div>
         <div class="btn-group">
           <button class="btn btn-warning" @click="showDi()">Less</button>
-          <button class="btn btn-danger" @click="drop()">Block</button>
-          <button class="btn btn-success" @click="drop()">Unblock</button>
+          <button class="btn btn-danger" @click="block()">Block</button>
+          <button class="btn btn-success" @click="unblock()">Unblock</button>
         </div>
       </div>
     </div>
@@ -75,11 +75,11 @@ export default {
     },
     showEn() {
       this.showBtn = true;
-      console.log("true");
+      // console.log("true");
     },
     showDi() {
       this.showBtn = false;
-      console.log("false");
+      // console.log("false");
     },
     async run() {
       this.logData= true;
@@ -100,7 +100,7 @@ export default {
         if (data.count % 2 === 0) {
           this.output += data.allOutput + "\n";
           this.log = data.allOutput + "\n";
-          console.log(this.output);
+          // console.log(this.output);
           const r = /ipv4\(.*\):\s+(.*)\s\->\s+(.*)/gm;
           const m = r.exec(this.output);
           const rPort = /udp\(.*\): (.*):(.*) (.*):(.*) (.*)/gm;
@@ -109,16 +109,23 @@ export default {
           this.dIP = `${m[2]}`;
           this.sPort = `${mPort[2]}`;
           this.dPort = `${mPort[4]}`;
-          console.log(mPort);
+          // console.log(mPort);
           const reg = /\[\*\*\](.*)/gm;
           this.log = this.log.match(reg).toString();
         }
       });
       await axios.get("http://localhost:8081/api/configList/sse");
     },
-    async drop() {
-      console.log(this.sIP, this.sPort);
+    async block() {
+      // console.log(this.sIP, this.sPort);
       await axios.post("http://localhost:8081/filter/block", {
+        ip: this.sIP,
+        port: this.sPort
+      });
+    },
+        async unblock() {
+      // console.log(this.sIP, this.sPort);
+      await axios.post("http://localhost:8081/filter/unblock", {
         ip: this.sIP,
         port: this.sPort
       });
