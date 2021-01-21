@@ -20,7 +20,7 @@
             <a class="nav-item nav-link" href="/#/inspection">Inspection</a>
             <a class="nav-item nav-link" href="/#/log">Log</a>
             <a class="nav-item nav-link" href="/#/upload">Upload</a>
-            <a class="nav-item nav-link disabled" href="/#/users">Users</a>
+            <a class="nav-item nav-link" href="/#/users">Users</a>
             <a class="nav-item nav-link disabled" href="/#/users">Whois</a>
             <a class="nav-item nav-link disabled" href="/#/users">Filter</a>
           </div>

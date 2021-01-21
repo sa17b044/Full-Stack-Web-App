@@ -8,7 +8,7 @@
         </li>
         <li><a class="nav-item nav-link" href="/#/Log">Log</a></li>
         <li><a class="nav-item nav-link" href="/#/Upload">Upload</a></li>
-        <li><a class="nav-item nav-link disabled" href="/#/users">Users</a></li>
+        <li><a class="nav-item nav-link" href="/#/users">Users</a></li>
         <li><a class="nav-item nav-link disabled" href="/#/users">Whois</a></li>
         <li>
           <a class="nav-item nav-link disabled" href="/#/users">Filter</a>
