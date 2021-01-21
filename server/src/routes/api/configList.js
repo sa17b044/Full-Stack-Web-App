@@ -6,7 +6,7 @@ const cp = require("child_process");
 const Policy_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/policy_schema.js");
 const Server_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/server_schema.js");
 const Pcap_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/pcap_schema.js");
-
+//iptables -A INPUT -s IP-ADDRESS -p tcp --destination-port port_number -j DROP
 const {
     ConnectionStates
 } = require("mongoose");
@@ -46,7 +46,7 @@ router.post("/", upload.single('file'), async (req, res) => {
         const pcapList = await newPcapList.save();
         if (!pcapList) throw new Error("wrong saving");
         res.status(200).json(pcapList);
-        console.log(req.body);
+        // console.log(req.body);
     } catch (error) {
         res.status(500).json({
             message: error.message,
@@ -376,7 +376,7 @@ router.get("/sse", async (req, res) => {
     const pcapList = await Pcap_Model.find().limit(1).sort({
         "createdAt": -1
     });
-    console.log('################################')
+    // console.log('################################')
     res.setHeader('Content-Type', 'text/event-stream')
     res.setHeader('Cache-Control', "no-cache");
     let output = '';
@@ -387,7 +387,7 @@ router.get("/sse", async (req, res) => {
     let cmd = `snort ${snort_lua} ${rule} ${pcap} -A alert_full -d -X -e`
     // let cmd = 'snort -c /opt/snort-sabic/etc/snort.lua -R /home/payman/snort_src/snort3/etc/rules/local.rules -r /home/payman/snort_src/snort3/captures/test_case/knxnetip/header/02_knxnetip_invalid_header_size.pcap -A alert_full -d -X -e'
     // let cmd= 'sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules -i ens33 -A alert_fast -s 65535 -k none'
-    console.log(cmd)
+    // console.log(cmd)
     const {
         stdout,
         stderr
@@ -398,11 +398,11 @@ router.get("/sse", async (req, res) => {
         output = chunk.toString();
         allOutput += output;
         count++;
-        console.log(allOutput)
+        // console.log(allOutput)
         console.log("SEND DATA TO CLIENT")
         const reg = /\+\+\s+\[\d+\][^;]*\-\-\s+\[\d+\]/gm;
         allOutput = allOutput.match(reg)
-        console.log(allOutput)
+        // console.log(allOutput)
         res.write("data:" + JSON.stringify({
             allOutput,
             count
@@ -415,7 +415,7 @@ router.get("/sse", async (req, res) => {
 
 router.get("/sseOnline", async (req, res) => {
     //################################### - - - - > sse connection 
-    console.log('################################')
+    // console.log('################################')
     res.setHeader('Content-Type', 'text/event-stream')
     res.setHeader('Cache-Control', "no-cache");
     let output = '';
@@ -425,7 +425,7 @@ router.get("/sseOnline", async (req, res) => {
     let cmd = `snort ${snort_lua} ${rule} ${iFace} -A alert_fast -s 65535 -k none`
     // let cmd = 'snort -c /opt/snort-sabic/etc/snort.lua -R /home/payman/snort_src/snort3/etc/rules/local.rules -r /home/payman/snort_src/snort3/captures/test_case/knxnetip/header/02_knxnetip_invalid_header_size.pcap -A alert_full -d -X -e'
     // let cmd= 'sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules -i ens33 -A alert_fast -s 65535 -k none'
-    console.log(cmd)
+    // console.log(cmd)
     const {
         stdout,
         stderr
@@ -439,7 +439,7 @@ router.get("/sseOnline", async (req, res) => {
         console.log("SEND DATA TO CLIENT")
         const reg = /\+\+\s+\[\d+\][^;]*\-\-\s+\[\d+\]/gm;
         allOutput = allOutput.match(reg)
-        console.log(allOutput)
+        // console.log(allOutput)
 
         res.write("data:" + JSON.stringify({
             allOutput,

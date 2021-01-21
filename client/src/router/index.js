@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-// import Login from "@/components/Login";
+import Login from "@/components/Login";
 import Users from "@/components/Users";
 import Xml from "@/components/Xml";
 import Inspection from "@/components/Inspection";
@@ -60,6 +60,11 @@ export default new Router({
       path: "/log",
       name: "Log",
       component: Log
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: Login
     },
     {
       path: "/upload",

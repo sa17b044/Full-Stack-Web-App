@@ -12,13 +12,21 @@
       </div>
     </div>
     <!-- {{log}} -->
-
+    <div v-if="logData">
     <div class="cardIn">
-      <div class="alert-danger alert">{{ sIP }}</div>
-      <div class="alert-light alert">{{ dIP }}</div>
-      <div class="alert-danger alert">{{ log }}</div>
+      <div class="alert-danger alert col">
+        Source IP: {{ sIP }} - Source Port: {{ sPort }}
+      </div>
+      <div class="alert-light alert col">
+        Destination IP: {{ dIP }} - Destination Port: {{ dPort }}
+      </div>
+      <div class="alert-danger alert col">Output : {{ log }}</div>
       <div v-if="!showBtn">
-        <button class="btn btn-secondary" @click="showEn()">More</button>
+        <div class="btn-group">
+          <button class="btn btn-secondary" @click="showEn()">More</button>
+          <button class="btn btn-danger" @click="drop()">Block</button>
+          <button class="btn btn-success" @click="drop()">Unblock</button>
+        </div>
       </div>
       <div v-else>
         <div id="output" class="alert-secondary alert">
@@ -26,8 +34,13 @@
             {{ par }}
           </p>
         </div>
-        <button class="btn btn-warning" @click="showDi()">Less</button>
+        <div class="btn-group">
+          <button class="btn btn-warning" @click="showDi()">Less</button>
+          <button class="btn btn-danger" @click="drop()">Block</button>
+          <button class="btn btn-success" @click="drop()">Unblock</button>
+        </div>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -46,6 +59,7 @@ export default {
       dPort: "",
       log: "",
       showBtn: false,
+      logData: false,
       selectedFile: null
     };
   },
@@ -68,6 +82,7 @@ export default {
       console.log("false");
     },
     async run() {
+      this.logData= true;
       const fd = new FormData();
       fd.append("file", this.selectedFile, this.selectedFile.name);
       const response = await axios.post(
@@ -88,16 +103,25 @@ export default {
           console.log(this.output);
           const r = /ipv4\(.*\):\s+(.*)\s\->\s+(.*)/gm;
           const m = r.exec(this.output);
-          const rPort = /udp\(.*\): (.*) (.*) (.*)/gm;
-          const mPort = rPort.exec(this.output)
-          this.sIP = `Source IP: ${m[1]} & ${mPort[1]}` ;
-          this.dIP = `Destination IP: ${m[2]} & ${mPort[2]}`;
-          console.log(mPort)
+          const rPort = /udp\(.*\): (.*):(.*) (.*):(.*) (.*)/gm;
+          const mPort = rPort.exec(this.output);
+          this.sIP = `${m[1]}`;
+          this.dIP = `${m[2]}`;
+          this.sPort = `${mPort[2]}`;
+          this.dPort = `${mPort[4]}`;
+          console.log(mPort);
           const reg = /\[\*\*\](.*)/gm;
-          this.log = this.output.match(reg).toString();
+          this.log = this.log.match(reg).toString();
         }
       });
       await axios.get("http://localhost:8081/api/configList/sse");
+    },
+    async drop() {
+      console.log(this.sIP, this.sPort);
+      await axios.post("http://localhost:8081/filter/block", {
+        ip: this.sIP,
+        port: this.sPort
+      });
     }
   }
 };
@@ -127,10 +151,10 @@ select,
 button {
   border: 2px solid black;
 }
-.btn {
+/* .btn {
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
+} */
 .card {
   background-color: rgba(255, 255, 255, 0.35);
   border-radius: 15px;
@@ -169,5 +193,9 @@ img {
   border-radius: 10px;
   margin: -5px;
   padding: 15px;
+}
+.btn {
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 </style>

@@ -1,7 +1,7 @@
-GET http://localhost:8081/api/xmlList/
+GET http://localhost:8081/filter/
 # Content-Type: application/json
 
 # {
-#     "cmd":"ls",
-#     "log": " "
+#     "user":"test",
+#     "role":"admin"
 # }

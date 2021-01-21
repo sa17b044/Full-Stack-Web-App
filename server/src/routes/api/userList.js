@@ -1,10 +1,9 @@
 const { Router } = require("express");
-
 const Users_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/users_schema.js");
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/",async (req, res) => {
   try {
     const userList = await Users_Model.find();
     if (!userList) throw new Error("No user List");
@@ -18,9 +17,8 @@ router.get("/", async (req, res) => {
     });
   }
 });
-router.post("/", async (req, res) => {
+router.post("/",async (req, res) => {
   const newUserList = new Users_Model(req.body);
-  
   try {
     const userList = await newUserList.save();
     if (!userList) throw new Error("wrong saving");
@@ -47,13 +45,11 @@ router.put("/:id", async (req, res) => {
 });
 router.delete("/:id", async (req, res) => {
   const { id } = req.params
-  // console.log('#######')
   try {
     const removed  = await Users_Model.findByIdAndDelete(id);
     console.log(removed)
     if (!removed) throw Error('Something went wrong ')
     res.status(200).json(removed)
-    // console.log('test')
   } catch (error) {
     res.status(500).json({
       message: error.message,

@@ -7,8 +7,8 @@
       <input type="text" class="form-control" v-model="password" />
       <label>Confirm password</label>
       <input type="text" class="form-control" v-model="conf_password" />
-      <div v-if="!msg">
-      <div class="alert alert-danger">{{textMsg}}</div>
+      <div v-if="msg">
+        <div class="alert alert-danger">{{textMsg}}</div>
       </div>
       <label>Permissions</label>
       <select class="form-control" v-model="permission">
@@ -25,8 +25,8 @@
       <input type="text" class="form-control" v-model="password" />
       <label>Confirm password</label>
       <input type="text" class="form-control" v-model="conf_password" />
-            <div v-if="!msg">
-      <div class="alert alert-danger">{{textMsg}}</div>
+      <div v-if="msg">
+        <div class="alert alert-danger">{{textMsg}}</div>
       </div>
       <label>Permissions</label>
       <select class="form-control"  v-model="permission">
@@ -66,7 +66,7 @@ export default {
       itemList: [],
       selectedItem: "",
       msg:false,
-      textMsg:""
+      textMsg:''
     };
   },
   async mounted() {
@@ -76,7 +76,7 @@ export default {
   methods: {
     async addItem() {
       if (this.password == this.conf_password) {
-              const response = await axios.post("http://localhost:8081/api/userList/", {
+        const response = await axios.post("http://localhost:8081/api/userList/", {
         userName: this.user_name,
         password: this.password,
         permission: this.permission,
@@ -86,11 +86,12 @@ export default {
       this.password = "";
       this.conf_password = "";
       this.permission = "";
+      this.msg = false
       } else{
         // console.log(this.msg)
-        this.msg == true
+        this.msg = true
         // console.log(this.msg)
-        this.textMsg = "Password is not match"
+        this.textMsg = "Password wrong"
       }
 
     },
