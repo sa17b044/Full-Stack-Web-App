@@ -1,52 +1,132 @@
 <template>
   <div class="card mt-3">
-    <div v-if="!edit">
-      <label>User Name</label>
-      <input type="text" class="form-control" v-model="user_name" />
-      <label>Password</label>
-      <input type="text" class="form-control" v-model="password" />
-      <label>Confirm password</label>
-      <input type="text" class="form-control" v-model="conf_password" />
-      <div v-if="msg">
-        <div class="alert alert-danger">{{textMsg}}</div>
-      </div>
-      <label>Permissions</label>
-      <select class="form-control" v-model="permission">
-        <option value="admin">Admin</option>
-        <option value="readOnly">Read only</option>
-      </select>
+    <h2 class="mb-2">Users</h2>
+    <div class="cardIn center">
+      <div v-if="!edit">
+        <label>User Name</label>
+        <div class="row">
+          <div class="col">
+            <input type="text" v-model="user_name" />
+          </div>
+        </div>
+        <label>Password</label>
+        <div class="row">
+          <div class="col">
+            <input :type="type" v-model="password" />
+            <button class="btn btn-secondary" @click="showPassword()">
+              {{btnText}}
+            </button>
+          </div>
+        </div>
 
-      <button class="btn btn-primary" @click="addItem()">Add</button>
-    </div>
-    <div v-else>
-      <label>User Name</label>
-      <input type="text" class="form-control" v-model="user_name" />
-      <label>Password</label>
-      <input type="text" class="form-control" v-model="password" />
-      <label>Confirm password</label>
-      <input type="text" class="form-control" v-model="conf_password" />
-      <div v-if="msg">
-        <div class="alert alert-danger">{{textMsg}}</div>
+        <label>Confirm password</label>
+        <div class="row">
+          <div class="col">
+            <input :type="type" v-model="conf_password" />
+            <button class="btn btn-secondary" @click="showPassword()">
+              {{btnText}}
+            </button>
+          </div>
+        </div>
+        <div v-if="msg">
+          <div class="alert alert-danger">{{ textMsg }}</div>
+        </div>
+        <label>Permissions</label>
+        <div class="row">
+          <div class="col">
+            <select v-model="permission">
+              <option value="admin">Admin</option>
+              <option value="readOnly">Read only</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-primary" @click="addItem()">Add</button>
+          </div>
+        </div>
       </div>
-      <label>Permissions</label>
-      <select class="form-control"  v-model="permission">
-        <option value="Admin">Admin</option>
-        <option value="Read only">Read only</option>
-      </select>
-      <button class="btn btn-success" @click="updateItem(selectedItem)">
-        Update
-      </button>
+
+      <div v-else>
+        <label>User Name</label>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" v-model="user_name" />
+          </div>
+        </div>
+        <label>Password</label>
+        <div class="row">
+          <div class="col">
+            <input
+              :type="type"
+              class="form-control"
+              v-model="password"
+            /><button class="btn btn-secondary" @click="showPassword()">
+              {{btnText}}
+            </button>
+          </div>
+        </div>
+        <label>Confirm password</label>
+        <div class="row">
+          <div class="col">
+            <div>
+              <input
+                :type="type"
+                class="form-control"
+                v-model="conf_password"
+              /><button class="btn btn-secondary" @click="showPassword()">
+                {{btnText}}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div v-if="msg">
+          <div class="alert alert-danger">{{ textMsg }}</div>
+        </div>
+        <label>Permissions</label>
+        <div class="row">
+          <div class="col">
+            <select class="form-control" v-model="permission">
+              <option value="Admin">Admin</option>
+              <option value="Read only">Read only</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-success" @click="updateItem(selectedItem)">
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div v-for="(item, i) in itemList" :key="item._id">
-      <div class="cardIn">
-      {{ ++i }}
-      {{ item.userName }}
-      {{ item.password }}
-      {{ item.permission }}
-      <button class="btn btn-warning" @click="editItem(i, item)">Edit</button>
-      <button class="btn btn-danger" @click="removeItem(item, i)">
-        Remove
-      </button>
+    <div class="cardIn">
+      <div class="row title">
+        <div class="col-1">#</div>
+        <div class="col-2">User name</div>
+        <div class="col-2">Password</div>
+        <div class="col-2">Permission</div>
+      </div>
+      <div v-for="(item, i) in itemList" :key="item._id">
+        <div class="line">
+          <div class="row">
+            <div class="col-1">{{ ++i }}</div>
+            <div class="col-2">{{ item.userName }}</div>
+            <div class="col-2">{{ item.password }}</div>
+            <div class="col-2">{{ item.permission }}</div>
+            <div class="col-3">
+              <div class="btn-group">
+                <button class="btn btn-warning" @click="editItem(i, item)">
+                  Edit
+                </button>
+                <button class="btn btn-danger" @click="removeItem(item, i)">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -65,8 +145,10 @@ export default {
       permission: "",
       itemList: [],
       selectedItem: "",
-      msg:false,
-      textMsg:''
+      msg: false,
+      textMsg: "",
+      type: "password",
+      btnText: "Show"
     };
   },
   async mounted() {
@@ -76,24 +158,26 @@ export default {
   methods: {
     async addItem() {
       if (this.password == this.conf_password) {
-        const response = await axios.post("http://localhost:8081/api/userList/", {
-        userName: this.user_name,
-        password: this.password,
-        permission: this.permission,
-      });
-      this.itemList.push(response.data);
-      this.user = "";
-      this.password = "";
-      this.conf_password = "";
-      this.permission = "";
-      this.msg = false
-      } else{
+        const response = await axios.post(
+          "http://localhost:8081/api/userList/",
+          {
+            userName: this.user_name,
+            password: this.password,
+            permission: this.permission
+          }
+        );
+        this.itemList.push(response.data);
+        this.user = "";
+        this.password = "";
+        this.conf_password = "";
+        this.permission = "";
+        this.msg = false;
+      } else {
         // console.log(this.msg)
-        this.msg = true
+        this.msg = true;
         // console.log(this.msg)
-        this.textMsg = "Password wrong"
+        this.textMsg = "Password wrong";
       }
-
     },
     async removeItem(item, i) {
       await axios.delete("http://localhost:8081/api/userList/" + item._id);
@@ -105,7 +189,7 @@ export default {
       await axios.put("http://localhost:8081/api/userList/" + item._id, {
         userName: this.user_name,
         password: this.password,
-        permission: this.permission,
+        permission: this.permission
       });
       this.edit = false;
       this.user = "";
@@ -123,29 +207,24 @@ export default {
       this.permission = item.permission;
       this.selectedItem = item;
     },
-  },
+    showPassword() {
+      if (this.type === "password") {
+        this.type = "text";
+        this.btnText = "Hide";
+      } else {
+        this.type = "password";
+        this.btnText = "Show";
+      }
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-input[type="number"] {
-  width: 40%;
-}
-input[type="text"] {
-  width: 50%;
-}
-input,
-select,
-button {
-  border: 2px solid black;
-}
-.btn {
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+<style>
+label {
+  margin-bottom: 2px;
+  font-weight: bold;
 }
 .card {
   background-color: rgba(255, 255, 255, 0.35);
@@ -155,17 +234,6 @@ button {
   box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
   margin: 1px;
   margin-right: -35%;
-}
-.cardIn {
-  background-color: rgba(255, 255, 255, 0.35);
-  border-radius: 15px;
-  padding: 25px;
-  border: 2px solid black;
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
-  margin: 0px;
-}
-.col-3 {
-  font-weight: bold;
 }
 h2 {
   text-align: center;
@@ -177,15 +245,39 @@ h2 {
   margin-top: -5px;
   margin-bottom: -5px;
 }
-label {
-  margin-bottom: 2px;
-  font-weight: bold;
+.cardIn {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 15px;
+  padding: 25px;
+  border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
+  margin: 0px;
 }
-img {
-  width: 17px;
-  height: auto;
+
+input[type="password"] {
+  width: 20%;
 }
-.row {
-  border-bottom: 2px solid black;
+input[type="text"] {
+  width: 20%;
+}
+.alert {
+  width: 20%;
+}
+.form-control {
+  width: 15%;
+  margin-bottom: 5px;
+}
+input {
+  border: 2px solid black;
+}
+.btn {
+  border: 2px solid black;
+  border-radius: 15px;
+}
+.line {
+  border-top: 2px solid black;
+}
+.title {
+  font-size: 20px;
 }
 </style>

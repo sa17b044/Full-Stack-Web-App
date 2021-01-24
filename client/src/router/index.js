@@ -11,7 +11,7 @@ import Home from "@/components/Home";
 import Server from "@/components/Server";
 import Policy from "@/components/Policy";
 import Upload from "@/components/Upload";
-import Ping from "@/components/Ping"
+// import Ping from "@/components/Ping"
 
 Vue.use(Router);
 
@@ -71,11 +71,11 @@ export default new Router({
       name: "Upload",
       component: Upload
     },
-    {
-      path: "/ping",
-      name: "Ping",
-      component: Ping
-    },
+    // {
+    //   path: "/ping",
+    //   name: "Ping",
+    //   component: Ping
+    // },
     
   ]
 });

@@ -1,22 +1,10 @@
 <template>
   <div class="card mt-3">
-    <h2>Inspection</h2>
+    <h2>Log</h2>
     <div class="row">
       <div class="col"></div>
-      <div class="cardA col">
-        <h2>Passiv</h2>
-        <p>
-          You can upload a pcap file and receive a log
-        </p>
-        <a href="/#/offline"><button class="btn btn-primary">Go</button></a>
-      </div>
-      <div class="cardA col">
-        <h2>Active</h2>
-        <p>
-          You can run the server on NIC and receive logs
-        </p>
-        <a href="/#/online"><button class="btn btn-primary">Go</button></a>
-      </div>
+      <div class="col"><a href="/#/offline">Passive</a></div>
+      <div class="col"><a href="/#/online">Active</a></div>
       <div class="col"></div>
     </div>
   </div>
@@ -42,19 +30,29 @@ export default {
   margin: 1px;
   margin-right: -35%;
 }
-.cardA {
+a {
   background-color: rgba(0, 0, 0, 0.35);
-  /* height: 250px; */
+  height: 250px;
   display: flex;
-  padding: 20px;
+  font-size: 50px;
+  padding: 70px;
+  padding-left: 70px;
+  padding-right: 70px;
   flex-direction: column;
   border: 3px black solid;
   border-radius: 15px;
-  margin-left: 5px;
-  margin-right: 5px;
+  text-align: center;
 }
-.col-4 {
+a:hover {
+  color: aliceblue;
+  border: 3px aliceblue solid;
+  background-color: rgba(0, 0, 0);
+}
+.col {
   font-weight: bold;
+  /* border: 2px solid black; */
+  /* padding: 20px;
+  padding-left: 160px; */
 }
 h2 {
   text-align: center;
@@ -70,9 +68,5 @@ h2 {
   border: black 2px solid;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 100px;
-}
-img {
-  width: 50px;
-  height: auto;
 }
 </style>

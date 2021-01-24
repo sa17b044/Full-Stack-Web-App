@@ -1,19 +1,18 @@
 <template>
   <div class="card mt-3">
-    <h2>Welcome</h2>
-    <div>
-      <ul>
-        <li>
-          <a class="nav-item nav-link" href="/#/inspection">Inspection</a>
-        </li>
-        <li><a class="nav-item nav-link" href="/#/Log">Log</a></li>
-        <li><a class="nav-item nav-link" href="/#/Upload">Upload</a></li>
-        <li><a class="nav-item nav-link" href="/#/users">Users</a></li>
-        <li><a class="nav-item nav-link disabled" href="/#/users">Whois</a></li>
-        <!-- <li>
-          <a class="nav-item nav-link disabled" href="/#/users">Filter</a>
-        </li> -->
-      </ul>
+    <h2>Home</h2>
+    <div class="row">
+      <div class="col">
+        <a href="/#/inspection">Inspection</a>
+      </div>
+      <div class="col">
+        <a href="/#/Log">Log</a>
+      </div>
+      <div class="col">
+        <a href="/#/Upload">Upload</a>
+      </div>
+      <div class="col"><a href="/#/users">Users</a></div>
+      <div class="col"><a href="/#/users">Whois</a></div>
     </div>
   </div>
 </template>
@@ -27,34 +26,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-/* input {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}*/
-input[type="number"] {
-  width: 40%;
-}
-input[type="text"] {
-  width: 50%;
-}
-/* input[type="file"] {
-  width: 27%;
-} */
-/* select {
-  width: 50%;
-} */
-/* input[type="number"]:focus {
-  background-color: rgb(224, 247, 255);
-} */
-input,
-select,
-button {
-  border: 2px solid black;
-}
-.btn {
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
+<style scoped>
 .card {
   background-color: rgba(255, 255, 255, 0.35);
   border-radius: 15px;
@@ -64,27 +36,43 @@ button {
   margin: 1px;
   margin-right: -35%;
 }
-.cardIn {
-  background-color: rgba(255, 255, 255, 0.35);
+a {
+  background-color: rgba(0, 0, 0, 0.35);
+  height: 250px;
+  display: flex;
+  font-size: 50px;
+  padding: 70px;
+  padding-left: 70px;
+  padding-right: 70px;
+  flex-direction: column;
+  border: 3px black solid;
   border-radius: 15px;
-  padding: 25px;
-  border: 2px solid black;
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
-  margin: 1px;
-  /* margin-right: -15%; */
+  text-align: center;
 }
-.col-3 {
+a:hover {
+  color: aliceblue;
+  border: 3px aliceblue solid;
+  background-color: rgba(0, 0, 0);
+}
+.col {
   font-weight: bold;
+  /* border: 2px solid black; */
+  /* padding: 20px;
+  padding-left: 160px; */
 }
 h2 {
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: aliceblue;
+  border-radius: 15px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-top: -5px;
 }
-label {
-  margin-bottom: 2px;
-  font-weight: bold;
-}
-img {
-  width: 17px;
-  height: auto;
+.btn {
+  border-radius: 10px;
+  border: black 2px solid;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 100px;
 }
 </style>

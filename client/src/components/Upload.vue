@@ -1,23 +1,16 @@
 <template>
   <div class="card mt-3">
-    <h2>Upload</h2>
+    <h2>Home</h2>
     <div class="row">
-       <div class="col-3"></div>
-      <div class="cardA col-3">
-        <h2>XML</h2>
-        <p>
-          Upload Group address file
-          </p>
-        <a href="/#/xml"><button class="btn btn-primary">Go</button></a>
-      </div>
+      <div class="col"></div>
+      <div class="col"><a href="/#/xml">XML</a></div>
+      <div class="col"></div>
+      <div class="col"></div>
     </div>
-    <div class="col-3"></div>
-    <div class="col-3"></div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     return {};
@@ -36,19 +29,29 @@ export default {
   margin: 1px;
   margin-right: -35%;
 }
-.cardA {
+a {
   background-color: rgba(0, 0, 0, 0.35);
-  /* height: 250px; */
+  height: 250px;
   display: flex;
-  padding: 20px;
+  font-size: 50px;
+  padding: 70px;
+  padding-left: 70px;
+  padding-right: 70px;
   flex-direction: column;
   border: 3px black solid;
   border-radius: 15px;
-  margin-left: 5px;
-  margin-right: 5px;
+  text-align: center;
 }
-.col-4 {
+a:hover {
+  color: aliceblue;
+  border: 3px aliceblue solid;
+  background-color: rgba(0, 0, 0);
+}
+.col {
   font-weight: bold;
+  /* border: 2px solid black; */
+  /* padding: 20px;
+  padding-left: 160px; */
 }
 h2 {
   text-align: center;
@@ -64,9 +67,5 @@ h2 {
   border: black 2px solid;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 100px;
-}
-img {
-  width: 50px;
-  height: auto;
 }
 </style>

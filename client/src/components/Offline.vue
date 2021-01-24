@@ -1,12 +1,13 @@
 <template>
   <div class="card mt-3">
-    <h2>Logs Offline</h2>
+    <h2>Passive</h2>
     <div class="row">
       <div class="col">
         <div class="cardIn">
-          <h3>pcap file</h3>
+          <div>
+            <label class="mb-2">pcap file</label>
+            </div>
           <input type="file" @change="onFileSelected" />
-
           <button class="btn btn-dark" @click="run()">Run</button>
         </div>
       </div>
@@ -15,12 +16,14 @@
     <div v-if="logData">
     <div class="cardIn">
       <div class="alert-danger alert col">
-        Source IP: {{ sIP }} - Source Port: {{ sPort }}
+        >_ Source <br> 
+        IP: {{ sIP }} - Port: {{ sPort }}
       </div>
       <div class="alert-light alert col">
-        Destination IP: {{ dIP }} - Destination Port: {{ dPort }}
+        >_ Destination <br>
+        IP: {{ dIP }} - Port: {{ dPort }}
       </div>
-      <div class="alert-danger alert col">Output : {{ log }}</div>
+      <div class="alert-danger alert col">>_ Output : <br> {{ log }}</div>
       <div v-if="!showBtn">
         <div class="btn-group">
           <button class="btn btn-secondary" @click="showEn()">More</button>
@@ -96,15 +99,16 @@ export default {
       sse.addEventListener("message", output => {
         const data = JSON.parse(output.data);
         // const data = output.data;
-        // console.log(data);
+        console.log(data);
         if (data.count % 2 === 0) {
-          this.output += data.allOutput + "\n";
+          // this.output += data.allOutput + "\n";
+          this.output = data.allOutput + "\n";
           this.log = data.allOutput + "\n";
           // console.log(this.output);
           const r = /ipv4\(.*\):\s+(.*)\s\->\s+(.*)/gm;
-          const m = r.exec(this.output);
+          const m = r.exec(this.log);
           const rPort = /udp\(.*\): (.*):(.*) (.*):(.*) (.*)/gm;
-          const mPort = rPort.exec(this.output);
+          const mPort = rPort.exec(this.log);
           this.sIP = `${m[1]}`;
           this.dIP = `${m[2]}`;
           this.sPort = `${mPort[2]}`;
@@ -135,33 +139,12 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-/* input {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}*/
-input[type="number"] {
-  width: 40%;
-}
-input[type="text"] {
-  width: 50%;
-}
-/* input[type="file"] {
-  width: 27%;
-} */
-/* select {
-  width: 50%;
-} */
-/* input[type="number"]:focus {
-  background-color: rgb(224, 247, 255);
-} */
-input,
-select,
-button {
+input {
   border: 2px solid black;
+  border-radius: 15px;
+  color: aliceblue;
+  background-color: black;
 }
-/* .btn {
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-} */
 .card {
   background-color: rgba(255, 255, 255, 0.35);
   border-radius: 15px;
@@ -180,19 +163,15 @@ button {
   margin: 1px;
   /* margin-right: -15%; */
 }
-.col-3 {
-  font-weight: bold;
-}
 h2 {
   text-align: center;
-}
-label {
-  margin-bottom: 2px;
-  font-weight: bold;
-}
-img {
-  width: 17px;
-  height: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: aliceblue;
+  border-radius: 15px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-top: -5px;
+
 }
 .alert {
   font-weight: bold;
@@ -203,6 +182,6 @@ img {
 }
 .btn {
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border: 2px solid black
 }
 </style>

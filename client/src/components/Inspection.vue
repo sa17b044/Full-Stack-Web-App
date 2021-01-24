@@ -3,23 +3,13 @@
     <h2>Inspection</h2>
     <div class="row">
       <div class="col"></div>
-      <div class="cardA col">
-        <h2>Servers</h2>
-        <p>
-          Server configuration for inspection part in lua file <br />
-          You can set source, destination, and port address for a policy and
-          also see servers List
-        </p>
-        <a href="/#/server"><button class="btn btn-primary">Go</button></a>
+      <div class="col">
+        <a href="/#/server">Servers</a>
       </div>
-      <div class="cardA col">
-        <h2>Policies</h2>
-        <p>
-          Policy configuration for inspection part in lua file <br />
-          You can set services, app Services, group address level and -file for a server and
-          also see policies List
-        </p>
-        <a href="/#/policy"><button class="btn btn-primary">Go</button></a>
+      <div class="col">
+        <a href="/#/policy">
+          Policies
+        </a>
       </div>
       <div class="col"></div>
     </div>
@@ -46,18 +36,23 @@ export default {
   margin: 1px;
   margin-right: -35%;
 }
-.cardA {
+a {
   background-color: rgba(0, 0, 0, 0.35);
-  /* height: 250px; */
+  height: 250px;
   display: flex;
-  padding: 20px;
+  font-size: 50px;
+  padding: 70px;
+  padding-left: 110px;
   flex-direction: column;
   border: 3px black solid;
   border-radius: 15px;
-  margin-left: 5px;
-  margin-right: 5px;
 }
-.col-4 {
+a:hover {
+  color: aliceblue;
+  border: 3px aliceblue solid;
+  background-color: rgba(0, 0, 0);
+}
+.col {
   font-weight: bold;
 }
 h2 {
@@ -74,9 +69,5 @@ h2 {
   border: black 2px solid;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 100px;
-}
-img {
-  width: 50px;
-  height: auto;
 }
 </style>

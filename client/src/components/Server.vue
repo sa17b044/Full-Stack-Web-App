@@ -338,10 +338,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 input[type="number"] {
-  width: 40%;
+  width: 10%;
 }
 input[type="text"] {
-  width: 50%;
+  width: 30%;
+}
+select {
+  width: 30%;
 }
 input,
 select,
