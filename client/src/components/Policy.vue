@@ -260,6 +260,10 @@
         <h2>Policies</h2>
         <div v-for="(item, i) in itemListP" :key="item._id">
           <div class="cardIn">
+                        <div class="row">
+              <div class="col-3">Number :</div>
+              <div class="col-6">{{ ++i }}</div>
+            </div>
             <div class="row">
               <div class="col-3">Detection :</div>
               <div class="col-6">{{ item.detection }}</div>

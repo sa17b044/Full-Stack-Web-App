@@ -586,3 +586,171 @@ Len: 23
 172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
 Len: 23
 
+[**] [147:3:1] "(knxnetip) invalid protocol version" [**]
+[Priority: 3] 
+08/22-13:27:08.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:3:1] "(knxnetip) invalid protocol version" [**]
+[Priority: 3] 
+08/22-13:27:08.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:5:1] "(knxnetip) invalid service type" [**]
+[Priority: 3] 
+08/22-13:28:29.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:5:1] "(knxnetip) invalid service type" [**]
+[Priority: 3] 
+08/22-13:28:29.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:3:1] "(knxnetip) invalid protocol version" [**]
+[Priority: 3] 
+08/22-13:27:08.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:3:1] "(knxnetip) invalid protocol version" [**]
+[Priority: 3] 
+08/22-13:27:08.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [1:1000007:1] "KNXnet/IP TUNNELING_REQUEST" [**]
+[Priority: 0] 
+04/22-14:38:50.059332 00:24:6D:00:C7:55 -> B8:27:EB:3C:91:42 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:16 TOS:0x0 ID:1198 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [1:1000007:1] "KNXnet/IP TUNNELING_REQUEST" [**]
+[Priority: 0] 
+04/22-14:38:50.059332 00:24:6D:00:C7:55 -> B8:27:EB:3C:91:42 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:16 TOS:0x0 ID:1198 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:5:1] "(knxnetip) invalid service type" [**]
+[Priority: 3] 
+08/22-13:28:29.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:5:1] "(knxnetip) invalid service type" [**]
+[Priority: 3] 
+08/22-13:28:29.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:4:1] "(knxnetip) total length of packet does not match received length" [**]
+[Priority: 3] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [1:1000007:1] "KNXnet/IP TUNNELING_REQUEST" [**]
+[Priority: 0] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:4:1] "(knxnetip) total length of packet does not match received length" [**]
+[Priority: 3] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [1:1000007:1] "KNXnet/IP TUNNELING_REQUEST" [**]
+[Priority: 0] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:4:1] "(knxnetip) total length of packet does not match received length" [**]
+[Priority: 3] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [1:1000007:1] "KNXnet/IP TUNNELING_REQUEST" [**]
+[Priority: 0] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:4:1] "(knxnetip) total length of packet does not match received length" [**]
+[Priority: 3] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [1:1000007:1] "KNXnet/IP TUNNELING_REQUEST" [**]
+[Priority: 0] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:4:1] "(knxnetip) total length of packet does not match received length" [**]
+[Priority: 3] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [1:1000007:1] "KNXnet/IP TUNNELING_REQUEST" [**]
+[Priority: 0] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:4:1] "(knxnetip) total length of packet does not match received length" [**]
+[Priority: 3] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [1:1000007:1] "KNXnet/IP TUNNELING_REQUEST" [**]
+[Priority: 0] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:5:1] "(knxnetip) invalid service type" [**]
+[Priority: 3] 
+08/22-13:28:29.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:5:1] "(knxnetip) invalid service type" [**]
+[Priority: 3] 
+08/22-13:28:29.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:4:1] "(knxnetip) total length of packet does not match received length" [**]
+[Priority: 3] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [1:1000007:1] "KNXnet/IP TUNNELING_REQUEST" [**]
+[Priority: 0] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [147:4:1] "(knxnetip) total length of packet does not match received length" [**]
+[Priority: 3] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
+[**] [1:1000007:1] "KNXnet/IP TUNNELING_REQUEST" [**]
+[Priority: 0] 
+08/22-13:29:42.000000 0A:01:01:01:01:01 -> 0A:02:02:02:02:02 type:0x800 len:0x41
+172.22.10.76:3671 -> 172.22.12.76:41975 UDP TTL:255 TOS:0x0 ID:4660 IpLen:20 DgmLen:51
+Len: 23
+
