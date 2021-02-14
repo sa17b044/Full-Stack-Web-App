@@ -1,9 +1,15 @@
 <template>
   <div class="card mt-3">
     <h2>Welcome</h2>
-    <input type="text" v-model="user" />
-    <input type="user" v-model="pass" />
-    <button class="btn" @click="login()">Login</button>
+
+    <label for="usernam">Usernam</label>
+    <input type="text" v-model="userName" />
+
+    <label for="password">Password</label>
+    <input type="password" v-model="password" />
+    
+    <button class="btn btn-primary" @click="login()">Login</button>
+
   </div>
 </template>
 
@@ -12,44 +18,37 @@ import axios from "axios";
 export default {
   data() {
     return {
-      user: "",
-      pass: ""
+      userName: "",
+      password: ""
     };
   },
   methods: {
     async login() {
       const response = await axios.post(
-        "http://localhost:8081/api/loginList/",
+        "http://localhost:8081/auth/login/",
         {
-          user: this.user,
-          pass: this.pass
+          userName: this.userName,
+          password: this.password
         }
       );
+      this.password = NULL;
+      this.userName = NULL;
     }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-/* input {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}*/
-input[type="number"] {
-  width: 40%;
+<style scoped>
+input[type="password"] {
+  width: 30%;
 }
 input[type="text"] {
-  width: 50%;
+  width: 30%;
 }
-/* input[type="file"] {
-  width: 27%;
-} */
-/* select {
-  width: 50%;
-} */
-/* input[type="number"]:focus {
-  background-color: rgb(224, 247, 255);
-} */
+select {
+  width: 30%;
+}
 input,
 select,
 button {
@@ -74,7 +73,7 @@ button {
   padding: 25px;
   border: 2px solid black;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
-  margin: 1px;
+  margin: 0px;
   /* margin-right: -15%; */
 }
 .col-3 {
@@ -82,6 +81,14 @@ button {
 }
 h2 {
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: aliceblue;
+  border-radius: 15px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-top: -5px;
+  margin-bottom: -5px ;
+
 }
 label {
   margin-bottom: 2px;
@@ -91,4 +98,11 @@ img {
   width: 17px;
   height: auto;
 }
+.row{
+border-bottom: 2px solid black;
+}
 </style>
+
+
+
+

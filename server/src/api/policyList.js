@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const Policy_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/policy_schema.js");
+const Policy_Model = require("../models/policySchema");
 const router = Router();
 router.get("/", async (req, res) => {
   try {

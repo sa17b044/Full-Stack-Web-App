@@ -1,43 +1,47 @@
+const bcrypt = require("bcryptjs");
 const { Router } = require("express");
-const Server_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/server_schema.js");
-
+// const userAuth = require("../../../utils/Auth.js");
 const router = Router();
+const Users_Model = require("../models/userSchema.js");
 
-router.get("/", async (req, res) => {
+
+router.get("/",async (req, res) => {
   try {
-    const serverList = await Server_Model.find();
-    if (!serverList) throw new Error("No item List");
-    const stored = serverList.sort((a, b) => {
+    const userList = await Users_Model.find();
+    console.log(userList)
+    if (!userList) throw new Error("No user List");
+    const stored = userList.sort((a, b) => {
       return new Date(a.date).getTime() - new Date(b.date).getTime();
     });
     res.status(200).json(stored);
-    console.log(req.body);
   } catch (error) {
     res.status(500).json({
       message: error.message,
     });
   }
 });
-router.post("/", async (req, res) => {
-  console.log(req.body);
-  const newserverList = new Server_Model(req.body);
-  
+// send to Database
+router.post("/",async (req, res) => {
+  const password = req.body.password
+  const hashedPassword = await bcrypt.hash(password,10);
+  console.log(hashedPassword)
+  req.body.password = hashedPassword;
+  const newUserList = new Users_Model(req.body);
   try {
-    const serverList = await newserverList.save();
-    if (!serverList) throw new Error("wrong saving");
-    res.status(200).json(serverList);
-    console.log(req.body);
+    const userList = await newUserList.save();
+    if (!userList) throw new Error("wrong saving");
+    res.status(200).json(userList);
   } catch (error) {
     res.status(500).json({
       message: error.message,
     });
   }
-});
+}); 
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const response = await Server_Model.findByIdAndUpdate(id, req.body);
-    console.log(response)
+    const response = await Users_Model.findByIdAndUpdate(id, req.body);
+    // console.log(response)
     if (!response) throw new Error("wrong updating");
     const updated = { ...response._doc, ...req.body };
     res.status(200).json(updated);
@@ -50,8 +54,8 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const { id } = req.params
   try {
-    const removed  = await Server_Model.findByIdAndDelete(id);
-    console.log(removed)
+    const removed  = await Users_Model.findByIdAndDelete(id);
+    // console.log(removed)
     if (!removed) throw Error('Something went wrong ')
     res.status(200).json(removed)
   } catch (error) {
@@ -60,4 +64,5 @@ router.delete("/:id", async (req, res) => {
     });
   }
 });
+
 module.exports = router;

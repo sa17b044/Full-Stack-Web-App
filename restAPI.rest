@@ -1,7 +1,6 @@
-GET http://localhost:8081/filter/
-# Content-Type: application/json
+GET http://localhost:8081/login/dashboard
+Content-Type: application/json
 
-# {
-#     "user":"test",
-#     "role":"admin"
-# }
+{
+  "userId": "admin"
+}

@@ -17,7 +17,7 @@ Vue.use(Router);
 
 export default new Router({
   routes: [{
-      path: "/",
+      path: "/home",
       name: "home",
       component: Home
     },
@@ -25,6 +25,11 @@ export default new Router({
       path: "/server",
       name: "Server",
       component: Server
+    },
+    {
+      path: "/",
+      name: "Login",
+      component: Login
     },
     {
       path: "/policy",

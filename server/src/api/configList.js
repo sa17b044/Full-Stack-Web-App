@@ -3,9 +3,9 @@ const {
 } = require("express");
 const fs = require("fs");
 const cp = require("child_process");
-const Policy_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/policy_schema.js");
-const Server_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/server_schema.js");
-const Pcap_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/pcap_schema.js");
+const Policy_Model = require("../models/policySchema.js");
+const Server_Model = require("../models/serverSchema.js");
+const Pcap_Model = require("../models/pcapSchema.js");
 //iptables -A INPUT -s IP-ADDRESS -p tcp --destination-port port_number -j DROP
 const {
     ConnectionStates
@@ -15,7 +15,7 @@ const {
 } = require("mongodb");
 const {
     countDocuments
-} = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/policy_schema.js");
+} = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/policySchema.js");
 const {
     config
 } = require("process");

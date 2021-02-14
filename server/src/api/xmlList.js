@@ -3,7 +3,7 @@ const {
 } = require("express");
 const fs = require("fs");
 const XML_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/xml_schema.js");
-const PCAP_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/pcap_schema.js");
+const PCAP_Model = require("/home/payman/#Project/Full-Stack-Web-App/server/src/models/pcapSchema.js");
 const {
     connected
 } = require("process");

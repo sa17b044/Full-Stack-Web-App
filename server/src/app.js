@@ -3,17 +3,38 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const {success, error} = require('consola')
+// const passport = require('passport');
 const PORT = 8081;
 const app = express();
+
+// middelware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.static("public"));
+app.use(morgan("tiny"));
+// app.use(passport.initialize());
+
 // routes
-const userListRoutes = require("./routes/api/userList.js");
-const serverListRoutes = require("./routes/api/serverList.js");
-const policyListRoutes = require("./routes/api/policyList");
-const configListRoutes = require("./routes/api/configList");
-const xmlListRoutes = require("./routes/api/xmlList");
+const userListRoutes = require("./api/userList.js");
+const serverListRoutes = require("./api/serverList");
+const policyListRoutes = require("./api/policyList");
+const configListRoutes = require("./api/configList");
+const xmlListRoutes = require("./api/xmlList");
 const filterRoutes = require("./routes/filter");
 const activeRoutes = require("./routes/active");
-// Database connection
+const loginRoutes = require("./routes/login");
+
+app.use('/api/userList', userListRoutes);
+app.use('/api/serverList', serverListRoutes);
+app.use('/api/policyList', policyListRoutes);
+app.use('/api/configList', configListRoutes);
+app.use('/api/xmlList', xmlListRoutes);
+app.use('/filter',filterRoutes)
+app.use('/active',activeRoutes)
+app.use('/login',loginRoutes)
+// Database connection and star web app
 const dbUrl = "mongodb://127.0.0.1:27017/bsa";
 mongoose
   .connect(dbUrl, {
@@ -22,25 +43,13 @@ mongoose
   })
   .then((data) => {
     app.listen(PORT);
-    console.log("http://localhost:8081/");
-    console.log("Server is running ...");
+    success({message:`http://localhost:${PORT}/`, badge:true})
   })
   .catch((err) => {
-    console.log("Error Database connection..." + "\n" + err);
+    error({message:`Unable connect to the database`, badge:true})
   });
-// middelware
-app.use(express.static("public"));
-app.use(morgan("tiny"));
-app.use(bodyParser.json());
-app.use(cors());
-app.use('/api/userList', userListRoutes);
-app.use('/api/serverList', serverListRoutes);
-app.use('/api/policyList', policyListRoutes);
-app.use('/api/configList', configListRoutes);
-app.use('/api/xmlList', xmlListRoutes);
-app.use('/filter',filterRoutes)
-app.use('/active',activeRoutes)
+
 
 app.get("/", (req, res) => {
-  res.send('<a href="http://localhost:8080">http://localhost:8080</a>');
+  res.send(`b<a href="http://localhost:${PORT}">http://localhost:${PORT}</a>`);
 });

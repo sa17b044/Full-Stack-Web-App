@@ -31,12 +31,12 @@
         <div v-if="msg">
           <div class="alert alert-danger">{{ textMsg }}</div>
         </div>
-        <label>Permissions</label>
+        <label>Roles</label>
         <div class="row">
           <div class="col">
-            <select v-model="permission">
-              <option value="admin">Admin</option>
-              <option value="readOnly">Read only</option>
+            <select v-model="role">
+              <option value="Admin">Admin</option>
+              <option value="Read-Only">Read-Only</option>
             </select>
           </div>
         </div>
@@ -83,12 +83,12 @@
         <div v-if="msg">
           <div class="alert alert-danger">{{ textMsg }}</div>
         </div>
-        <label>Permissions</label>
+        <label>Role</label>
         <div class="row">
           <div class="col">
-            <select class="form-control" v-model="permission">
+            <select class="form-control" v-model="role">
               <option value="Admin">Admin</option>
-              <option value="Read only">Read only</option>
+              <option value="Read-Only">Read-Only</option>
             </select>
           </div>
         </div>
@@ -106,7 +106,7 @@
         <div class="col-1">#</div>
         <div class="col-2">User name</div>
         <div class="col-2">Password</div>
-        <div class="col-2">Permission</div>
+        <div class="col-2">Role</div>
       </div>
       <div v-for="(item, i) in itemList" :key="item._id">
         <div class="line">
@@ -114,7 +114,7 @@
             <div class="col-1">{{ ++i }}</div>
             <div class="col-2">{{ item.userName }}</div>
             <div class="col-2">{{ item.password }}</div>
-            <div class="col-2">{{ item.permission }}</div>
+            <div class="col-2">{{ item.role }}</div>
             <div class="col-3">
               <div class="btn-group">
                 <button class="btn btn-warning" @click="editItem(i, item)">
@@ -142,7 +142,7 @@ export default {
       user_name: "",
       password: "",
       conf_password: "",
-      permission: "",
+      role: "",
       itemList: [],
       selectedItem: "",
       msg: false,
@@ -163,14 +163,14 @@ export default {
           {
             userName: this.user_name,
             password: this.password,
-            permission: this.permission
+            role: this.role
           }
         );
         this.itemList.push(response.data);
         this.user = "";
         this.password = "";
         this.conf_password = "";
-        this.permission = "";
+        this.role = "";
         this.msg = false;
       } else {
         // console.log(this.msg)
@@ -189,13 +189,13 @@ export default {
       await axios.put("http://localhost:8081/api/userList/" + item._id, {
         userName: this.user_name,
         password: this.password,
-        permission: this.permission
+        role: this.role
       });
       this.edit = false;
       this.user = "";
       this.password = "";
       this.conf_password = "";
-      this.permission = "";
+      this.role = "";
       const response = await axios.get("http://localhost:8081/api/userList/");
       this.itemList = response.data;
     },
@@ -204,7 +204,7 @@ export default {
       this.edit = true;
       this.user_name = item.userName;
       this.password = item.password;
-      this.permission = item.permission;
+      this.role = item.role;
       this.selectedItem = item;
     },
     showPassword() {

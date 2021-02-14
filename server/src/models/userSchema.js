@@ -1,7 +1,6 @@
-const { timeStamp } = require("console");
+// const { timeStamp } = require("console");
 const mongoose = require("mongoose");
-
-const users_schema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     data: {
       type: Date,
@@ -15,13 +14,14 @@ const users_schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    permission: {
+    role: {
       type: String,
-      required: true,
+      default: "Read-Only",
+      enum:['Read-Only','Admin']
     },
-  }
-  // { timestamps: true }
+  },
+  { timestamps: true }
 );
 
-const Users_Model = mongoose.model("Users_Model", users_schema);
+const Users_Model = mongoose.model("Users_Model", userSchema);
 module.exports = Users_Model;
