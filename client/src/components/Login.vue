@@ -2,14 +2,13 @@
   <div class="card mt-3">
     <h2>Welcome</h2>
 
-    <label for="usernam">Usernam</label>
-    <input type="text" v-model="userName" />
-
-    <label for="password">Password</label>
-    <input type="password" v-model="password" />
-    
+    <div class="container cardIn">
+      <label for="usernam">Usernam</label>
+      <input type="text" v-model="userName" />
+      <label for="password">Password</label>
+      <input type="password" v-model="password" />
+    </div>
     <button class="btn btn-primary" @click="login()">Login</button>
-
   </div>
 </template>
 
@@ -24,15 +23,12 @@ export default {
   },
   methods: {
     async login() {
-      const response = await axios.post(
-        "http://localhost:8081/auth/login/",
-        {
-          userName: this.userName,
-          password: this.password
-        }
-      );
-      this.password = NULL;
-      this.userName = NULL;
+      await axios.post("http://localhost:8081/login/dashboard/", {
+        userName: this.userName,
+        password: this.password
+      });
+      this.password = "";
+      this.userName = "";
     }
   }
 };
@@ -87,8 +83,7 @@ h2 {
   padding-bottom: 10px;
   padding-top: 10px;
   margin-top: -5px;
-  margin-bottom: -5px ;
-
+  margin-bottom: -5px;
 }
 label {
   margin-bottom: 2px;
@@ -98,11 +93,7 @@ img {
   width: 17px;
   height: auto;
 }
-.row{
-border-bottom: 2px solid black;
+.row {
+  border-bottom: 2px solid black;
 }
 </style>
-
-
-
-

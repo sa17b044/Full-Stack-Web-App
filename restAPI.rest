@@ -1,6 +1,6 @@
-GET http://localhost:8081/login/dashboard
+GET http://localhost:8081/login/admin
 Content-Type: application/json
 
 {
-  "userId": "admin"
+  "userId": "user"
 }
