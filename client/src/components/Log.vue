@@ -11,10 +11,14 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   data() {
     return {};
+  },
+  created(){
+    if(localStorage.getItem('token') === null)
+    this.$router.push('/login')
   }
 };
 </script>

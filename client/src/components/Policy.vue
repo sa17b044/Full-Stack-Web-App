@@ -451,6 +451,10 @@ export default {
       this.payload = item.payload;
       this.selectedItem = item;
     }
+  },
+    created(){
+    if(localStorage.getItem('token') === null)
+    this.$router.push('/login')
   }
 };
 </script>

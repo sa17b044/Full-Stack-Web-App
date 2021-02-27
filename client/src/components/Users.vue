@@ -112,7 +112,7 @@
         <div class="line">
           <div class="row">
             <div class="col-1">{{ ++i }}</div>
-            <div class="col-2">{{ item.userName }}</div>
+            <div class="col-2">{{ item.username }}</div>
             <div class="col-2">{{ item.password }}</div>
             <div class="col-2">{{ item.role }}</div>
             <div class="col-3">
@@ -161,7 +161,7 @@ export default {
         const response = await axios.post(
           "http://localhost:8081/api/userList/",
           {
-            userName: this.user_name,
+            username: this.user_name,
             password: this.password,
             role: this.role
           }
@@ -187,7 +187,7 @@ export default {
     },
     async updateItem(item) {
       await axios.put("http://localhost:8081/api/userList/" + item._id, {
-        userName: this.user_name,
+        username: this.user_name,
         password: this.password,
         role: this.role
       });
@@ -202,7 +202,7 @@ export default {
 
     editItem(i, item) {
       this.edit = true;
-      this.user_name = item.userName;
+      this.user_name = item.username;
       this.password = item.password;
       this.role = item.role;
       this.selectedItem = item;
@@ -216,6 +216,10 @@ export default {
         this.btnText = "Show";
       }
     }
+  },
+    created(){
+    if(localStorage.getItem('token') === null)
+    this.$router.push('/login')
   }
 };
 </script>

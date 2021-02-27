@@ -3,8 +3,8 @@
     <h2>Welcome</h2>
 
     <div class="container cardIn">
-      <label for="usernam">Usernam</label>
-      <input type="text" v-model="userName" />
+      <label for="usernam">Username</label>
+      <input type="text" v-model="userame" />
       <label for="password">Password</label>
       <input type="password" v-model="password" />
     </div>
@@ -17,18 +17,25 @@ import axios from "axios";
 export default {
   data() {
     return {
-      userName: "",
-      password: ""
+      userame: "",
+      password: "",
+      error:""
     };
   },
   methods: {
     async login() {
-      await axios.post("http://localhost:8081/login/dashboard/", {
-        userName: this.userName,
+      await axios.post("http://localhost:8081/auth/login", {
+        username: this.userame,
         password: this.password
+      }).then(res => {
+        console.log('#')
+        if (res.status === 200) {
+          localStorage.setItem('token',res.data.token);
+          this.$router.push('/home')
+        }
       });
       this.password = "";
-      this.userName = "";
+      this.userame = "";
     }
   }
 };

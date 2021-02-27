@@ -22,10 +22,12 @@ router.get("/",async (req, res) => {
 });
 // send to Database
 router.post("/",async (req, res) => {
+  //hash password
   const password = req.body.password
-  const hashedPassword = await bcrypt.hash(password,10);
-  console.log(hashedPassword)
-  req.body.password = hashedPassword;
+  // const hash = bcrypt.hashSync(password,10)
+  // // console.log(hash)
+  // req.body.password = hash;
+  // store data
   const newUserList = new Users_Model(req.body);
   try {
     const userList = await newUserList.save();

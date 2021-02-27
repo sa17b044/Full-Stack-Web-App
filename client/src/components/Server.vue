@@ -331,6 +331,10 @@ export default {
       this.logToFile = itemServer.logToFile;
       this.selectedItemServer = itemServer;
     }
+  },
+    created(){
+    if(localStorage.getItem('token') === null)
+    this.$router.push('/login')
   }
 };
 </script>

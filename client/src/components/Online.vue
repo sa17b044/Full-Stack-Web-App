@@ -38,6 +38,10 @@ export default {
     });
     console.log("3");
     await axios.get("http://localhost:8081/active");
+  },
+    created(){
+    if(localStorage.getItem('token') === null)
+    this.$router.push('/login')
   }
 };
 </script>

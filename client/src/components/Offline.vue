@@ -134,6 +134,10 @@ export default {
         port: this.sPort
       });
     }
+  },
+    created(){
+    if(localStorage.getItem('token') === null)
+    this.$router.push('/login')
   }
 };
 </script>

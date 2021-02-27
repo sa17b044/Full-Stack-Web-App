@@ -52,6 +52,10 @@ export default {
       this.alert = true;
       setTimeout(() => (this.alert = false), 1000);
     }
+  },
+    created(){
+    if(localStorage.getItem('token') === null)
+    this.$router.push('/login')
   }
 };
 </script>
