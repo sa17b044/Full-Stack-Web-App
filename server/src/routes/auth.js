@@ -20,8 +20,6 @@ router.post("/login", (req, res, next) => {
       );
     }
     if (user.password !== req.body.password) {
-        console.log(user.password)
-        console.log(req.body.password)
       console.log("Password wrong");
       return res.status(401).json({
         error: "Password wrong",
@@ -35,10 +33,12 @@ router.post("/login", (req, res, next) => {
     //   });
     // }
     // if correct - webtoken
+    console.log(user.role)
     let token = jwt.sign({ userId: user._id }, "secretkey");
     return res.status(200).json({
       msg: "succes",
       token: token,
+      role: user.role
     });
   });
 });

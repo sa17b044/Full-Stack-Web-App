@@ -2,7 +2,7 @@
   <div class="card mt-3">
     <h2>Welcome</h2>
 
-    <div class="container cardIn">
+    <div class="container card">
       <label for="usernam">Username</label>
       <input type="text" v-model="userame" />
       <label for="password">Password</label>
@@ -30,8 +30,16 @@ export default {
       }).then(res => {
         console.log('#')
         if (res.status === 200) {
+          // console.log(res.data.role)
           localStorage.setItem('token',res.data.token);
-          this.$router.push('/home')
+          if (res.data.role !== 'Admin') {
+            console.log('online')
+            this.$router.push('/online')
+          } else {
+            console.log('home')
+            this.$router.push('/home')
+          }
+          
         }
       });
       this.password = "";

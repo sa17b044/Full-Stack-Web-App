@@ -22,7 +22,7 @@
             <a class="nav-item nav-link" href="/#/upload">Upload</a>
             <a class="nav-item nav-link" href="/#/users">Users</a>
             <a class="nav-item nav-link disabled" href="/#/users">Whois</a>
-            <a class="nav-item nav-link" @click=logout()>logout</a>
+            <a class="nav-item nav-link" @click=logout()>Logout</a>
             <!-- <a class="nav-item nav-link disabled" href="/#/users">Filter</a> -->
           </div>
         </div>
