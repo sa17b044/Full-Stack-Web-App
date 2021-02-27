@@ -46,13 +46,8 @@ export default {
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-input[type="number"] {
-  width: 40%;
-}
-input[type="text"] {
-  width: 50%;
-}
+<style scoped>
+
 input,
 select,
 button {

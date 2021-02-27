@@ -142,13 +142,8 @@ export default {
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-input {
-  border: 2px solid black;
-  border-radius: 15px;
-  color: aliceblue;
-  background-color: black;
-}
+<style scoped>
+
 .card {
   background-color: rgba(255, 255, 255, 0.35);
   border-radius: 15px;

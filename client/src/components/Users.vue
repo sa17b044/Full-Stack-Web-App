@@ -1,132 +1,137 @@
 <template>
   <div class="card mt-3">
     <h2 class="mb-2">Users</h2>
-    <div class="cardIn center">
-      <div v-if="!edit">
-        <label>User Name</label>
-        <div class="row">
-          <div class="col">
-            <input type="text" v-model="user_name" />
+    <div class="row cardIn">
+      <div class="col-4 l">
+        <div v-if="!edit">
+          <div class="row">
+            <label>User Name</label>
+            <div class="col">
+              <input type="text" v-model="user_name" />
+            </div>
           </div>
-        </div>
-        <label>Password</label>
-        <div class="row">
-          <div class="col">
-            <input :type="type" v-model="password" />
-            <button class="btn btn-secondary" @click="showPassword()">
-              {{btnText}}
-            </button>
-          </div>
-        </div>
-
-        <label>Confirm password</label>
-        <div class="row">
-          <div class="col">
-            <input :type="type" v-model="conf_password" />
-            <button class="btn btn-secondary" @click="showPassword()">
-              {{btnText}}
-            </button>
-          </div>
-        </div>
-        <div v-if="msg">
-          <div class="alert alert-danger">{{ textMsg }}</div>
-        </div>
-        <label>Roles</label>
-        <div class="row">
-          <div class="col">
-            <select v-model="role">
-              <option value="Admin">Admin</option>
-              <option value="Read-Only">Read-Only</option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <button class="btn btn-primary" @click="addItem()">Add</button>
-          </div>
-        </div>
-      </div>
-
-      <div v-else>
-        <label>User Name</label>
-        <div class="row">
-          <div class="col">
-            <input type="text" class="form-control" v-model="user_name" />
-          </div>
-        </div>
-        <label>Password</label>
-        <div class="row">
-          <div class="col">
-            <input
-              :type="type"
-              class="form-control"
-              v-model="password"
-            /><button class="btn btn-secondary" @click="showPassword()">
-              {{btnText}}
-            </button>
-          </div>
-        </div>
-        <label>Confirm password</label>
-        <div class="row">
-          <div class="col">
-            <div>
-              <input
-                :type="type"
-                class="form-control"
-                v-model="conf_password"
-              /><button class="btn btn-secondary" @click="showPassword()">
-                {{btnText}}
+          <div class="row">
+            <label>Password</label>
+            <div class="col">
+              <input :type="type" v-model="password" />
+              <button class="btn btn-secondary show" @click="showPassword()">
+                {{ btnText }}
               </button>
             </div>
           </div>
-        </div>
-        <div v-if="msg">
-          <div class="alert alert-danger">{{ textMsg }}</div>
-        </div>
-        <label>Role</label>
-        <div class="row">
-          <div class="col">
-            <select class="form-control" v-model="role">
-              <option value="Admin">Admin</option>
-              <option value="Read-Only">Read-Only</option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <button class="btn btn-success" @click="updateItem(selectedItem)">
-              Update
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="cardIn">
-      <div class="row title">
-        <div class="col-1">#</div>
-        <div class="col-2">User name</div>
-        <div class="col-2">Password</div>
-        <div class="col-2">Role</div>
-      </div>
-      <div v-for="(item, i) in itemList" :key="item._id">
-        <div class="line">
           <div class="row">
-            <div class="col-1">{{ ++i }}</div>
-            <div class="col-2">{{ item.username }}</div>
-            <div class="col-2">{{ item.password }}</div>
-            <div class="col-2">{{ item.role }}</div>
-            <div class="col-3">
-              <div class="btn-group">
-                <button class="btn btn-warning" @click="editItem(i, item)">
-                  Edit
-                </button>
-                <button class="btn btn-danger" @click="removeItem(item, i)">
-                  Remove
+            <label>Confirm password</label>
+            <div class="col">
+              <input :type="type" v-model="conf_password" />
+              <button class="btn btn-secondary show" @click="showPassword()">
+                {{ btnText }}
+              </button>
+            </div>
+          </div>
+          <div v-if="msg">
+            <div class="alert alert-danger">{{ textMsg }}</div>
+          </div>
+          <div class="row">
+            <label>Roles</label>
+            <div class="col">
+              <select v-model="role">
+                <option value="Admin">Admin</option>
+                <option value="Read-Only">Read-Only</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-primary" @click="addItem()">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div v-else>
+          <div class="row">
+            <label>User Name</label>
+            <div class="col">
+              <input type="text" v-model="user_name" />
+            </div>
+          </div>
+
+          <div class="row">
+            <label>Password</label>
+            <div class="col">
+              <input :type="type" v-model="password" /><button
+                class="btn btn-secondary show"
+                @click="showPassword()"
+              >
+                {{ btnText }}
+              </button>
+            </div>
+          </div>
+
+          <div class="row">
+            <label>Confirm password</label>
+            <div class="col">
+              <div>
+                <input :type="type" v-model="conf_password" /><button
+                  class="btn btn-secondary show"
+                  @click="showPassword()"
+                >
+                  {{ btnText }}
                 </button>
               </div>
             </div>
           </div>
+          <div v-if="msg">
+            <div class="alert alert-danger">{{ textMsg }}</div>
+          </div>
+
+          <div class="row">
+            <label>Role</label>
+            <div class="col">
+              <select v-model="role">
+                <option value="Admin">Admin</option>
+                <option value="Read-Only">Read-Only</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-success" @click="updateItem(selectedItem)">
+                Update
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="col-8 l">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">User</th>
+              <th scope="col">Password</th>
+              <th scope="col">Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, i) in itemList" :key="item._id">
+              <th scope="row">{{ ++i }}</th>
+              <td>{{ item.username }}</td>
+              <td>{{ item.password }}</td>
+              <td>{{ item.role }}</td>
+
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-warning" @click="editItem(i, item)">
+                    Edit
+                  </button>
+                  <button class="btn btn-danger" @click="removeItem(item, i)">
+                    Remove
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -217,18 +222,30 @@ export default {
       }
     }
   },
-    created(){
-    if(localStorage.getItem('token') === null)
-    this.$router.push('/login')
+  created() {
+    if (localStorage.getItem("token") === null) this.$router.push("/login");
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-label {
-  margin-bottom: 2px;
-  font-weight: bold;
+<style scoped>
+select {
+  width: 30%;
+  border-radius: 7px;
+  background-color: white;
+  border: 2px solid black;
+}
+input::-webkit-input-placeholder {
+  font-size: 12px;
+  line-height: 2;
+}
+.show {
+  font-size: 10px;
+  padding: 5px;
+}
+.l {
+  border: solid tomato 2px;
 }
 .card {
   background-color: rgba(255, 255, 255, 0.35);
@@ -257,31 +274,15 @@ h2 {
   box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
   margin: 0px;
 }
-
-input[type="password"] {
-  width: 20%;
-}
-input[type="text"] {
-  width: 20%;
-}
 .alert {
-  width: 20%;
+  width: 30%;
 }
 .form-control {
   width: 15%;
   margin-bottom: 5px;
 }
-input {
-  border: 2px solid black;
-}
 .btn {
   border: 2px solid black;
   border-radius: 15px;
-}
-.line {
-  border-top: 2px solid black;
-}
-.title {
-  font-size: 20px;
 }
 </style>

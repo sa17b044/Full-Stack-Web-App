@@ -62,7 +62,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input,
 select,
 button {
   border: 2px solid black;

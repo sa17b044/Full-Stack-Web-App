@@ -1,10 +1,13 @@
 <template>
   <div class="card mt-3">
-    <div class="row">
-      <!-- Policy ################################################################ -->
-      <div class="col">
-        <h2>Policy</h2>
-        <div class="cardIn">
+    <!-- <div class="row"> -->
+    <!-- Policy ################################################################ -->
+    <!-- <div class="col"> -->
+
+    <h2>Policy</h2>
+    <div class="mt-3">
+      <div class="row ">
+        <div class="col-2 l">
           <div v-if="!editPolicy">
             <div class="mb-3 form-check">
               <input
@@ -257,82 +260,77 @@
             </button>
           </div>
         </div>
-        <h2>Policies</h2>
-        <div v-for="(item, i) in itemListP" :key="item._id">
-          <div class="cardIn">
-                        <div class="row">
-              <div class="col-3">Number :</div>
-              <div class="col-6">{{ ++i }}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Detection :</div>
-              <div class="col-6">{{ item.detection }}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Inspection :</div>
-              <div class="col-6">{{ item.inspection }}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Individual addressing :</div>
-              <div class="col-6">{{ item.individual_addressing }}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Services :</div>
-              <div class="col" v-for="(serv, ind) in item.services" :key="ind">
-                {{ serv.select }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-3">App Services :</div>
-              <div
-                class="col"
-                v-for="(appServ, inde) in item.app_services"
-                :key="inde"
-              >
-                {{ appServ.select_app }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-3">Group address level :</div>
-              <div class="col-6">{{ item.group_address_level }}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Group address file :</div>
-              <div class="col-6">{{ item.group_address_file }}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Header :</div>
-              <div class="col-6">{{ item.header }}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Payload :</div>
-              <div class="col-6">{{ item.payload }}</div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="btn-group">
-                  <button
-                    class="btn btn-warning mt-3"
-                    @click="editItem(i, item)"
+        <div class="col-10 l">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Detection</th>
+                <th scope="col">Inspection</th>
+                <th scope="col">Individual addressing</th>
+                <th scope="col">Services</th>
+                <th scope="col">App Services</th>
+                <th scope="col">Group address level</th>
+                <th scope="col">Group address file</th>
+                <th scope="col">Header</th>
+                <th scope="col">Payload</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item, i) in itemListP" :key="item._id">
+                <th scope="row">{{ ++i }}</th>
+                <td>{{ item.detection }}</td>
+                <td>{{ item.inspection }}</td>
+                <td>{{ item.individual_addressing }}</td>
+                <td>
+                  <div
+                    class="col"
+                    v-for="(serv, ind) in item.services"
+                    :key="ind"
                   >
-                    Edit
-                  </button>
-                  <button
-                    class="btn btn-danger mt-3"
-                    @click="removeItem(item, i)"
+                    {{ serv.select }}
+                  </div>
+                </td>
+                <td>
+                  <div
+                    class="col"
+                    v-for="(appServ, inde) in item.app_services"
+                    :key="inde"
                   >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+                    {{ appServ.select_app }}
+                  </div>
+                </td>
+                <td>{{ item.group_address_level }}</td>
+                <td>{{ item.group_address_file }}</td>
+                <td>{{ item.header }}</td>
+                <td>{{ item.payload }}</td>
+                <td>
+                  <div class="btn-group">
+                    <button
+                      class="btn btn-warning mt-3"
+                      @click="editItem(i, item)"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      class="btn btn-danger mt-3"
+                      @click="removeItem(item, i)"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-
-      <!-- Server ##################################################################### -->
     </div>
   </div>
+
+  <!-- Server ##################################################################### -->
+  <!-- </div>
+  </div> -->
 </template>
 
 <script>
@@ -452,21 +450,14 @@ export default {
       this.selectedItem = item;
     }
   },
-    created(){
-    if(localStorage.getItem('token') === null)
-    this.$router.push('/login')
+  created() {
+    if (localStorage.getItem("token") === null) this.$router.push("/login");
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input[type="number"] {
-  width: 10%;
-}
-input[type="text"] {
-  width: 30%;
-}
 input,
 select,
 button {
@@ -514,8 +505,10 @@ img {
   width: 17px;
   height: auto;
 }
-.row {
-  border-bottom: 2px solid black;
+.l {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
 }
 select {
   width: 30%;
