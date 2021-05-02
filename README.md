@@ -8,5 +8,5 @@ cd Full-Stack-Web-App/client
 npm install
 npm run dev
 ## After npm installation must be install SNORT
-### Please check installation under
+Please check installation under :
 https://github.com/sabicalija/snort3
