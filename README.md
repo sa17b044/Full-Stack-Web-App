@@ -3,7 +3,9 @@
 ## Node js installation 
 
 cd Full-Stack-Web-App/server
+
 npm install
+
 node src/app.js
 
 ## Vue js installation
